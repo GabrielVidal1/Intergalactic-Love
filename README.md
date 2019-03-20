@@ -9,8 +9,8 @@
 
 
 ## Members of the group
-  Director: Maxime Lizandier\
-  Programmer: Gabriel Vidal \
-  Artist 2D/3D: Henri Le Brun-Bouvet\
-  Wild Card / Music maker: Oscar Tafler
+  **Director**: Maxime Lizandier\
+  **Programmer**: Gabriel Vidal \
+  **Artist 2D/3D**: Henri Le Brun-Bouvet\
+  **Wild Card / Music maker**: Oscar Tafler
   
