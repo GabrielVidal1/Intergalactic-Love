@@ -12,5 +12,5 @@
   Director: Maxime Lizandier\
   Programmer: Gabriel Vidal \
   Artist 2D/3D: Henri Le Brun-Bouvet\
-  Wild Card / Music maker: Oscar Tafler\
+  Wild Card / Music maker: Oscar Tafler
   
