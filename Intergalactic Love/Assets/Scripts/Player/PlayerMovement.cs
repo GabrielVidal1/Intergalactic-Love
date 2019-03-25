@@ -11,16 +11,20 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float camRotSpeed = 3f;
 
+    [SerializeField] private Transform camPivotTransform;
+
     //[SerializeField] private Transform camRot;
 
     private Rigidbody rb;
     private float jumpForce;
 
-    //[SerializeField]
+    [SerializeField]
     private Attractor mainAttractor;
     private Vector3 up;
 
     private bool canJump = true;
+
+    private float camRotXAngle;
 
     void Start()
     {
@@ -30,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        #region Movement
+
         Vector3 localDir = Vector3.zero;
 
         if (Input.GetKey(KeyCode.W))
@@ -49,6 +55,9 @@ public class PlayerMovement : MonoBehaviour
         {
             localDir -= Vector3.left * speed;
         }
+
+        //localDir.Normalize();
+
         
         if (canJump && Input.GetKeyDown(KeyCode.Space))
         {
@@ -56,21 +65,37 @@ public class PlayerMovement : MonoBehaviour
             canJump = false;
         }
 
+        #endregion
+
+        #region Camera
+
         if (Input.GetMouseButtonDown(1))
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+
         if (Input.GetMouseButton(1))
         {
             float xRatio = Input.GetAxis("Mouse X");
-            transform.Rotate(transform.up, xRatio * camRotSpeed);
+            float yRatio = Input.GetAxis("Mouse Y");
+
+            transform.rotation *= Quaternion.Euler(0, xRatio * camRotSpeed, 0);
+
+            camRotXAngle +=  - yRatio * camRotSpeed;
+            camRotXAngle = Mathf.Clamp(camRotXAngle, -50, 30);
+            camPivotTransform.localRotation = Quaternion.Euler(camRotXAngle, 0, 0);
+
+            print(transform.up);
         }
+
         if (Input.GetMouseButtonUp(1))
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
+
+        #endregion
 
         jumpForce *= 0.9f;
 
