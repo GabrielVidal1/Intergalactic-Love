@@ -8,9 +8,12 @@ public class PlayerInventory : MonoBehaviour
 
     public float maxMass;
 
-    public void Initialize()
+    private Player player;
+
+    public void Initialize(Player player)
     {
         inventory = new Dictionary<ItemData, int>();
+        this.player = player;
     }
 
     public float CarriedMass()
@@ -22,7 +25,6 @@ public class PlayerInventory : MonoBehaviour
 
         return total;
     }
-
 
     public void AddItemToInventory(ItemData item, int amount)
     {
@@ -38,11 +40,25 @@ public class PlayerInventory : MonoBehaviour
 
     public bool Collect(Collectible collectible)
     {
+        if (collectible is DroppedItem)
+        {
+            DroppedItem droppedItem = (DroppedItem)collectible;
 
+            AddItemToInventory(droppedItem.associatedItem, 1);
 
-
+        }
 
         return true;
     }
 
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (Interactible.targetedItem != null)
+            {
+                Interactible.targetedItem.Interact(player);
+            }
+        }
+    }
 }

@@ -4,8 +4,32 @@ using UnityEngine;
 
 public class Interactible : MonoBehaviour
 {
+    public static Interactible targetedItem;
+
     public virtual void Interact(Player player)
     {
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            SetObjectAsTarget(true);
+        }
+    }
+
+    protected void SetObjectAsTarget(bool enable)
+    {
+        GameManager.gm.mainCanvas.ShowInteractTooltip(true);
+        targetedItem = enable ? this : null;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            SetObjectAsTarget(false);
+        }
     }
 }

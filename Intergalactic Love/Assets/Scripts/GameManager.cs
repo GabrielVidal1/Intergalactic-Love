@@ -16,9 +16,20 @@ public class GameManager : MonoBehaviour
     #endregion
 
     public ItemManager itemManager;
+    public MainCanvas mainCanvas;
+    public Player player;
+
+    public DroppedItem droppedItemPrefab;
 
     public void Start()
     {
         itemManager = GetComponent<ItemManager>();
+        mainCanvas = GameObject.FindObjectOfType<MainCanvas>();
+        player = GameObject.FindObjectOfType<Player>();
+    }
+
+    public bool CanPlayerMove()
+    {
+        return !mainCanvas.IsInventoryOpened();
     }
 }

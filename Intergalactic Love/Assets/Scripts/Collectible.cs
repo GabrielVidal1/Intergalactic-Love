@@ -9,6 +9,8 @@ public class Collectible : MonoBehaviour
     //used for when the player gets near by, he automatically collects the item
     //used for money and dropped Items
 
+    [SerializeField] private Collider itemCollider;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -24,10 +26,14 @@ public class Collectible : MonoBehaviour
 
     IEnumerator CollectCoroutine(Player player)
     {
-        while ((transform.position - player.transform.position).sqrMagnitude > 0.01f)
+        itemCollider.enabled = false;
+        GetComponent<CustomRigidbody>().enabled = false;
+
+        while ((transform.position - player.transform.position).sqrMagnitude > 0.05f)
         {
             yield return 0;
-            transform.position = Vector3.Lerp(transform.position, player.transform.position, 0.1f);
+            transform.localScale *= 0.9f;
+            transform.position = Vector3.Lerp(transform.position, player.transform.position, 0.2f);
         }
         Destroy(gameObject);
     }
