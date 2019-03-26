@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
             camRotXAngle = Mathf.Clamp(camRotXAngle, -50, 30);
             camPivotTransform.localRotation = Quaternion.Euler(camRotXAngle, 0, 0);
 
-            print(transform.up);
+            //print(transform.up);
         }
 
         if (Input.GetMouseButtonUp(1))

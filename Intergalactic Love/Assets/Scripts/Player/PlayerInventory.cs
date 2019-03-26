@@ -36,4 +36,13 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    public bool Collect(Collectible collectible)
+    {
+
+
+
+
+        return true;
+    }
+
 }

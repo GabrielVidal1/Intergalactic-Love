@@ -13,4 +13,6 @@ public class Player : MonoBehaviour
         playerInventory = GetComponent<PlayerInventory>();
         playerMovement= GetComponent<PlayerMovement>();
     }
+
+
 }
