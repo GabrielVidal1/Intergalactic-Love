@@ -6,6 +6,8 @@ public class TrashPile : Interactible
 {
     public RandomItem[] items;
 
+    [SerializeField] private float projForce = 5f;
+
     private Attractor associatedAttractor;
 
     private void Start()
@@ -33,6 +35,11 @@ public class TrashPile : Interactible
 
     public void SpawnItems()
     {
+        Vector3 localUp = transform.up;
+        Vector3 u = Vector3.Cross(localUp, new Vector3(65f, 0.54f, -8f));
+        Vector3 v = Vector3.Cross(localUp, u);
+
+
         foreach (RandomItem item in items)
         {
             if (Random.value < item.chance)
@@ -41,6 +48,13 @@ public class TrashPile : Interactible
 
                 r.associatedItem = item.item;
                 r.GetComponent<CustomRigidbody>().SetAttractor(associatedAttractor);
+
+                float angle = Random.value * 2 * Mathf.PI;
+
+                Vector3 dir = (u * Mathf.Cos(angle) + v * Mathf.Sin(angle)).normalized;
+                dir = (dir + localUp).normalized * projForce;
+
+                r.GetComponent<Rigidbody>().velocity = dir;
             }
         }
     }
