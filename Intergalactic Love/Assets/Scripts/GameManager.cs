@@ -28,13 +28,25 @@ public class GameManager : MonoBehaviour
         itemManager = GetComponent<ItemManager>();
         mainCanvas = GameObject.FindObjectOfType<MainCanvas>();
         player = GameObject.FindObjectOfType<Player>();
+        player.Initialize();
 
         recipeManager = GetComponent<RecipeManager>();
         recipeManager.Initialize();
+
+        SaveLoad.LoadGame();
     }
 
     public bool CanPlayerMove()
     {
         return !mainCanvas.IsInventoryOpened();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.S))
+        {
+            SaveLoad.SaveGame();
+            Debug.Log("Save Game Complete!");
+        }
     }
 }

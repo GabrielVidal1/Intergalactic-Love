@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Scrap Metal
   mass: 0.5
-  texture: {fileID: 10906, guid: 0000000000000000f000000000000000, type: 0}
+  texture: {fileID: 2800000, guid: bd23ed54ea3a4ad40bc507b6acddefca, type: 3}

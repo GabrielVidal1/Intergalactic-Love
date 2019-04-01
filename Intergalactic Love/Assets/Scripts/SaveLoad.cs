@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Text;
+
 public static class SaveLoad
 {
     public static void SaveGame()
     {
         Save save = new Save();
-        save.discoveredRecipes = JsonUtility.ToJson(GameManager.gm.recipeManager.hasDiscoveredRecipe);
 
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/save.save");
         bf.Serialize(file, save);
+
+        Debug.Log("Save at: " + Application.persistentDataPath + "/save.save");
     }
 
     public static void LoadGame()
@@ -25,8 +28,7 @@ public static class SaveLoad
 
             file.Close();
 
-            GameManager.gm.recipeManager.hasDiscoveredRecipe =
-                JsonUtility.FromJson<bool[]>(save.discoveredRecipes);
+            save.Load();
         }
     }
 
@@ -36,4 +38,31 @@ public static class SaveLoad
 public class Save
 {
     public string discoveredRecipes;
+
+    public string playerInventory;
+
+    public Save()
+    {
+        StringBuilder sb = new StringBuilder();
+
+        foreach (bool item in GameManager.gm.recipeManager.hasDiscoveredRecipe)
+            sb.Append(item ? "1" : "0");
+
+        discoveredRecipes = sb.ToString();
+        Debug.Log("Discorved Recipe: " + discoveredRecipes);
+
+        playerInventory = "";
+
+    }
+
+    public void Load()
+    {
+        Debug.Log(discoveredRecipes);
+
+        for (int i = 0; i < discoveredRecipes.Length; i++)
+        {
+            GameManager.gm.recipeManager.hasDiscoveredRecipe[i] =
+                discoveredRecipes[i].Equals('1');
+        }
+    }
 }

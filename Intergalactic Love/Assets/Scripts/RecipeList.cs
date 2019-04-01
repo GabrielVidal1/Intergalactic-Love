@@ -11,6 +11,8 @@ public class RecipeList : MonoBehaviour
 
     public void Initialize(CraftingSystemUI craftingSystem)
     {
+        RecipeListItem.recipeList = this;
+
         this.craftingSystem = craftingSystem;
 
         RecipeManager recipeManager = GameManager.gm.recipeManager;

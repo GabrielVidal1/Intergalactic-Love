@@ -714,6 +714,18 @@ MonoBehaviour:
   m_Script: {fileID: -146154839, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &524840399 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1661617092994843134, guid: 866bbbc572ea3b045bf52a2ba641ff23,
+    type: 3}
+  m_PrefabInstance: {fileID: 2011979008150816768}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 312f2d78446504a42842ce3c14f029a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &551379817
 GameObject:
   m_ObjectHideFlags: 0
@@ -1277,7 +1289,7 @@ RectTransform:
   m_Children:
   - {fileID: 824728291}
   m_Father: {fileID: 748480198}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1365,8 +1377,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1421546840}
   - {fileID: 715548944}
+  - {fileID: 1421546840}
   m_Father: {fileID: 1195758403}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1487,6 +1499,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recipes:
   - {fileID: 11400000, guid: ddac0bf72c8fdb74bac4524e322d7293, type: 2}
+  - {fileID: 11400000, guid: 4e86c03909460114fb90de790811b68a, type: 2}
+  - {fileID: 11400000, guid: 94d81ea3a79a5a740a2b8ef16f509fff, type: 2}
   hasDiscoveredRecipe: 
 --- !u!1 &824728290
 GameObject:
@@ -1538,7 +1552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 1077226590}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
@@ -1557,6 +1571,18 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.ScrollRect+ScrollRectEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &905484261 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1661617092994843134, guid: 866bbbc572ea3b045bf52a2ba641ff23,
+    type: 3}
+  m_PrefabInstance: {fileID: 159288267}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 312f2d78446504a42842ce3c14f029a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &927026841
 GameObject:
   m_ObjectHideFlags: 0
@@ -2233,6 +2259,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recipeList: {fileID: 715548947}
+  craftingZone: {fileID: 1421546843}
+  ingredientInCrafting: []
 --- !u!1 &1228837890
 GameObject:
   m_ObjectHideFlags: 0
@@ -2525,6 +2553,7 @@ GameObject:
   - component: {fileID: 1421546840}
   - component: {fileID: 1421546842}
   - component: {fileID: 1421546841}
+  - component: {fileID: 1421546843}
   m_Layer: 0
   m_Name: Crafting Zone
   m_TagString: Untagged
@@ -2549,7 +2578,7 @@ RectTransform:
   - {fileID: 159288268}
   - {fileID: 707835954}
   m_Father: {fileID: 748480198}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2593,6 +2622,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1421546839}
   m_CullTransparentMesh: 0
+--- !u!114 &1421546843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421546839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b9289abe0786c243b129bcc984e738e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  craftingZoneSlots:
+  - {fileID: 524840399}
+  - {fileID: 905484261}
+  - {fileID: 1518521083}
+  craftButton: {fileID: 1688002162}
 --- !u!1001 &1427899348
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2654,6 +2700,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b170f3beac4273148ade7130d556a901, type: 3}
+--- !u!114 &1518521083 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1661617092994843134, guid: 866bbbc572ea3b045bf52a2ba641ff23,
+    type: 3}
+  m_PrefabInstance: {fileID: 707835953}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 312f2d78446504a42842ce3c14f029a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1559637388
 GameObject:
   m_ObjectHideFlags: 0
@@ -2763,7 +2821,7 @@ GameObject:
   - component: {fileID: 1688002163}
   - component: {fileID: 1688002162}
   m_Layer: 0
-  m_Name: Button
+  m_Name: CraftButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

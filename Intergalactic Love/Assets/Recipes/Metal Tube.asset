@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a3e8521d9dd4ce4ead6548dc53e9b15, type: 3}
-  m_Name: Metal
+  m_Name: Metal Tube
   m_EditorClassIdentifier: 
   result: {fileID: 11400000, guid: 5c309f81ce4d3eb4392668514d9a6b9b, type: 2}
   amount: 1

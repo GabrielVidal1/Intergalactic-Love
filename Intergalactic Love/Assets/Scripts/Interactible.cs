@@ -21,7 +21,7 @@ public class Interactible : MonoBehaviour
 
     protected void SetObjectAsTarget(bool enable)
     {
-        Debug.Log("Called");
+        //Debug.Log("Called");
         GameManager.gm.mainCanvas.ShowInteractTooltip(enable);
         targetedItem = enable ? this : null;
     }

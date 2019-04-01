@@ -151,12 +151,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-  - item: {fileID: 11400000, guid: 64af5b7f15b88ad45aa00262f8776e32, type: 2}
+  - item: {fileID: 11400000, guid: bf3f3b30b3eac0d47a8e366594fb752e, type: 2}
     chance: 0.5
-  - item: {fileID: 11400000, guid: 64af5b7f15b88ad45aa00262f8776e32, type: 2}
+  - item: {fileID: 11400000, guid: bf3f3b30b3eac0d47a8e366594fb752e, type: 2}
     chance: 0.5
-  - item: {fileID: 11400000, guid: 64af5b7f15b88ad45aa00262f8776e32, type: 2}
+  - item: {fileID: 11400000, guid: bf3f3b30b3eac0d47a8e366594fb752e, type: 2}
     chance: 0.5
-  - item: {fileID: 11400000, guid: 64af5b7f15b88ad45aa00262f8776e32, type: 2}
+  - item: {fileID: 11400000, guid: bf3f3b30b3eac0d47a8e366594fb752e, type: 2}
     chance: 0.5
   projForce: 10

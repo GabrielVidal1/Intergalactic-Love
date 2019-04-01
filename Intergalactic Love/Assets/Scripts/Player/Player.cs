@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public PlayerInventory playerInventory;
     public PlayerMovement playerMovement;
 
-    public void Start()
+    public void Initialize()
     {
         playerInventory = GetComponent<PlayerInventory>();
         playerInventory.Initialize(this);
