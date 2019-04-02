@@ -11,6 +11,8 @@ public class CraftingSystemUI : MonoBehaviour
 
     private PlayerInventory playerInventory;
 
+    private Recipe presetRecipe;
+
     public void Initialize()
     {
         playerInventory = GameManager.gm.player.playerInventory;
@@ -31,7 +33,30 @@ public class CraftingSystemUI : MonoBehaviour
         }
     }
 
+    public void PresetRecipe(Recipe recipe)
+    {
+        presetRecipe = recipe;
+    }
 
+    public void Craft()
+    {
+        if (presetRecipe != null)
+        {
+            presetRecipe = FindAssociatedRecipe();
+            if (presetRecipe == null)
+            {
+                Debug.Log("NO RECIPE");
+                return;
+            }
+        }
+
+        foreach (ItemData ingredient in presetRecipe.ingredients)
+        {
+            playerInventory.RemoveItemFromInventory(ingredient, 1);
+        }
+
+        playerInventory.AddItemToInventory(presetRecipe.result, presetRecipe.amount);
+    }
 
     public bool CanCraftItem(Recipe recipe)
     {
@@ -58,5 +83,8 @@ public class CraftingSystemUI : MonoBehaviour
         return true;
     }
 
-
+    public Recipe FindAssociatedRecipe()
+    {
+        return GameManager.gm.recipeManager.FindRecipeFromIngredients(ingredientInCrafting);
+    }
 }

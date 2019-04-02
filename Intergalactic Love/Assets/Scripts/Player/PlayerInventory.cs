@@ -38,6 +38,17 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    public bool RemoveItemFromInventory(ItemData item, int amount)
+    {
+        if (!inventory.ContainsKey(item))
+            return false;
+        if (inventory[item] < amount)
+            return false;
+
+        inventory[item] -= amount;
+        return true;
+    }
+
     public bool Collect(Collectible collectible)
     {
         if (collectible is DroppedItem)

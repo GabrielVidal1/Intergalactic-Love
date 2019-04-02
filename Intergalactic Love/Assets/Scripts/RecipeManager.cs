@@ -52,4 +52,16 @@ public class RecipeManager : MonoBehaviour
             }
         }
     }
+
+
+    public Recipe FindRecipeFromIngredients(List<ItemData> ingredients)
+    {
+        HashSet<ItemData> second = new HashSet<ItemData>(ingredients);
+        foreach (Recipe recipe in recipes)
+        {
+            if (new HashSet<ItemData>(recipe.ingredients).SetEquals(second))
+                return recipe;
+        }
+        return null;
+    }
 }

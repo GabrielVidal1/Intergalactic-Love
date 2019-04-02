@@ -43,6 +43,21 @@ public class MainCanvas : MonoBehaviour
                 craftingSystem.OnOpenCraftingTab();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (isCraftingDisplayed)
+            {
+                isCraftingDisplayed = false;
+                craftingSystem.gameObject.SetActive(isCraftingDisplayed);
+            }
+
+            if (isInventoryDisplayed)
+            {
+                isInventoryDisplayed = false;
+                inventoryUI.gameObject.SetActive(isInventoryDisplayed);
+            }
+        }
     }
 
     public void ShowInteractTooltip(bool enable)

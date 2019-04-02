@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CraftingZone : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class CraftingZone : MonoBehaviour
 
     [SerializeField] private CraftingZoneSlot[] craftingZoneSlots;
     [SerializeField] private Button craftButton;
+
+    [SerializeField] private RawImage resultRawImage;
+    [SerializeField] private TextMeshProUGUI resultAmountText;
 
     public void Initialize(CraftingSystemUI craftingSystemUI)
     {
@@ -23,7 +27,7 @@ public class CraftingZone : MonoBehaviour
 
     public void OnClickCraft()
     {
-
+        craftingSystemUI.Craft();
     }
 
     public void UpdateCraftingSlot(ItemData newItem, ItemData oldItem)
@@ -45,5 +49,10 @@ public class CraftingZone : MonoBehaviour
         {
             craftingZoneSlots[i].SetIngredient(recipe.ingredients[i]);
         }
+
+        resultRawImage.texture = recipe.result.texture;
+        resultAmountText.text = recipe.amount == 1 ? "" : recipe.amount.ToString();
+
+        craftingSystemUI.PresetRecipe(recipe);
     }
 }
