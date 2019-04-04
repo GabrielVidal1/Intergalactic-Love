@@ -37,7 +37,10 @@ public class GameManager : MonoBehaviour
 
     public bool CanPlayerMove()
     {
-        return !mainCanvas.IsInventoryOpened();
+        return 
+            !mainCanvas.IsInventoryOpened() &&
+            !mainCanvas.IsCraftingDisplayed() &&
+            !mainCanvas.dialogueSystem.IsExecutingDialogue();
     }
 
     private void Update()

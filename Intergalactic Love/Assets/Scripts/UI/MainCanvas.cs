@@ -5,8 +5,8 @@ using UnityEngine;
 public class MainCanvas : MonoBehaviour
 {
     public InventoryUI inventoryUI;
-
     public CraftingSystemUI craftingSystem;
+    public DialogueSystem dialogueSystem;
 
     public GameObject interactTooltip;
 
@@ -15,6 +15,8 @@ public class MainCanvas : MonoBehaviour
     { return isInventoryDisplayed; }
 
     private bool isCraftingDisplayed = false;
+    public bool IsCraftingDisplayed()
+    { return isCraftingDisplayed; }
 
     private void Start()
     {
@@ -22,30 +24,34 @@ public class MainCanvas : MonoBehaviour
 
         inventoryUI.gameObject.SetActive(false);
         craftingSystem.gameObject.SetActive(false);
+        dialogueSystem.Initialize();
     }
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        if (!dialogueSystem.IsExecutingDialogue())
         {
-            isInventoryDisplayed = !isInventoryDisplayed;
-            inventoryUI.gameObject.SetActive(isInventoryDisplayed);
-
-            if (isInventoryDisplayed)
+            if (Input.GetKeyDown(KeyCode.I))
             {
-                inventoryUI.Initialize();
+                isInventoryDisplayed = !isInventoryDisplayed;
+                inventoryUI.gameObject.SetActive(isInventoryDisplayed);
+
+                if (isInventoryDisplayed)
+                {
+                    inventoryUI.Initialize();
+                }
             }
-        }
-        else if (Input.GetKeyDown(KeyCode.C))
-        {
-            isCraftingDisplayed = !isCraftingDisplayed;
-            craftingSystem.gameObject.SetActive(isCraftingDisplayed);
-
-            inventoryUI.Initialize();
-
-            if (isCraftingDisplayed)
+            else if (Input.GetKeyDown(KeyCode.C))
             {
-                craftingSystem.OnOpenCraftingTab();
+                isCraftingDisplayed = !isCraftingDisplayed;
+                craftingSystem.gameObject.SetActive(isCraftingDisplayed);
+
+                inventoryUI.Initialize();
+
+                if (isCraftingDisplayed)
+                {
+                    craftingSystem.OnOpenCraftingTab();
+                }
             }
         }
 

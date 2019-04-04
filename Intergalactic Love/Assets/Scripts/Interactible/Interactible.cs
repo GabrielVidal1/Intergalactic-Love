@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public class Interactible : MonoBehaviour
 {
     public static Interactible targetedItem;

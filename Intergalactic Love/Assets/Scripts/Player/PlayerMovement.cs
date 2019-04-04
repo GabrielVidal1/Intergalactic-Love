@@ -98,6 +98,11 @@ public class PlayerMovement : MonoBehaviour
 
             #endregion
         }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
 
         jumpForce *= 0.9f;
 
