@@ -9,4 +9,6 @@ public class Recipe : ScriptableObject
     public int amount;
 
     public ItemData[] ingredients;
+
+    [HideInInspector] public int index;
 }

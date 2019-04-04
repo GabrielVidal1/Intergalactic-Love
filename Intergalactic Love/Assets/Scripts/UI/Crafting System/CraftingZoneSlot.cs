@@ -9,14 +9,18 @@ public class CraftingZoneSlot : MonoBehaviour, IDropHandler
     [SerializeField] private RawImage ingredientTexture;
     [SerializeField] private GameObject removeButton;
 
+    [SerializeField] private Texture emptySlotTexture;
+
     public ItemData item;
 
     private CraftingZone craftingZone;
 
+    private InventoryListItem ilitem;
+
     public void Initialize(CraftingZone craftingZone)
     {
         this.craftingZone = craftingZone;
-        removeButton.SetActive(false);
+        ResetItem();
     }
 
     public void SetIngredient(ItemData item)
@@ -31,16 +35,68 @@ public class CraftingZoneSlot : MonoBehaviour, IDropHandler
     public void ResetItem()
     {
         removeButton.SetActive(false);
-        ingredientTexture.texture = null;
+        ingredientTexture.texture = emptySlotTexture;
         craftingZone.UpdateCraftingSlot(null, item);
         item = null;
+
+        if (ilitem != null)
+            ilitem.PreviewQuantity++;
+        ilitem = null;
+    }
+
+    public void ResetIlitem()
+    {
+        ilitem = null;
     }
 
     public void OnDrop(PointerEventData eventData)
     {
         if (InventoryListItemDraggable.draggedItem != null)
         {
-            SetIngredient(InventoryListItemDraggable.draggedItem);
+            if (ilitem != null)
+            {
+                ilitem.PreviewQuantity++;
+            }
+
+            ilitem = InventoryListItemDraggable.draggedItem.inventoryListItem;
+
+            ilitem.PreviewQuantity--;
+
+            SetIngredient(ilitem.GetItemData());
         }
     }
+
+    public void ReplaceItem()
+    {
+        item = null;
+        if (ilitem == null)
+        {
+            Debug.Log("ERROR");
+            return;
+        }
+
+        if (ilitem.PreviewQuantity <= 0)
+        {
+            ilitem = null;
+            ResetItem();
+            //return false;
+        }
+        else
+        {
+            //print("Item is correctly replaced : " + ilitem.PreviewQuantity + "remainning");
+
+            SetIngredient(ilitem.GetItemData());
+            ilitem.PreviewQuantity--;
+            //return true;
+        }
+
+
+    }
+
+    public void ReplaceItem(InventoryListItem ilitem)
+    {
+        this.ilitem = ilitem;
+        ReplaceItem();
+    }
+
 }

@@ -54,6 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientTexture: {fileID: 1624242582489733534}
   removeButton: {fileID: 2417206633580940567}
+  emptySlotTexture: {fileID: 2800000, guid: 72c5309bc6311264088f567d9ecb44b4, type: 3}
   item: {fileID: 0}
 --- !u!225 &3508510193057412920
 CanvasGroup:
@@ -217,7 +218,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1172280819374717658}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1661617092994843134}
+        m_MethodName: ResetItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &8820714437577132697

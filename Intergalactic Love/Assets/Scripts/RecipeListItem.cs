@@ -14,10 +14,17 @@ public class RecipeListItem : MonoBehaviour
 
     [SerializeField] private RawImage[] ingredientTextures;
 
-    private Recipe recipe;
+    [SerializeField] private GameObject disable;
 
-    public void Initialize(Recipe recipe)
+    private Recipe recipe;
+    private bool canDo;
+
+    private CraftingSystemUI craftingSystemUI;
+
+    public void Initialize(Recipe recipe, CraftingSystemUI craftingSystemUI)
     {
+        this.craftingSystemUI = craftingSystemUI;
+
         this.recipe = recipe;
 
         recipeNameText.text = recipe.result.itemName;
@@ -33,10 +40,20 @@ public class RecipeListItem : MonoBehaviour
         {
             ingredientTextures[i].gameObject.SetActive(false);
         }
+
+        UpdateStatus();
     }
 
     public void OnClick()
     {
-        recipeList.OnClickRecipe(recipe);
+        if (canDo)
+            recipeList.OnClickRecipe(recipe);
+    }
+
+    public void UpdateStatus()
+    {
+        canDo = craftingSystemUI.CanCraftItem(recipe);
+
+        disable.SetActive(!canDo);
     }
 }

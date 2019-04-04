@@ -9,18 +9,23 @@ public class CraftingSystemUI : MonoBehaviour
 
     public List<ItemData> ingredientInCrafting;
 
+    [SerializeField] private CanvasGroup noRecipeAlert;
+
     private PlayerInventory playerInventory;
 
     private Recipe presetRecipe;
+    public InventoryList inventoryList;
 
     public void Initialize()
     {
+        inventoryList = GameManager.gm.mainCanvas.inventoryUI.inventoryList;
         playerInventory = GameManager.gm.player.playerInventory;
-        craftingZone.Initialize(this);
+        noRecipeAlert.alpha = 0f;
     }
 
     public void OnOpenCraftingTab()
     {
+        craftingZone.Initialize(this);
         recipeList.Initialize(this);
         ingredientInCrafting = new List<ItemData>();
     }
@@ -38,24 +43,61 @@ public class CraftingSystemUI : MonoBehaviour
         presetRecipe = recipe;
     }
 
-    public void Craft()
+    public bool Craft()
     {
-        if (presetRecipe != null)
+        if (presetRecipe == null)
         {
             presetRecipe = FindAssociatedRecipe();
             if (presetRecipe == null)
             {
+                //DESTROY INGREDIENTS
+
+                for (int i = 0; i < ingredientInCrafting.Count; i++)
+                {
+                    playerInventory.RemoveItemFromInventory(ingredientInCrafting[i], 1);
+                    inventoryList.listItems[ingredientInCrafting[i]].ResetPreviewQuantity();
+                }
+
+                StartCoroutine(PrintNoRecipeAlert());
+
                 Debug.Log("NO RECIPE");
-                return;
+                return false;
             }
         }
+
+        IEnumerator PrintNoRecipeAlert()
+        {
+            noRecipeAlert.alpha = 1f;
+            yield return new WaitForSecondsRealtime(1f);
+
+            for (float i = 1f; i >= 0f; i-=0.02f)
+            {
+                noRecipeAlert.alpha = i;
+                yield return 0;
+            }
+            noRecipeAlert.alpha = 0f;
+        }
+
 
         foreach (ItemData ingredient in presetRecipe.ingredients)
         {
             playerInventory.RemoveItemFromInventory(ingredient, 1);
+            inventoryList.listItems[ingredient].ResetPreviewQuantity();
         }
 
         playerInventory.AddItemToInventory(presetRecipe.result, presetRecipe.amount);
+        if (!inventoryList.listItems.ContainsKey(presetRecipe.result))
+        {
+            inventoryList.AddNewItem(presetRecipe.result);
+        }
+
+        inventoryList.listItems[presetRecipe.result].ResetPreviewQuantity();
+
+        //reset ingredients and recipe
+        ingredientInCrafting = new List<ItemData>();
+        presetRecipe = null;
+
+        return true;
     }
 
     public bool CanCraftItem(Recipe recipe)

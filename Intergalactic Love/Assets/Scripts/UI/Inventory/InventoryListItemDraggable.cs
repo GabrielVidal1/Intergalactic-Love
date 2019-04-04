@@ -6,26 +6,43 @@ using UnityEngine;
 
 public class InventoryListItemDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public static ItemData draggedItem;
+    public static InventoryListItemDraggable draggedItem;
 
     [SerializeField] public RawImage itemIcon;
 
-    private InventoryListItem inventoryListItem;
+    [HideInInspector]
+    public InventoryListItem inventoryListItem;
     private CanvasGroup canvasGroup;
+
+    public bool shouldResetPreviewQuantity = true;
 
     public void Initialize(InventoryListItem inventoryListItem)
     {
         this.inventoryListItem = inventoryListItem;
         canvasGroup = GetComponent<CanvasGroup>();
+
+        canvasGroup.alpha = 0.0f;
+        canvasGroup.blocksRaycasts = true;
+
+        isDragged = false;
     }
+
+    private bool isDragged;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        transform.SetParent(GameManager.gm.mainCanvas.transform);
-        draggedItem = inventoryListItem.GetItemData();
+        if (inventoryListItem.PreviewQuantity > 0)
+        {
+            transform.SetParent(GameManager.gm.mainCanvas.transform);
+            draggedItem = this;
 
-        canvasGroup.blocksRaycasts = false;
-        canvasGroup.alpha = 0.6f;
+            canvasGroup.blocksRaycasts = false;
+            canvasGroup.alpha = 0.6f;
+
+            inventoryListItem.PreviewQuantity--;
+
+            isDragged = true;
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -35,14 +52,20 @@ public class InventoryListItemDraggable : MonoBehaviour, IBeginDragHandler, IDra
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("OnEndDrag");
+        if (isDragged)
+        {
+            //Debug.Log("OnEndDrag");
 
-        transform.SetParent(inventoryListItem.transform);
-        transform.localPosition = Vector3.zero;
-        draggedItem = null;
+            transform.SetParent(inventoryListItem.transform);
+            transform.localPosition = Vector3.zero;
+            draggedItem = null;
 
-        canvasGroup.blocksRaycasts = true;
-        canvasGroup.alpha = 0.0f;
+            canvasGroup.blocksRaycasts = true;
+            canvasGroup.alpha = 0.0f;
+
+            inventoryListItem.PreviewQuantity++;
+
+            isDragged = false;
+        }
     }
-
 }

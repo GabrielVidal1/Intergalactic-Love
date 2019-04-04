@@ -5,7 +5,6 @@ using UnityEngine;
 public class RecipeManager : MonoBehaviour
 {
     public Recipe[] recipes;
-    [HideInInspector]
     public bool[] hasDiscoveredRecipe;
 
     public void DiscoverRecipe(int index)
@@ -15,11 +14,14 @@ public class RecipeManager : MonoBehaviour
 
     public void Initialize()
     {
-        Debug.Log(recipes.Length);
+        //Debug.Log(recipes.Length);
 
         hasDiscoveredRecipe = new bool[recipes.Length];
         for (int i = 0; i < recipes.Length; i++)
+        {
             hasDiscoveredRecipe[i] = false;
+            recipes[i].index = i;
+        }
     }
 
     public void DiscoverRandomRecipe()

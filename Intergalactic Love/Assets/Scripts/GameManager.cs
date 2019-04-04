@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
     public ItemManager itemManager;
     public MainCanvas mainCanvas;
     public RecipeManager recipeManager;
-
     public Player player;
 
     public DroppedItem droppedItemPrefab;

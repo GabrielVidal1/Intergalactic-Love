@@ -19,6 +19,9 @@ public class MainCanvas : MonoBehaviour
     private void Start()
     {
         craftingSystem.Initialize();
+
+        inventoryUI.gameObject.SetActive(false);
+        craftingSystem.gameObject.SetActive(false);
     }
 
     public void Update()
@@ -30,13 +33,15 @@ public class MainCanvas : MonoBehaviour
 
             if (isInventoryDisplayed)
             {
-                inventoryUI.OnOpenInventory();
+                inventoryUI.Initialize();
             }
         }
         else if (Input.GetKeyDown(KeyCode.C))
         {
             isCraftingDisplayed = !isCraftingDisplayed;
             craftingSystem.gameObject.SetActive(isCraftingDisplayed);
+
+            inventoryUI.Initialize();
 
             if (isCraftingDisplayed)
             {

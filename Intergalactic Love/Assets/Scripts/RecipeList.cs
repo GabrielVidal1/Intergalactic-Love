@@ -25,8 +25,17 @@ public class RecipeList : MonoBehaviour
             if (recipeManager.hasDiscoveredRecipe[i])
             {
                 RecipeListItem recipeListItem = Instantiate(recipeListItemPrefab, recipeListParent);
-                recipeListItem.Initialize(recipeManager.recipes[i]);
+                recipeListItem.Initialize(recipeManager.recipes[i], craftingSystem);
             }
+        }
+    }
+
+    public void UpdateRecipeList()
+    {
+        for (int i = 0; i < recipeListParent.childCount; i++)
+        {
+            RecipeListItem recipeListItem = recipeListParent.GetChild(i).GetComponent<RecipeListItem>();
+            recipeListItem.UpdateStatus();
         }
     }
 

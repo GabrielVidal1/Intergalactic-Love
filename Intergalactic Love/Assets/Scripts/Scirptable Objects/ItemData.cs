@@ -9,4 +9,6 @@ public class ItemData : ScriptableObject
 
     public float mass;
     public Texture texture;
+
+    [HideInInspector] public int index;
 }
