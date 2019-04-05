@@ -16,5 +16,8 @@ public class Player : MonoBehaviour
         playerMovement= GetComponent<PlayerMovement>();
     }
 
-
+    public void DisablePlayer()
+    {
+        playerMovement.DisablePlayer();
+    }
 }

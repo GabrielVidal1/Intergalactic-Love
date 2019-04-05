@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public ItemManager itemManager;
     public MainCanvas mainCanvas;
     public RecipeManager recipeManager;
+    public MainCanvasSE mainCanvasSE;
     public Player player;
 
     public DroppedItem droppedItemPrefab;
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
     {
         itemManager = GetComponent<ItemManager>();
         mainCanvas = GameObject.FindObjectOfType<MainCanvas>();
+        mainCanvasSE = GameObject.FindObjectOfType<MainCanvasSE>();
         player = GameObject.FindObjectOfType<Player>();
         player.Initialize();
 

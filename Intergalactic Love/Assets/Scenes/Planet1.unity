@@ -1762,96 +1762,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748480197}
   m_CullTransparentMesh: 0
---- !u!1 &759970670
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 759970673}
-  - component: {fileID: 759970672}
-  - component: {fileID: 759970671}
-  - component: {fileID: 759970674}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &759970671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 759970670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad1d91f45bb64ef489dfa645d7e4d2ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  items:
-  - {fileID: 11400000, guid: e85901f2c2340b34294cf2367d7740a6, type: 2}
-  - {fileID: 11400000, guid: 9dca0ae165be9e74aa37a2bbd3d63b7f, type: 2}
-  - {fileID: 11400000, guid: ac9cd899877789243bfb73c79b2cb45f, type: 2}
-  - {fileID: 11400000, guid: 5c309f81ce4d3eb4392668514d9a6b9b, type: 2}
-  - {fileID: 11400000, guid: 0c354e41049f99b4b8e3cdc4858e5914, type: 2}
-  - {fileID: 11400000, guid: 64af5b7f15b88ad45aa00262f8776e32, type: 2}
-  - {fileID: 11400000, guid: 9cfe5e2872b0acd4a8603e0d9a56d855, type: 2}
-  - {fileID: 11400000, guid: 7c70a2e9091ace24fa65de795c28329e, type: 2}
-  - {fileID: 11400000, guid: bf3f3b30b3eac0d47a8e366594fb752e, type: 2}
---- !u!114 &759970672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 759970670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd967515577bdf840b6dff68a719fde6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemManager: {fileID: 759970671}
-  mainCanvas: {fileID: 0}
-  recipeManager: {fileID: 0}
-  player: {fileID: 0}
-  droppedItemPrefab: {fileID: 8891760448634575040, guid: 0d7bc1c175f4f2a4781203d346ac9a80,
-    type: 3}
---- !u!4 &759970673
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 759970670}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &759970674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 759970670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 767036b41df36684fb598390ab88848d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  recipes:
-  - {fileID: 11400000, guid: ddac0bf72c8fdb74bac4524e322d7293, type: 2}
-  - {fileID: 11400000, guid: 4e86c03909460114fb90de790811b68a, type: 2}
-  - {fileID: 11400000, guid: 94d81ea3a79a5a740a2b8ef16f509fff, type: 2}
-  hasDiscoveredRecipe: 
 --- !u!1 &765470311
 GameObject:
   m_ObjectHideFlags: 0
@@ -5496,3 +5406,72 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a57ce1b490fc474593ed6c12ae36335, type: 3}
+--- !u!1001 &8440754602591627227
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8440754603049065653, guid: 57d24a770a628dc43a7260abfd3b732c,
+        type: 3}
+      propertyPath: m_Name
+      value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8440754603049065642, guid: 57d24a770a628dc43a7260abfd3b732c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8440754603049065642, guid: 57d24a770a628dc43a7260abfd3b732c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8440754603049065642, guid: 57d24a770a628dc43a7260abfd3b732c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8440754603049065642, guid: 57d24a770a628dc43a7260abfd3b732c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8440754603049065642, guid: 57d24a770a628dc43a7260abfd3b732c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8440754603049065642, guid: 57d24a770a628dc43a7260abfd3b732c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8440754603049065642, guid: 57d24a770a628dc43a7260abfd3b732c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8440754603049065642, guid: 57d24a770a628dc43a7260abfd3b732c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8440754603049065642, guid: 57d24a770a628dc43a7260abfd3b732c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8440754603049065642, guid: 57d24a770a628dc43a7260abfd3b732c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8440754603049065642, guid: 57d24a770a628dc43a7260abfd3b732c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 57d24a770a628dc43a7260abfd3b732c, type: 3}

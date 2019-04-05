@@ -94,7 +94,9 @@ public class DialogueSystem : MonoBehaviour
 
     private void SetUp(Dialogue.DialogueLine line, Dialogue dialogue)
     {
-        Dialogue.Protagonist protagonist = dialogue.protagonists[line.protagonistIndex];
+        Dialogue.Protagonist protagonist = 
+            line.protagonistPos == Dialogue.DialogueLine.ProtagonistPos.First ? 
+            dialogue.protagonist1 : dialogue.protagonist2;
 
         switch (line.position)
         {

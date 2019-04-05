@@ -5,7 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Dialogue", menuName = "", order = 1)]
 public class Dialogue : ScriptableObject
 {
-    public Protagonist[] protagonists;
+    public Protagonist protagonist1;
+    public Protagonist protagonist2;
     public DialogueLine[] lines;
 
     [System.Serializable]
@@ -18,7 +19,14 @@ public class Dialogue : ScriptableObject
     [System.Serializable]
     public class DialogueLine
     {
-        public int protagonistIndex;
+        public ProtagonistPos protagonistPos;
+
+        public enum ProtagonistPos
+        {
+            First,
+            Second
+        }
+
         public ProtagonistPosition position;
         public string line;
         public DialogueLineStyle style;
