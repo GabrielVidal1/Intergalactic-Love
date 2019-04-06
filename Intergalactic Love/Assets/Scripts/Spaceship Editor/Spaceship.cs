@@ -14,6 +14,10 @@ public class Spaceship : SpaceshipPart
 
     }
 
+    private void Start()
+    {
+        mesh.Initiliaze(this);
+    }
 }
 
 [System.Serializable]

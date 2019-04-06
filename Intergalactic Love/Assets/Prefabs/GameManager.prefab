@@ -48,6 +48,7 @@ MonoBehaviour:
   itemManager: {fileID: 8440754603049065652}
   mainCanvas: {fileID: 0}
   recipeManager: {fileID: 0}
+  mainCanvasSE: {fileID: 0}
   player: {fileID: 0}
   droppedItemPrefab: {fileID: 8891760448634575040, guid: 0d7bc1c175f4f2a4781203d346ac9a80,
     type: 3}
@@ -74,6 +75,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7c70a2e9091ace24fa65de795c28329e, type: 2}
   parts:
   - {fileID: 6937197600998521838, guid: 932f159a9f4163f488a78ad69cb5940b, type: 3}
+  - {fileID: 1719568674746801530, guid: 588129ebd42b0e04bb82fb427f2583a7, type: 3}
 --- !u!114 &8440754603049065641
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -48,12 +48,13 @@ public class PartListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
         if (Physics.Raycast(ray, out hit))
         {
-
+            bool isPosValid = false;
             if (hit.collider.CompareTag("SpaceshipPart") &&
-                hit.collider.GetComponent<SpaceshipPart>().canBeParent)
+                hit.collider.GetComponent<SpaceshipPartMesh>().GetPart().canBeParent)
             {
                 spaceshipPart.SetMat(null);
-                parentPart = hit.collider.GetComponent<SpaceshipPart>();
+                parentPart = hit.collider.GetComponent<SpaceshipPartMesh>().GetPart();
+                isPosValid = true;
             }
             else
             {
@@ -61,7 +62,8 @@ public class PartListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
                 parentPart = null;
             }
 
-            spaceshipPart.SetPosition(hit.point);
+            spaceshipPart.DisableSymetry(isPosValid);
+            spaceshipPart.SetPosition(hit.point, isPosValid);
             spaceshipPart.LookAt(-hit.normal);
         }
     }
@@ -73,6 +75,7 @@ public class PartListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
             if (parentPart != null)
             {
                 spaceshipPart.AttachToPart(parentPart);
+                partListItem.PreviewQuantity--;
             }
             else
             {

@@ -10,23 +10,31 @@ public class SpaceshipPart : MonoBehaviour
     public enum SpaceshipPartType
     {
         Core,
+        Structure,
         Reactor,
         Cockpit,
         Weapon
     }
 
     public bool canBeParent;
+    public bool canBeRotated;
 
-    [SerializeField] private SpaceshipPartMesh mesh;
+    public SpaceshipPartMesh mesh;
 
     private List<SpaceshipPart> attachedParts;
     private SpaceshipPart parent;
 
     private SpaceshipPartMesh mesh2;
 
+    private Vector3 position;
+    private Quaternion rotation;
+
     public void Initialize()
     {
         mesh2 = Instantiate(mesh);
+        mesh2.transform.SetParent(transform);
+        mesh.Initiliaze(this);
+        mesh2.Initiliaze(this);
     }
 
     public void SetMat(Material mat)
@@ -35,11 +43,20 @@ public class SpaceshipPart : MonoBehaviour
         mesh2.SetMat(mat);
     }
 
+    public void DisableSymetry(bool disable)
+    {
+        if (mesh2 != null)
+            mesh2.gameObject.SetActive(disable);
+    }
+
     #region Spaceship Manipulation
 
     public void AttachToPart(SpaceshipPart parent)
     {
         this.parent = parent;
+        transform.parent = parent.transform;
+
+        GameManager.gm.mainCanvasSE.partTransformation.SelectePart(this);
     }
 
     public void Remove()
@@ -62,12 +79,34 @@ public class SpaceshipPart : MonoBehaviour
         part.transform.SetParent(transform);
     }
 
+    public SerializedSpaceship.SerializedSpaceshipPart SerializePart()
+    {
+        SerializedSpaceship.SerializedSpaceshipPart sPart = new SerializedSpaceship.SerializedSpaceshipPart();
+
+        int nb = attachedParts.Count;
+        sPart.parts = new SerializedSpaceship.SerializedSpaceshipPart[nb];
+        sPart.position = position;
+        sPart.rotation = rotation;
+
+        for (int i = 0; i < nb; i++)
+        {
+            sPart.parts[i] = attachedParts[i].SerializePart();
+        }
+
+        return sPart;
+    }
+
     #endregion
 
     #region Mesh Manipulation
 
-    public void SetPosition(Vector3 pos)
+    public void SetPosition(Vector3 pos, bool isPosValid)
     {
+        //POSITION IN X IN ALWAYS POSITIVE !!!
+        if (isPosValid)
+           pos.x = Mathf.Abs(pos.x);
+
+        position = pos;
         mesh.transform.position = pos;
         Vector3 pos2 = pos;
         pos2.x *= -1;
@@ -76,10 +115,18 @@ public class SpaceshipPart : MonoBehaviour
 
     public void LookAt(Vector3 direction)
     {
-        mesh.transform.LookAt(mesh.transform.position + direction);
-        Vector3 dir2 = direction;
-        dir2.x *= -1;
-        mesh2.transform.LookAt(mesh2.transform.position + dir2);
+        //DIRECTION IN X IN ALWAYS POSITIVE !!!
+        direction.x = Mathf.Abs(direction.x);
+
+        rotation = Quaternion.LookRotation(direction);
+
+        mesh.transform.rotation = rotation;
+
+        Quaternion rot2 = rotation;
+        rot2.y *= -1;
+        rot2.z *= -1;
+
+        mesh2.transform.rotation = rot2;
     }
 
     #endregion

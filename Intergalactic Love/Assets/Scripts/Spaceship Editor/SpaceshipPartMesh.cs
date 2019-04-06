@@ -5,7 +5,18 @@ using UnityEngine;
 public class SpaceshipPartMesh : MonoBehaviour
 {
     [SerializeField] private Material defaultMaterial;
-    [SerializeField] private MeshRenderer mr;
+
+    private MeshRenderer mr;
+
+    private SpaceshipPart part;
+    public SpaceshipPart GetPart()
+    { return part; }
+
+    public void Initiliaze(SpaceshipPart part)
+    {
+        this.part = part;
+        mr = GetComponent<MeshRenderer>();
+    }
 
     public void SetMat(Material mat)
     {

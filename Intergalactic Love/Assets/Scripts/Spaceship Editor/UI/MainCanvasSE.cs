@@ -6,6 +6,7 @@ public class MainCanvasSE : MonoBehaviour
 {
     public PartList partList;
     public Camera mainCam;
+    public PartTransformation partTransformation;
 
     [SerializeField] public Material notValidMat;
 
