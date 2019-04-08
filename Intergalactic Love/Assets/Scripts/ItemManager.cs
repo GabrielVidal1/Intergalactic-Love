@@ -23,5 +23,10 @@ public class ItemManager : MonoBehaviour
         {
             items[i].index = i;
         }
+
+        for (int i = 0; i < parts.Count; i++)
+        {
+            parts[i].index = i;
+        }
     }
 }

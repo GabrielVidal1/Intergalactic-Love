@@ -32,7 +32,7 @@ public class PartListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
             spaceshipPart = Instantiate(partListItem.part);
             spaceshipPart.Initialize();
-
+            spaceshipPart.DisableCollider(true);
             partListItem.PreviewQuantity--;
             isDragged = true;
         }
@@ -43,7 +43,7 @@ public class PartListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
     {
         transform.position = eventData.position;
 
-        Ray ray = GameManager.gm.mainCanvasSE.mainCam.ScreenPointToRay(Input.mousePosition);
+        Ray ray = GameManager.gm.mainCanvasSE.GetRayFromMousePosition();
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))
@@ -64,7 +64,10 @@ public class PartListDraggable : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
             spaceshipPart.DisableSymetry(isPosValid);
             spaceshipPart.SetPosition(hit.point, isPosValid);
-            spaceshipPart.LookAt(-hit.normal);
+
+            Vector3 normal = -hit.normal;
+            normal.x = -Mathf.Abs(normal.x);
+            spaceshipPart.SetRotation(Quaternion.LookRotation(normal));
         }
     }
 
