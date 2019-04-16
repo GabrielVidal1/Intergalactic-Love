@@ -8,6 +8,7 @@ TagManager:
   - SEnotGood
   - SpaceshipPart
   - RotationGizmo
+  - RaycastPlane
   layers:
   - Default
   - TransparentFX

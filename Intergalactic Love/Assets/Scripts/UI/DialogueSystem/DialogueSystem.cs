@@ -75,7 +75,7 @@ public class DialogueSystem : MonoBehaviour
                         break;
                 }
 
-                yield return 0;
+                yield return new WaitForSecondsRealtime(Time.deltaTime / 2);
             }
 
             while (!Input.GetKeyDown(KeyCode.Space))

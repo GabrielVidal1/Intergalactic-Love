@@ -10,15 +10,15 @@ public class SpaceshipSaveLoad : MonoBehaviour
 
     public SerializedSpaceshipPart savedVersion;
 
-    [SerializeField] private Transform shipParent;
+    public Transform shipParent;
     [SerializeField] private SpaceshipPart cockpitPrefab;
 
     public void SaveSpaceship()
     {
         savedVersion = mainSpaceship.SerializePart();
 
-        savedVersion.position = new SerializedSpaceshipPart.SerializedVector3(Vector3.zero);
-        savedVersion.rotation = new SerializedSpaceshipPart.SerializedQuaternion(Quaternion.identity);
+        //savedVersion.position = new SerializedSpaceshipPart.SerializedVector3(Vector3.zero);
+        //savedVersion.rotation = new SerializedSpaceshipPart.SerializedQuaternion(Quaternion.identity);
 
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/spaceship.data");
@@ -40,7 +40,7 @@ public class SpaceshipSaveLoad : MonoBehaviour
 
             mainSpaceship = savedVersion.LoadMain(shipParent);
 
-            Debug.Log("Loading complete");
+            Debug.Log("Loading from file complete");
         }
         else
         {
@@ -50,6 +50,8 @@ public class SpaceshipSaveLoad : MonoBehaviour
 
     public void LoadFirstTime()
     {
+        Debug.Log("First Time Loading...");
+
         mainSpaceship = Instantiate(cockpitPrefab, shipParent);
         mainSpaceship.Initialize();
         mainSpaceship.transform.localPosition = Vector3.zero;
@@ -114,14 +116,17 @@ public class SpaceshipSaveLoad : MonoBehaviour
             thisPart.SetPosition(position.Deserialize(), true);
             thisPart.SetRotation(rotation.Deserialize());
 
-            thisPart.transform.parent = parent;
-            thisPart.transform.localPosition = Vector3.zero;
 
             foreach (SerializedSpaceshipPart serializedSpaceshipPart in parts)
             {
                 SpaceshipPart childPart = serializedSpaceshipPart.Load();
                 thisPart.AddPart(childPart);
             }
+
+            thisPart.transform.parent = parent;
+            thisPart.transform.localPosition = Vector3.zero;
+            thisPart.transform.localRotation = Quaternion.identity;
+            thisPart.transform.localScale = Vector3.one;
 
             return thisPart;
         }
@@ -145,4 +150,3 @@ public class SpaceshipSaveLoad : MonoBehaviour
 
     }
 }
-

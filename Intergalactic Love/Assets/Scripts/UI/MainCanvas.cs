@@ -8,6 +8,8 @@ public class MainCanvas : MonoBehaviour
     public CraftingSystemUI craftingSystem;
     public DialogueSystem dialogueSystem;
 
+    public ConfirmationMessageUI confirmationMessage;
+
     public GameObject interactTooltip;
 
     private bool isInventoryDisplayed = false;
@@ -25,6 +27,8 @@ public class MainCanvas : MonoBehaviour
         inventoryUI.gameObject.SetActive(false);
         craftingSystem.gameObject.SetActive(false);
         dialogueSystem.Initialize();
+
+        confirmationMessage.Initiliaze();
     }
 
     public void Update()
