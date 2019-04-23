@@ -15,26 +15,27 @@ public class SPHook : MonoBehaviour
 
     [SerializeField] public SpacePhaseManager spacePhaseManager;
 
-    [SerializeField] private Transform hookParent;
-
     [SerializeField] private Transform hookPreview;
     [SerializeField] private MeshRenderer hookPreviewMr;
     [SerializeField] private Gradient color;
 
+    [SerializeField] private float hookHeadRadius;
     [SerializeField] private Transform hookHead;
 
-    [SerializeField] private TrailRenderer rope;
-
-    private Vector3 position;
-    private LayerMask mask;
 
     [SerializeField] private float maxLength;
     [SerializeField] private float deploymentSpeed;
-
     [SerializeField] private float returnSpeed;
 
+    [SerializeField] private AnimationCurve hitWreckSizeOverTime;
+
+    private LayerMask mask;
 
     private Vector3 firePosition;
+
+    private Vector3 fireDirection;
+
+    private SEWreck hitMesh;
 
     private void Start()
     {
@@ -45,7 +46,7 @@ public class SPHook : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !fireHook)
+        if (Input.GetMouseButtonDown(0) && !fireHook && !aimHook)
         {
             aimHook = true;
             force = 0;
@@ -60,10 +61,12 @@ public class SPHook : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 10000, mask))
             {
-                position = hit.point;
                 force += Time.deltaTime * forceSpeed;
+
+                fireDirection = (hit.point - transform.position).normalized;
+
                 hookPreview.localScale = new Vector3(1, 1, force);
-                hookParent.rotation = Quaternion.FromToRotation(Vector3.forward, (position - transform.position).normalized);
+                hookPreview.rotation = Quaternion.FromToRotation(Vector3.forward, fireDirection);
 
 
                 hookPreviewMr.material.color = color.Evaluate(force / maxForce);
@@ -72,27 +75,19 @@ public class SPHook : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0) && aimHook && !fireHook || force > maxForce)
         {
-            ReleaseClick();
+            StartCoroutine(FireHook());
+            fireHook = true;
+            aimHook = false;
+
+            hookPreview.gameObject.SetActive(false);
         }
-    }
-
-    public void ReleaseClick()
-    {
-        StartCoroutine(FireHook());
-        fireHook = true;
-
-        hookPreview.gameObject.SetActive(false);
     }
 
     IEnumerator FireHook()
     {
         firePosition = transform.position;
 
-
-        hookParent.rotation = Quaternion.FromToRotation(Vector3.forward, (position - transform.position).normalized);
-        hookParent.parent = null;
         float length = 0;
-
         bool hasHitObject = false;
 
         hookHead.gameObject.SetActive(true);
@@ -101,55 +96,57 @@ public class SPHook : MonoBehaviour
 
         while (!hasHitObject && length < maxLength)
         {
-            hookHead.transform.localPosition = new Vector3(0, 0, length);
+            hookHead.transform.position = firePosition + fireDirection * length;
 
+            foreach (Collider collider in Physics.OverlapSphere(hookHead.transform.position, hookHeadRadius))
+            {
+                if (collider.CompareTag("SpaceshipWreck"))
+                {
+                    SEWreck wreck = collider.transform.parent.GetComponent<SEWreck>();
+                    wreck.transform.SetParent(hookHead);
+                    hasHitObject = true;
+
+                    hitMesh = wreck;
+
+                    Debug.Log("CAUGHT");
+
+                    break;
+                }
+            }
 
             yield return 0;
             length += deploymentSpeed * speedCoef * Time.deltaTime;
 
         }
-        StartCoroutine(DrawRope());
 
-        Vector3 pos = hookHead.transform.position;
-        hookParent.transform.position = pos;
-        hookHead.transform.localPosition = Vector3.zero;
+        Vector3 extremumPos = hookHead.transform.position;
+        hookHead.transform.position = extremumPos;
 
         float k = 0f;
 
-
         while (k < 1f)
         {
-            hookParent.transform.position = Vector3.Lerp(pos, transform.position, k);
+            hookHead.transform.position = Vector3.Lerp(extremumPos, transform.position, k);
+
+            if (hasHitObject)
+            {
+                hitMesh.transform.localScale = Vector3.one * hitWreckSizeOverTime.Evaluate(k / 0.9f);
+            }
+
             yield return 0;
             k += 0.01f;
         }
 
+        fireHook = false;
         hookHead.gameObject.SetActive(false);
 
-        hookParent.parent = transform;
-        hookParent.localPosition = Vector3.zero;
 
-        fireHook = false;
-    }
-
-    IEnumerator DrawRope()
-    {
-        rope.transform.position = transform.position;
-        rope.emitting = true;
-
-        for (float i = 0f; i < 1f; i += 0.1f)
+        if (hasHitObject)
         {
-            rope.transform.position = transform.position * i * i +
-                firePosition * 2 * i * (1 - i) +
-                hookHead.transform.position * (1f - i) * (1f - i);
-            yield return 0;
+            hitMesh.CollectItems();
         }
-
-        rope.transform.position = hookHead.transform.position;
-
-        rope.emitting = false;
-
     }
+
 
 
 }

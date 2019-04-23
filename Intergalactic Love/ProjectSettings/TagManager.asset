@@ -9,6 +9,7 @@ TagManager:
   - SpaceshipPart
   - RotationGizmo
   - RaycastPlane
+  - SpaceshipWreck
   layers:
   - Default
   - TransparentFX
