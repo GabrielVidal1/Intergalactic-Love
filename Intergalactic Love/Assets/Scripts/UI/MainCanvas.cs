@@ -20,7 +20,7 @@ public class MainCanvas : MonoBehaviour
     public bool IsCraftingDisplayed()
     { return isCraftingDisplayed; }
 
-    private void Start()
+    public void Initialize()
     {
         craftingSystem.Initialize();
 

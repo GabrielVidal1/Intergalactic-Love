@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
         mainCanvas = GameObject.FindObjectOfType<MainCanvas>();
         mainCanvasSE = GameObject.FindObjectOfType<MainCanvasSE>();
         player = GameObject.FindObjectOfType<Player>();
+        mainCanvas.Initialize();
         player.Initialize();
 
         recipeManager = GetComponent<RecipeManager>();
