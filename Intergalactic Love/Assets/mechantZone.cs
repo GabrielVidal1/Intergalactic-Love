@@ -5,23 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class mechantZone : MonoBehaviour
 {
-    public Animator anim;
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            anim.SetTrigger("Dead");
-
-
-            Invoke("couille", 3);
+            StartCoroutine(BlackFondue());
         }
     }
 
-    private void couille()
+    IEnumerator BlackFondue()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        for (float i = 0f; i < 1f; i += 0.1f)
+        {
+            GameManager.gm.mainCanvas.blackFondue.alpha = i;
+            yield return 0;
+        }
+        GameManager.gm.mainCanvas.blackFondue.alpha = 1f;
+
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

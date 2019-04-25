@@ -12,6 +12,8 @@ public class MainCanvas : MonoBehaviour
 
     public GameObject interactTooltip;
 
+    public CanvasGroup blackFondue;
+
     private bool isInventoryDisplayed = false;
     public bool IsInventoryOpened()
     { return isInventoryDisplayed; }
