@@ -13,4 +13,11 @@ public class Planet : Attractor
     {
         return (target.position - Center).normalized;
     }
+
+    public static void Orient(Transform obj, Planet planet)
+    {
+        Vector3 localUp = (obj.position - planet.Center).normalized;
+        Quaternion rot = Quaternion.FromToRotation(obj.up, localUp);
+        obj.rotation = rot;
+    }
 }

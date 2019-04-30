@@ -69,7 +69,7 @@ public class ItineraryTracer : MonoBehaviour
                     float coef = (ms.GetMaxDistance() - distance) / addedDistance;
                     point = Vector3.Lerp(lastHit, point, coef);
 
-                    ms.SetFuelbar(ms.GetMaxDistance());
+                    distance = ms.GetMaxDistance();
                     Stop();
                 }
                 else

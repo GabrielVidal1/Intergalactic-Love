@@ -25,9 +25,7 @@ public class MyWindow : EditorWindow
 
                 foreach (GameObject obj in selectedObjects)
                 {
-                    Vector3 localUp = (obj.transform.position - planet.Center).normalized;
-                    Quaternion rot = Quaternion.FromToRotation(obj.transform.up, localUp);
-                    obj.transform.rotation = rot;
+                    Planet.Orient(obj.transform, planet);
                 }
             }
         }

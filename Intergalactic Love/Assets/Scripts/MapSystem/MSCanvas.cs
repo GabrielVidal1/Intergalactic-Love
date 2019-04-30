@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,11 +30,15 @@ public class MSCanvas : MonoBehaviour
 
     public void OnClickGo()
     {
-
-        StartCoroutine(blackFondu(true));
+        StartCoroutine(blackFondu(true, MapSystem.SceneName.SpacePhase));
     }
 
-    IEnumerator blackFondu(bool toBlack)
+    public void OnClickBack()
+    {
+        StartCoroutine(blackFondu(true, MapSystem.SceneName.Planet));
+    }
+
+    IEnumerator blackFondu(bool toBlack, MapSystem.SceneName sceneName)
     {
         for (float i = 0f; i < 1f; i += 0.02f)
         {
@@ -41,5 +46,6 @@ public class MSCanvas : MonoBehaviour
             yield return 0;
         }
         blackFonduGroup.alpha = toBlack ? 1f : 0f;
+        ms.ChangeScene(sceneName);
     }
 }
