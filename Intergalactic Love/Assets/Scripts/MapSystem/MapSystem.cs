@@ -10,7 +10,7 @@ public class MapSystem : MonoBehaviour
 
     private ItineraryTracer itineraryTracer;
 
-    [SerializeField] private MSCanvas canvas;
+    public MSCanvas canvas;
 
     [SerializeField] private float maxDistance;
     public float GetMaxDistance()
@@ -20,6 +20,8 @@ public class MapSystem : MonoBehaviour
     {
         itineraryTracer = GetComponent<ItineraryTracer>();
         itineraryTracer.Initialize(this);
+
+        canvas.SetFuel(0);
     }
 
     public void SetFuelbar(float distance)
