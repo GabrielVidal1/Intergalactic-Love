@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class Planet : Attractor
 {
+    public Vector3 Center
+    {
+        get { return transform.position; }
+    }
+
     protected override Vector3 GetUp(Transform target)
     {
-        return (target.position - transform.position).normalized;
+        return (target.position - Center).normalized;
     }
 }
