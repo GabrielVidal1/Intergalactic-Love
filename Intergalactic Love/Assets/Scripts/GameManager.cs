@@ -34,11 +34,11 @@ public class GameManager : MonoBehaviour
         mainCanvas = GameObject.FindObjectOfType<MainCanvas>();
         mainCanvasSE = GameObject.FindObjectOfType<MainCanvasSE>();
         player = GameObject.FindObjectOfType<Player>();
-
-        if (mainCanvas != null)
-            mainCanvas.Initialize();
         if (player != null)
             player.Initialize();
+        if (mainCanvas != null)
+            mainCanvas.Initialize();
+       
 
         SaveLoad.LoadGame();
     }

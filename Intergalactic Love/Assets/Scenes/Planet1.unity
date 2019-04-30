@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 3e8bc5155c4c9ed46a63ac64c06408f3, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.19714758, g: 0.099915944, b: 0.12106549, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3891,11 +3891,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effect:
+  - {fileID: 1246638314895344, guid: fe91343b9a35bb14794086f1770004a3, type: 3}
   - {fileID: 1436447386774278, guid: b36e5394bf3902b41877ecba9aa55b8d, type: 3}
-  - {fileID: 1967491460922094, guid: 8c446a74ba1e76244a5a66cb32aedc9b, type: 3}
-  - {fileID: 121928, guid: 313e5c5f850e5be429d4a6787a725f73, type: 3}
-  - {fileID: 167990, guid: 1915ba71ef127a84fb6bb20ebda36f1e, type: 3}
-  - {fileID: 1614648838348040, guid: 6b12f08cfea33d1429a5fb9ca7e5f9fe, type: 3}
+  - {fileID: 141900, guid: 994aac8c46b05f849b78294465816eb1, type: 3}
   planet: {fileID: 1916883014}
 --- !u!4 &1899398589
 Transform:
@@ -4743,7 +4741,7 @@ PrefabInstance:
     - target: {fileID: 3009522196499563763, guid: e1500b18fb8a0984b8a5a4d1b865278d,
         type: 3}
       propertyPath: m_ClearFlags
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1500b18fb8a0984b8a5a4d1b865278d, type: 3}
