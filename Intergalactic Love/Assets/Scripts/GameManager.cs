@@ -23,12 +23,15 @@ public class GameManager : MonoBehaviour
 
     public DroppedItem droppedItemPrefab;
 
+    public QuestManager questManager;
+
     public void Start()
     {
         //ALWAYS PRESENT
         recipeManager = GetComponent<RecipeManager>();
         recipeManager.Initialize();
         itemManager = GetComponent<ItemManager>();
+        questManager = GetComponent<QuestManager>();
 
         //NOT ALWAYS PRESENT
         mainCanvas = GameObject.FindObjectOfType<MainCanvas>();
