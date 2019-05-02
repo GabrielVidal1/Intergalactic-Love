@@ -21,7 +21,27 @@ ModelImporter:
     4300002: Icosphere
     7400000: Default Take
     9500000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ground
+    second: {fileID: 2100000, guid: d13c6a83dacded641b7e534426d3001c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Messas
+    second: {fileID: 2100000, guid: b9c08bed222b76a4ba8953ddbfe6443d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MetalWorld
+    second: {fileID: 2100000, guid: e8f43e1a3d8fe4840b68251335690e36, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WaterDirty
+    second: {fileID: 2100000, guid: b943d97ba64fdd54fa8b2311510e4f06, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
