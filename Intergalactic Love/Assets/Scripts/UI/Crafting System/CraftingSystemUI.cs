@@ -20,6 +20,10 @@ public class CraftingSystemUI : MonoBehaviour
     {
         inventoryList = GameManager.gm.mainCanvas.inventoryUI.inventoryList;
         playerInventory = GameManager.gm.player.playerInventory;
+        if (playerInventory.inventory == null)
+        {
+            playerInventory.inventory = new Dictionary<ItemData, int>();
+        }
         noRecipeAlert.alpha = 0f;
     }
 

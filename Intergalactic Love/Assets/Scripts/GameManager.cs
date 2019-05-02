@@ -25,15 +25,20 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
+        //ALWAYS PRESENT
+        recipeManager = GetComponent<RecipeManager>();
+        recipeManager.Initialize();
         itemManager = GetComponent<ItemManager>();
+
+        //NOT ALWAYS PRESENT
         mainCanvas = GameObject.FindObjectOfType<MainCanvas>();
         mainCanvasSE = GameObject.FindObjectOfType<MainCanvasSE>();
         player = GameObject.FindObjectOfType<Player>();
-        mainCanvas.Initialize();
-        player.Initialize();
-
-        recipeManager = GetComponent<RecipeManager>();
-        recipeManager.Initialize();
+        if (player != null)
+            player.Initialize();
+        if (mainCanvas != null)
+            mainCanvas.Initialize();
+       
 
         SaveLoad.LoadGame();
     }
