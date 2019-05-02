@@ -4,10 +4,11 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: ColorTexture
-  m_Shader: {fileID: 10703, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 9c6ece3d5ef8bb84db19471daaf6c788, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -118,15 +119,35 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _InvFade: 1
+    - _LightSmoothness: 0
+    - _LightThreshold: 0.3
+    - _MKEditorShowDetailBehavior: 0
+    - _MKEditorShowDissolveBehavior: 0
+    - _MKEditorShowLightBehavior: 0
+    - _MKEditorShowMainBehavior: 1
+    - _MKEditorShowOutlineBehavior: 1
+    - _MKEditorShowReflectionBehavior: 0
+    - _MKEditorShowRenderBehavior: 0
+    - _MKEditorShowRimBehavior: 0
+    - _MKEditorShowShadowBehavior: 0
+    - _MKEditorShowSketchBehavior: 0
+    - _MKEditorShowSpecularBehavior: 0
+    - _MKEditorShowTranslucentBehavior: 0
     - _Metallic: 0
     - _Mode: 0
     - _MotionAmount: 0
     - _OcclusionStrength: 1
+    - _OutlineSize: 0
     - _Parallax: 0.02
+    - _RimIntensity: 0.5
+    - _RimSize: 1.5
+    - _RimSmoothness: 0.5
+    - _ShadowIntensity: 1
     - _ShadowStrength: 1
     - _Shininess: 0.078125
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _SpecularIntensity: 0.5
     - _SquashAmount: 1
     - _SrcBlend: 1
     - _Stencil: 0
@@ -143,8 +164,13 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _HighlightColor: {r: 1, g: 1, b: 1, a: 1}
     - _HueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecColor: {r: 1, g: 1, b: 1, a: 0.5}
     - _Specular: {r: 0, g: 0, b: 0, a: 0}
     - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
     - _TranslucencyColor: {r: 0.73, g: 0.85, b: 0.41, a: 1}
