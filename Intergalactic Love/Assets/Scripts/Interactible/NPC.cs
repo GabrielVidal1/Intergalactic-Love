@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NPC : Interactible
 {
-    public Dialogue[] dialogues;
+    public Dialogue[] defaultDialogues;
 
     [SerializeField] private Transform questIconParent;
 
@@ -13,33 +13,45 @@ public class NPC : Interactible
     private Quest quest;
     private int index;
 
-    private void Start()
+    private QuestIcons questIcons;
+
+    private bool hasBeenInitialized = false;
+
+    public bool IsInitialized()
+    { return hasBeenInitialized; }
+
+    public void Initialize()
     {
-        QuestIcons questIcons = Instantiate(GameManager.gm.questManager.questIconPrefab);
+        questIcons = Instantiate(GameManager.gm.questManager.questIconPrefab.gameObject).GetComponent<QuestIcons>();
         questIcons.transform.SetParent(questIconParent);
         questIcons.transform.localPosition = Vector3.zero;
         questIcons.transform.localRotation = Quaternion.identity;
 
         questIcons.Disable();
+
+        hasBeenInitialized = true;
     }
 
     public override void Interact(Player player)
     {
         if (currentQuestPart == null)
         {
-            Dialogue selectedDialogue = dialogues[Random.Range(0, dialogues.Length - 1)];
-            GameManager.gm.mainCanvas.dialogueSystem.ExecuteDialogue(selectedDialogue);
+            Dialogue selectedDialogue = defaultDialogues[Random.Range(0, defaultDialogues.Length - 1)];
+            GameManager.gm.mainCanvas.dialogueSystem.ExecuteDialogueFromNPC(this, selectedDialogue);
         }
         else
         {
-            if (GetQuestValidation())
+            if (CanQuestBeValidated())
             {
-                GameManager.gm.mainCanvas.dialogueSystem.ExecuteDialogue(currentQuestPart.dialogue);
+                GameManager.gm.mainCanvas.dialogueSystem.ExecuteDialogueFromNPC(this, currentQuestPart.dialogue);
             }
             else
             {
-                Dialogue selectedDialogue = currentQuestPart.defaultDialogues[Random.Range(0, currentQuestPart.defaultDialogues.Length - 1)];
-                GameManager.gm.mainCanvas.dialogueSystem.ExecuteDialogue(selectedDialogue);
+                if (currentQuestPart.defaultDialogues.Length > 0)
+                {
+                    Dialogue selectedDialogue = currentQuestPart.defaultDialogues[Random.Range(0, currentQuestPart.defaultDialogues.Length - 1)];
+                    GameManager.gm.mainCanvas.dialogueSystem.ExecuteDialogueFromNPC(this, selectedDialogue);
+                }
             }
         }
     }
@@ -49,23 +61,60 @@ public class NPC : Interactible
         if (index >= quest.parts.Length) return;
 
         currentQuestPart = quest.parts[index];
+        if (currentQuestPart.validator != null)
+            GameManager.gm.questManager.AddNPCToPending(currentQuestPart.validator.GetValidatorType(), this);
 
         this.quest = quest;
         this.index = index;
+
+        UpdateQuestStatus();
     }
 
-    public bool GetQuestValidation()
+    public void UpdateQuestStatus()
+    {
+        if (currentQuestPart == null)
+        {
+            questIcons.Disable();
+            return;
+        }
+
+        if (CanQuestBeValidated())
+        {
+            if (index == 0)
+                questIcons.SetQuest(Quest.QuestType.NewQuest);
+            else
+                questIcons.SetQuest(Quest.QuestType.UpdateQuest);
+        }
+        else
+        {
+            if (index > 0)
+                questIcons.SetQuest(Quest.QuestType.UpdateQuestNone);
+        }
+    }
+
+    public bool CanQuestBeValidated()
     {
         return currentQuestPart.validator == null ||
-            currentQuestPart.validator.HasBeenValidated();
+            currentQuestPart.validator.CanPartBeValidated();
     }
 
     public void EndDialogue()
     {
-        if (GetQuestValidation())
+        if (currentQuestPart != null)
         {
-            quest.ExecuteQuest(index + 1);
-            currentQuestPart = null;
+            if (CanQuestBeValidated())
+            {
+                if (currentQuestPart.validator != null)
+                {
+                    currentQuestPart.validator.ValidatePart();
+                    GameManager.gm.questManager.RemoveNPCToPending(currentQuestPart.validator.GetValidatorType(), this);
+                }
+
+                currentQuestPart = null;
+                UpdateQuestStatus();
+
+                quest.ExecuteQuest(index + 1);
+            }
         }
     }
 }

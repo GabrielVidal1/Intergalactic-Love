@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestValidator : MonoBehaviour
+public abstract class QuestValidator : MonoBehaviour
 {
-    public bool HasBeenValidated()
-    {
-        return true;
-    }
+    public abstract bool CanPartBeValidated();
+
+    public abstract void ValidatePart();
+
+    public abstract Quest.ValidatorType GetValidatorType();
 }

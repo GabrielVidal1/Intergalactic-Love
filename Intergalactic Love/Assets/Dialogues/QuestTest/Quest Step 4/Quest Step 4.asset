@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7067fd353e1f5c144919dfebf0d2981b, type: 3}
+  m_Name: Quest Step 4
+  m_EditorClassIdentifier: 
+  protagonist1:
+    name: Billy
+    portrait: {fileID: 2800000, guid: 49a0be0ac3cd262438c8c97d505f3738, type: 3}
+  protagonist2:
+    name: Fleshy soldier
+    portrait: {fileID: 2800000, guid: f8dabab3195f90145927dd16fe76282e, type: 3}
+  lines:
+  - protagonistPos: 0
+    position: 0
+    line: Hey how are you feeling right now?
+    style: 0
+  - protagonistPos: 1
+    position: 1
+    line: I'M MADE OF FLESH AGAIN!!
+    style: 1
+  - protagonistPos: 1
+    position: 1
+    line: Here. To thank you let me give you 5 gold pieces
+    style: 0

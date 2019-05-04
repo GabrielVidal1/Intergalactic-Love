@@ -6,24 +6,12 @@ public class PlayerInventory : MonoBehaviour
 {
     public Dictionary<ItemData, int> inventory;
 
-    public float maxMass;
-
     private Player player;
 
     public void Initialize(Player player)
     {
         inventory = new Dictionary<ItemData, int>();
         this.player = player;
-    }
-
-    public float CarriedMass()
-    {
-        float total = 0f;
-
-        foreach (KeyValuePair<ItemData, int> item in inventory)
-            total += item.Key.mass * item.Value;
-
-        return total;
     }
 
     public void AddItemToInventory(ItemData item, int amount)
@@ -36,6 +24,10 @@ public class PlayerInventory : MonoBehaviour
         {
             inventory[item] = amount;
         }
+
+        GameManager.gm.questManager.UpdateQuestNPC(Quest.ValidatorType.GatherItems);
+        GameManager.gm.questManager.UpdateQuestNPC(Quest.ValidatorType.HasItems);
+        GameManager.gm.questManager.UpdateQuestNPC(Quest.ValidatorType.ConsumeItems);
     }
 
     public bool RemoveItemFromInventory(ItemData item, int amount)
@@ -46,6 +38,8 @@ public class PlayerInventory : MonoBehaviour
             return false;
 
         inventory[item] -= amount;
+        GameManager.gm.questManager.UpdateQuestNPC(Quest.ValidatorType.ConsumeItems);
+        GameManager.gm.questManager.UpdateQuestNPC(Quest.ValidatorType.HasItems);
         return true;
     }
 

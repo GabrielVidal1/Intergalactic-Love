@@ -9,9 +9,13 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         if (gm == null)
+        {
             gm = this;
+            //Initialize();
+        }
         else if (gm != this)
             Destroy(gameObject);
+
     }
     #endregion
 
@@ -25,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     public QuestManager questManager;
 
-    public void Start()
+    private void Start()
     {
         //ALWAYS PRESENT
         recipeManager = GetComponent<RecipeManager>();

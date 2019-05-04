@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7067fd353e1f5c144919dfebf0d2981b, type: 3}
+  m_Name: QuestStart
+  m_EditorClassIdentifier: 
+  protagonist1:
+    name: Billy
+    portrait: {fileID: 2800000, guid: 49a0be0ac3cd262438c8c97d505f3738, type: 3}
+  protagonist2:
+    name: Circuit Soldier
+    portrait: {fileID: 2800000, guid: f8dabab3195f90145927dd16fe76282e, type: 3}
+  lines:
+  - protagonistPos: 1
+    position: 1
+    line: Hey kiddo, I need your help!
+    style: 0
+  - protagonistPos: 0
+    position: 0
+    line: What for old man?
+    style: 0
+  - protagonistPos: 1
+    position: 1
+    line: You see, a pumpkin demon changed my flesh into circuit boards
+    style: 0
+  - protagonistPos: 1
+    position: 1
+    line: I need you to talk to him.
+    style: 0
+  - protagonistPos: 0
+    position: 0
+    line: Okay!
+    style: 0

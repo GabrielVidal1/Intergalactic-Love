@@ -39,6 +39,8 @@ public class DialogueSystem : MonoBehaviour
 
     public void ExecuteDialogue(Dialogue dialogue)
     {
+        if (dialogue == null) return;
+
         if (!isExecutingDialogue)
         {
             StartCoroutine(ExecuteDialogueCoroutine(dialogue));
@@ -57,27 +59,44 @@ public class DialogueSystem : MonoBehaviour
             StringBuilder sb = new StringBuilder();
             text.text = "";
 
-            for (int i = 0; i < line.line.Length; i++)
+            switch (line.style)
             {
+                case Dialogue.DialogueLine.DialogueLineStyle.Italic:
+                    text.fontStyle = FontStyles.Italic;
+                    break;
+                case Dialogue.DialogueLine.DialogueLineStyle.Bold:
+                    text.fontStyle = FontStyles.Bold;
+                    break;
+                default:
+                    text.fontStyle = FontStyles.Normal;
+                    break;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                while (!Input.GetKeyUp(KeyCode.Space))
+                    yield return 0;
+            }
+
+            int i = 0;
+
+            while (i < line.line.Length && !Input.GetKeyDown(KeyCode.Space))
+            { 
                 sb.Append(line.line[i]);
                 text.text = sb.ToString();
 
-                switch (line.style)
-                {
-                    case Dialogue.DialogueLine.DialogueLineStyle.Italic:
-                        text.fontStyle = FontStyles.Italic;
-                        break;
-                    case Dialogue.DialogueLine.DialogueLineStyle.Bold:
-                        text.fontStyle = FontStyles.Bold;
-                        break;
-                    default:
-                        text.fontStyle = FontStyles.Normal;
-                        break;
-                }
-
                 yield return new WaitForSecondsRealtime(Time.deltaTime / 2);
+
+                i++;
             }
 
+            text.text = line.line;
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                while (!Input.GetKeyUp(KeyCode.Space))
+                    yield return 0;
+            }
             while (!Input.GetKeyDown(KeyCode.Space))
                 yield return 0;
         }

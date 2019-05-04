@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8440754603049065652}
   - component: {fileID: 8440754603049065641}
   - component: {fileID: 8383183507330647387}
+  - component: {fileID: 6809974147648471892}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -48,11 +49,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemManager: {fileID: 8440754603049065652}
   mainCanvas: {fileID: 0}
-  recipeManager: {fileID: 0}
+  recipeManager: {fileID: 8440754603049065641}
   mainCanvasSE: {fileID: 0}
   player: {fileID: 0}
   droppedItemPrefab: {fileID: 8891760448634575040, guid: 0d7bc1c175f4f2a4781203d346ac9a80,
     type: 3}
+  questManager: {fileID: 6809974147648471892}
 --- !u!114 &8440754603049065652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,6 +76,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 64af5b7f15b88ad45aa00262f8776e32, type: 2}
   - {fileID: 11400000, guid: bf3f3b30b3eac0d47a8e366594fb752e, type: 2}
   - {fileID: 11400000, guid: 7c70a2e9091ace24fa65de795c28329e, type: 2}
+  - {fileID: 11400000, guid: d2aba4e7058d75043bbae9963ad68394, type: 2}
   parts:
   - {fileID: 1719568674746801530, guid: 588129ebd42b0e04bb82fb427f2583a7, type: 3}
   - {fileID: 6937197600998521838, guid: 932f159a9f4163f488a78ad69cb5940b, type: 3}
@@ -108,3 +111,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9edaa5663ad1a614bb93f6debe2f6d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6809974147648471892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8440754603049065653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8ea67d0a3beb6439d4b1f3f06999e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newQuest: {fileID: 2100000, guid: 2748ffdb0cee1a243950c1951c48f5c5, type: 2}
+  updateQuest: {fileID: 2100000, guid: cf98c9892d2d33546b3c0484ae85c8e4, type: 2}
+  updateQuestNone: {fileID: 2100000, guid: 776fd77890e38e94b9b85dd8ceb6d7a6, type: 2}
+  questIconPrefab: {fileID: 6907573803273646027, guid: 56523e13ffd089a48b4834be5868c930,
+    type: 3}
