@@ -42,6 +42,7 @@ public class Quest : MonoBehaviour
 
     public enum QuestType
     {
+        DialogueBubble,
         NewQuest,
         UpdateQuestNone,
         UpdateQuest

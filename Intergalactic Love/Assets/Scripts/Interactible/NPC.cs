@@ -56,6 +56,22 @@ public class NPC : Interactible
         }
     }
 
+    protected override void SetObjectAsTarget(bool enable)
+    {
+        if (!hasBeenInitialized)
+            Initialize();
+
+        base.SetObjectAsTarget(enable);
+
+        if (currentQuestPart == null)
+        {
+            if (enable)
+                questIcons.SetBubble(Quest.QuestType.DialogueBubble);
+            else
+                questIcons.Disable();
+        }
+    }
+
     public void SetQuestPart(Quest quest, int index)
     {
         if (index >= quest.parts.Length) return;
@@ -74,21 +90,21 @@ public class NPC : Interactible
     {
         if (currentQuestPart == null)
         {
-            questIcons.Disable();
+            questIcons.SetBubble(Quest.QuestType.DialogueBubble);
             return;
         }
 
         if (CanQuestBeValidated())
         {
             if (index == 0)
-                questIcons.SetQuest(Quest.QuestType.NewQuest);
+                questIcons.SetBubble(Quest.QuestType.NewQuest);
             else
-                questIcons.SetQuest(Quest.QuestType.UpdateQuest);
+                questIcons.SetBubble(Quest.QuestType.UpdateQuest);
         }
         else
         {
             if (index > 0)
-                questIcons.SetQuest(Quest.QuestType.UpdateQuestNone);
+                questIcons.SetBubble(Quest.QuestType.UpdateQuestNone);
         }
     }
 

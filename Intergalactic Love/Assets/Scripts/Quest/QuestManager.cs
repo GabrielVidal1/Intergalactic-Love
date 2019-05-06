@@ -7,6 +7,7 @@ public class QuestManager : MonoBehaviour
     public Material newQuest;
     public Material updateQuest;
     public Material updateQuestNone;
+    public Material dialogueBubble;
 
     public QuestIcons questIconPrefab;
 

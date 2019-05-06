@@ -126,5 +126,6 @@ MonoBehaviour:
   newQuest: {fileID: 2100000, guid: 2748ffdb0cee1a243950c1951c48f5c5, type: 2}
   updateQuest: {fileID: 2100000, guid: cf98c9892d2d33546b3c0484ae85c8e4, type: 2}
   updateQuestNone: {fileID: 2100000, guid: 776fd77890e38e94b9b85dd8ceb6d7a6, type: 2}
+  dialogueBubble: {fileID: 2100000, guid: d6d9fb9ecbc495140ad108f39614ac1d, type: 2}
   questIconPrefab: {fileID: 6907573803273646027, guid: 56523e13ffd089a48b4834be5868c930,
     type: 3}

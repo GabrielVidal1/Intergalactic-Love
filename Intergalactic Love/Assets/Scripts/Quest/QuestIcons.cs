@@ -13,7 +13,7 @@ public class QuestIcons : MonoBehaviour
         questQuad2.gameObject.SetActive(false);
     }
 
-    public void SetQuest(Quest.QuestType questType)
+    public void SetBubble(Quest.QuestType questType)
     {
         questQuad1.gameObject.SetActive(true);
         questQuad2.gameObject.SetActive(true);
@@ -31,6 +31,10 @@ public class QuestIcons : MonoBehaviour
             case Quest.QuestType.UpdateQuest:
                 questQuad1.material = GameManager.gm.questManager.updateQuest;
                 questQuad2.material = GameManager.gm.questManager.updateQuest;
+                break;
+            case Quest.QuestType.DialogueBubble:
+                questQuad1.material = GameManager.gm.questManager.dialogueBubble;
+                questQuad2.material = GameManager.gm.questManager.dialogueBubble;
                 break;
         }
     }

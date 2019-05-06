@@ -20,9 +20,8 @@ public class Interactible : MonoBehaviour
         }
     }
 
-    protected void SetObjectAsTarget(bool enable)
+    protected virtual void SetObjectAsTarget(bool enable)
     {
-        //Debug.Log("Called");
         GameManager.gm.mainCanvas.ShowInteractTooltip(enable);
         targetedItem = enable ? this : null;
     }
