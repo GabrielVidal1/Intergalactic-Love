@@ -19,11 +19,13 @@ public class Dialogue : ScriptableObject
     {
         public string name;
         public Texture portrait;
+        public AudioClip voice;
 
         public Protagonist(string name)
         {
-            this.name = name;
             portrait = GameManager.gm.NPCManager.GetPortrait(name);
+            voice = GameManager.gm.NPCManager.GetVoice(name);
+            this.name = name;
         }
 
     }

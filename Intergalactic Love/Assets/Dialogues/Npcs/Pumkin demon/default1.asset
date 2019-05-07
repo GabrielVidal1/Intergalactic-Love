@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: default1
   m_EditorClassIdentifier: 
   protagonist1: Pumkin Demon
-  protagonist2: 
+  protagonist2: player
   lines:
   - protagonistPos: 0
     position: 1

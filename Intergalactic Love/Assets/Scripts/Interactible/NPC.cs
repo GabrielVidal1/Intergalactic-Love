@@ -111,7 +111,6 @@ public class NPC : Interactible
 
     public void UpdateQuestStatus()
     {
-        print("UpdateQuestStatus()   " + index);
         if (currentQuestPart == null)
         {
             questIcons.SetBubble(Quest.QuestType.DialogueBubble);
@@ -120,9 +119,6 @@ public class NPC : Interactible
 
         if (CanQuestBeValidated())
         {
-
-            print("CanQuestBeValidated()   " + index);
-
             if (index == 0)
                 questIcons.SetBubble(Quest.QuestType.NewQuest);
             else

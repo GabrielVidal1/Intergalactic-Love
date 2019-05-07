@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckpointManager : MonoBehaviour
+public class CheckpointManager
 {
     private static Checkpoint lastCheckpoint;
 

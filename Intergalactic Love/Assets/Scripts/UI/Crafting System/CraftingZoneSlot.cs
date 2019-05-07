@@ -58,6 +58,8 @@ public class CraftingZoneSlot : MonoBehaviour, IDropHandler
                 ilitem.PreviewQuantity++;
             }
 
+            GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.dropItemFromInventory);
+
             ilitem = InventoryListItemDraggable.draggedItem.inventoryListItem;
 
             ilitem.PreviewQuantity--;

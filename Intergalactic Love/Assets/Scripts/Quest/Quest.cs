@@ -54,12 +54,13 @@ public class Quest : MonoBehaviour
     }
 
     public void StartQuest()
-    { ExecuteQuest(0); }
+    {
+        GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.newQuestSound);
+        ExecuteQuest(0);
+    }
 
     public void ExecuteQuest(int index)
     {
-        print("Aaweaweawe");
-
         if (index >= parts.Length)
         {
             StartCoroutine(ExecuteEndEvents());
@@ -68,8 +69,6 @@ public class Quest : MonoBehaviour
 
         if (!parts[index].npc.IsInitialized())
             parts[index].npc.Initialize();
-
-        print("parts[index].npc.SetQuestPart");
 
         parts[index].npc.SetQuestPart(this, index);
 

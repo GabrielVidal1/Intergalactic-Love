@@ -41,6 +41,8 @@ public class RecipeList : MonoBehaviour
 
     public void OnClickRecipe(Recipe recipe)
     {
+        GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.clickOnRecipe);
+
         craftingSystem.OnClickRecipe(recipe);
     }
 }

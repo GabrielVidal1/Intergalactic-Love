@@ -41,11 +41,20 @@ public class DialogueSystem : MonoBehaviour
 
     IEnumerator ExecuteDialogueCoroutine(Dialogue dialogue)
     {
+        GameObject g = new GameObject("dialogue sound");
+        AudioSource s = g.AddComponent<AudioSource>();
+        s.transform.SetParent(GameManager.gm.player.mainCam.transform);
+        s.transform.position = Vector3.zero;
+
+
         dialoguePanel.SetActive(true);
 
         foreach (Dialogue.DialogueLine line in dialogue.lines)
         {
-            SetUp(line, dialogue);
+            SetUp(line, dialogue, s);
+            s.time = Random.value * s.clip.length;
+            s.Play();
+            s.volume = 1f;
 
             StringBuilder sb = new StringBuilder();
             text.text = "";
@@ -69,6 +78,8 @@ public class DialogueSystem : MonoBehaviour
                     yield return 0;
             }
 
+
+
             int i = 0;
 
             while (i < line.line.Length && !Input.GetKeyDown(KeyCode.Space))
@@ -83,6 +94,14 @@ public class DialogueSystem : MonoBehaviour
 
             text.text = line.line;
 
+            for (float k = 0f; k < 1f; k += 0.1f)
+            {
+                s.volume = 1f - k;
+                yield return 0;
+            }
+            s.volume = 0f;
+
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 while (!Input.GetKeyUp(KeyCode.Space))
@@ -92,15 +111,19 @@ public class DialogueSystem : MonoBehaviour
                 yield return 0;
         }
 
+        Destroy(s);
+
         dialoguePanel.SetActive(false);
         isExecutingDialogue = false;
     }
 
-    private void SetUp(Dialogue.DialogueLine line, Dialogue dialogue)
+    private void SetUp(Dialogue.DialogueLine line, Dialogue dialogue, AudioSource s)
     {
         Dialogue.Protagonist protagonist = 
             line.protagonistPos == Dialogue.DialogueLine.ProtagonistPos.First ? 
             dialogue.GetProtagonist1() : dialogue.GetProtagonist2();
+
+        s.clip = protagonist.voice;
 
         switch (line.position)
         {

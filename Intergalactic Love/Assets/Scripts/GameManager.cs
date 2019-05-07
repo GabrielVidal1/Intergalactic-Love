@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public RecipeManager recipeManager;
     public MainCanvasSE mainCanvasSE;
     public NPCManager NPCManager;
+    public SoundManager soundManager;
 
     public Player player;
 
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
         itemManager = GetComponent<ItemManager>();
         questManager = GetComponent<QuestManager>();
         NPCManager = GetComponent<NPCManager>();
+        soundManager = GetComponent<SoundManager>();
 
         //NOT ALWAYS PRESENT
         mainCanvas = GameObject.FindObjectOfType<MainCanvas>();

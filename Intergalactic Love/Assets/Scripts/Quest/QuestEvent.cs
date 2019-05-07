@@ -12,6 +12,8 @@ public abstract class QuestEvent : MonoBehaviour
     [Range(1, 100)]
     public int framePerTravel = 40;
 
+    [SerializeField] private AudioClip sound;
+
     protected abstract IEnumerator Execute();
 
     public IEnumerator Invoke()
@@ -41,7 +43,10 @@ public abstract class QuestEvent : MonoBehaviour
 
         yield return new WaitForSeconds(waitAtEventDuration/2);
 
+        GameManager.gm.soundManager.PlaySound(sound);
+
         yield return StartCoroutine(Execute());
+
 
         yield return new WaitForSeconds(waitAtEventDuration/2);
 

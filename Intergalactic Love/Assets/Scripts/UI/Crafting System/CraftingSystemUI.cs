@@ -49,12 +49,17 @@ public class CraftingSystemUI : MonoBehaviour
 
     public bool Craft()
     {
+        GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.clickOnCraft);
+
         if (presetRecipe == null)
         {
             presetRecipe = FindAssociatedRecipe();
             if (presetRecipe == null)
             {
                 //DESTROY INGREDIENTS
+
+                GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.failedCraft);
+
 
                 for (int i = 0; i < ingredientInCrafting.Count; i++)
                 {
@@ -82,6 +87,7 @@ public class CraftingSystemUI : MonoBehaviour
             noRecipeAlert.alpha = 0f;
         }
 
+        GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.successfulCraft);
 
         foreach (ItemData ingredient in presetRecipe.ingredients)
         {

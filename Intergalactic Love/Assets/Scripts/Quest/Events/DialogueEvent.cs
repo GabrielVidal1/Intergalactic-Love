@@ -13,8 +13,6 @@ public class DialogueEvent : QuestEvent
 
     protected override IEnumerator Execute()
     {
-        print("Executing dialogue...");
         yield return StartCoroutine(GameManager.gm.mainCanvas.dialogueSystem.ExecuteDialogue(dialogue));
-        print("Done Executing dialogue!");
     }
 }

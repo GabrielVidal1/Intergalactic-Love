@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
     [SerializeField] private float speed;
     [SerializeField] private float gravity = 10f;
     [SerializeField] private float jumpHeight;
@@ -12,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float camRotSpeed = 3f;
 
     [SerializeField] private Transform camPivotTransform;
+
+    [SerializeField] private float camDistance = 6f;
 
     //[SerializeField] private Transform camRot;
 
@@ -25,12 +26,17 @@ public class PlayerMovement : MonoBehaviour
     private bool canJump = true;
 
     private float camRotXAngle;
+    private Camera mainCam;
 
+    private LayerMask mask;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         up = Vector3.up;
         isDisabled = false;
+        mainCam = GameManager.gm.player.mainCam;
+
+        mask = ~LayerMask.GetMask("UI");
     }
 
     private bool isDisabled;
@@ -65,6 +71,8 @@ public class PlayerMovement : MonoBehaviour
 
                 if (canJump && Input.GetKeyDown(KeyCode.Space))
                 {
+                    GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.playerJump);
+
                     jumpForce = jumpHeight;
                     canJump = false;
                 }
@@ -89,8 +97,21 @@ public class PlayerMovement : MonoBehaviour
                     camRotXAngle += -yRatio * camRotSpeed;
                     camRotXAngle = Mathf.Clamp(camRotXAngle, -50, 30);
                     camPivotTransform.localRotation = Quaternion.Euler(camRotXAngle, 0, 0);
-
                     //print(transform.up);
+                }
+
+                Ray ray = new Ray(camPivotTransform.position - mainCam.transform.forward, -mainCam.transform.forward);
+
+                Debug.DrawRay(camPivotTransform.position - mainCam.transform.forward, -mainCam.transform.forward * camDistance, Color.red, 1f);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, camDistance, mask))
+                {
+                    mainCam.transform.position = hit.point - mainCam.transform.forward * 0.1f;
+                }
+                else
+                {
+                    mainCam.transform.localPosition = new Vector3(0, 0, -camDistance);
                 }
 
                 if (Input.GetMouseButtonUp(1))

@@ -46,6 +46,9 @@ public class RecipeListItem : MonoBehaviour
 
     public void OnClick()
     {
+        GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.cantClickHere);
+
+
         if (canDo)
             recipeList.OnClickRecipe(recipe);
     }

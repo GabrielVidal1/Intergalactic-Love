@@ -12,12 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7067fd353e1f5c144919dfebf0d2981b, type: 3}
   m_Name: default1
   m_EditorClassIdentifier: 
-  protagonist1:
-    name: Circuit Soldier
-    portrait: {fileID: 2800000, guid: f8dabab3195f90145927dd16fe76282e, type: 3}
-  protagonist2:
-    name: 
-    portrait: {fileID: 0}
+  protagonist1: Circuit Soldier
+  protagonist2: 
   lines:
   - protagonistPos: 0
     position: 1

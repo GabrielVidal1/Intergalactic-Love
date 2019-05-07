@@ -53,6 +53,11 @@ public class MainCanvas : MonoBehaviour
                 if (isInventoryDisplayed)
                 {
                     inventoryUI.Initialize();
+                    GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.openInventory);
+                }
+                else
+                {
+                    GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.closeInventory);
                 }
             }
             else if (Input.GetKeyDown(KeyCode.C))
@@ -65,6 +70,11 @@ public class MainCanvas : MonoBehaviour
                 if (isCraftingDisplayed)
                 {
                     craftingSystem.OnOpenCraftingTab();
+                    GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.openCraftingTable);
+                }
+                else
+                {
+                    GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.closeCraftingTable);
                 }
             }
         }
@@ -75,12 +85,14 @@ public class MainCanvas : MonoBehaviour
             {
                 isCraftingDisplayed = false;
                 craftingSystem.gameObject.SetActive(isCraftingDisplayed);
+                GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.closeInventory);
             }
 
             if (isInventoryDisplayed)
             {
                 isInventoryDisplayed = false;
                 inventoryUI.gameObject.SetActive(isInventoryDisplayed);
+                GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.closeCraftingTable);
             }
         }
     }

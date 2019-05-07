@@ -42,6 +42,8 @@ public class InventoryListItemDraggable : MonoBehaviour, IBeginDragHandler, IDra
             inventoryListItem.PreviewQuantity--;
 
             isDragged = true;
+
+            GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.pickupItemFromInventory);
         }
     }
 

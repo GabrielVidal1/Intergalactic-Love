@@ -20,6 +20,8 @@ public class Collectible : MonoBehaviour
             if (hasBeenCollected)
             {
                 StartCoroutine(CollectCoroutine(player));
+
+                GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.pickupItemFromGround);
             }
         }
     }
@@ -35,6 +37,9 @@ public class Collectible : MonoBehaviour
             transform.localScale *= 0.9f;
             transform.position = Vector3.Lerp(transform.position, player.transform.position, 0.2f);
         }
+
+        GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.putItemInInventory);
+
         Destroy(gameObject);
     }
 }
