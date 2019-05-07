@@ -7,9 +7,6 @@ using System.Text;
 
 public class DialogueSystem : MonoBehaviour
 {
-    private static NPC npc;
-
-
     [SerializeField] private GameObject dialoguePanel;
 
     [SerializeField] private RawImage portraitLeft;
@@ -31,20 +28,14 @@ public class DialogueSystem : MonoBehaviour
         isExecutingDialogue = false;
     }
 
-    public void ExecuteDialogueFromNPC(NPC npc, Dialogue dialogue)
+    public IEnumerator ExecuteDialogue(Dialogue dialogue)
     {
-        DialogueSystem.npc = npc;
-        ExecuteDialogue(dialogue);
-    }
-
-    public void ExecuteDialogue(Dialogue dialogue)
-    {
-        if (dialogue == null) return;
+        if (dialogue == null) yield break;
 
         if (!isExecutingDialogue)
         {
-            StartCoroutine(ExecuteDialogueCoroutine(dialogue));
             isExecutingDialogue = true;
+            yield return StartCoroutine(ExecuteDialogueCoroutine(dialogue));
         }
     }
 
@@ -103,19 +94,13 @@ public class DialogueSystem : MonoBehaviour
 
         dialoguePanel.SetActive(false);
         isExecutingDialogue = false;
-
-        if (npc != null)
-        {
-            npc.EndDialogue();
-            npc = null;
-        }
     }
 
     private void SetUp(Dialogue.DialogueLine line, Dialogue dialogue)
     {
         Dialogue.Protagonist protagonist = 
             line.protagonistPos == Dialogue.DialogueLine.ProtagonistPos.First ? 
-            dialogue.protagonist1 : dialogue.protagonist2;
+            dialogue.GetProtagonist1() : dialogue.GetProtagonist2();
 
         switch (line.position)
         {

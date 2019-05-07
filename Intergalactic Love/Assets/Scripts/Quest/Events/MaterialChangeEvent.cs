@@ -7,8 +7,9 @@ public class MaterialChangeEvent : QuestEvent
     public MeshRenderer target;
     public Material newMaterial;
 
-    public override void Invoke()
+    protected override IEnumerator Execute()
     {
         target.material = newMaterial;
+        yield break;
     }
 }

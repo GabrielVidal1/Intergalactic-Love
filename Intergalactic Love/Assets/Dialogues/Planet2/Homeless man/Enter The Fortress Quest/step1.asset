@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7067fd353e1f5c144919dfebf0d2981b, type: 3}
+  m_Name: step1
+  m_EditorClassIdentifier: 
+  protagonist1: player
+  protagonist2: Homeless Man
+  lines:
+  - protagonistPos: 0
+    position: 0
+    line: Hey! do you know how I can enter the fortress?
+    style: 0
+  - protagonistPos: 1
+    position: 1
+    line: Yeah you can go through the door idiot!
+    style: 0
+  - protagonistPos: 0
+    position: 0
+    line: I checked and the door is closed...
+    style: 0
+  - protagonistPos: 1
+    position: 1
+    line: I can open it for you hehe *kof*
+    style: 0
+  - protagonistPos: 0
+    position: 0
+    line: That would be super cool!
+    style: 0
+  - protagonistPos: 1
+    position: 1
+    line: HE HO c pa gratis fdp
+    style: 0
+  - protagonistPos: 0
+    position: 0
+    line: What do you want?
+    style: 0
+  - protagonistPos: 1
+    position: 1
+    line: You see that tree over there ?
+    style: 0
+  - protagonistPos: 1
+    position: 1
+    line: Birds lay their eggs in the branches
+    style: 0
+  - protagonistPos: 1
+    position: 1
+    line: If you bring be 10 eggs, I will open the door for you.
+    style: 0

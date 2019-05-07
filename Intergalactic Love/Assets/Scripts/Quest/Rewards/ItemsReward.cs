@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemsReward : QuestReward
+public class ItemsReward : QuestEvent
 {
     public ItemAndQuantity[] neededItems;
 
-    public override void RewardPlayer()
+    protected override IEnumerator Execute()
     {
         PlayerInventory playerInventory = GameManager.gm.player.playerInventory;
 
@@ -14,6 +14,8 @@ public class ItemsReward : QuestReward
         {
             playerInventory.AddItemToInventory(item.item, item.quantity);
         }
+
+        yield break;
     }
 
     [System.Serializable]

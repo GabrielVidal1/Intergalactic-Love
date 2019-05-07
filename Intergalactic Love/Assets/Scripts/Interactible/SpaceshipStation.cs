@@ -11,8 +11,6 @@ public class SpaceshipStation : Interactible
 
     public override void Interact(Player player)
     {
-        base.Interact(player);
-
         GameManager.gm.mainCanvas.confirmationMessage.TriggerMessage(
             "Do you want to edit your ship?",
             "Yes",

@@ -5,15 +5,27 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Dialogue", menuName = "", order = 1)]
 public class Dialogue : ScriptableObject
 {
-    public Protagonist protagonist1;
-    public Protagonist protagonist2;
+    [SerializeField] private string protagonist1;
+    [SerializeField] private string protagonist2;
     public DialogueLine[] lines;
 
-    [System.Serializable]
+    public Protagonist GetProtagonist1()
+    { return new Protagonist(protagonist1); }
+
+    public Protagonist GetProtagonist2()
+    { return new Protagonist(protagonist2); }
+
     public class Protagonist
     {
         public string name;
         public Texture portrait;
+
+        public Protagonist(string name)
+        {
+            this.name = name;
+            portrait = GameManager.gm.NPCManager.GetPortrait(name);
+        }
+
     }
 
     [System.Serializable]

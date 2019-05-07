@@ -35,8 +35,16 @@ public class MainCanvas : MonoBehaviour
 
     public void Update()
     {
-        if (!dialogueSystem.IsExecutingDialogue())
+        if (GameManager.gm.canPlayerDoAnything && !dialogueSystem.IsExecutingDialogue())
         {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (Interactible.targetedItem != null)
+                {
+                    Interactible.targetedItem.Interact(GameManager.gm.player);
+                }
+            }
+
             if (Input.GetKeyDown(KeyCode.I))
             {
                 isInventoryDisplayed = !isInventoryDisplayed;

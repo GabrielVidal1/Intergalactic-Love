@@ -23,11 +23,15 @@ public class GameManager : MonoBehaviour
     public MainCanvas mainCanvas;
     public RecipeManager recipeManager;
     public MainCanvasSE mainCanvasSE;
+    public NPCManager NPCManager;
+
     public Player player;
 
     public DroppedItem droppedItemPrefab;
 
     public QuestManager questManager;
+
+    public bool canPlayerDoAnything;
 
     private void Start()
     {
@@ -36,6 +40,7 @@ public class GameManager : MonoBehaviour
         recipeManager.Initialize();
         itemManager = GetComponent<ItemManager>();
         questManager = GetComponent<QuestManager>();
+        NPCManager = GetComponent<NPCManager>();
 
         //NOT ALWAYS PRESENT
         mainCanvas = GameObject.FindObjectOfType<MainCanvas>();
@@ -48,6 +53,8 @@ public class GameManager : MonoBehaviour
        
 
         SaveLoad.LoadGame();
+
+        canPlayerDoAnything = true;
     }
 
     public bool CanPlayerMove()
@@ -55,7 +62,8 @@ public class GameManager : MonoBehaviour
         return 
             !mainCanvas.IsInventoryOpened() &&
             !mainCanvas.IsCraftingDisplayed() &&
-            !mainCanvas.dialogueSystem.IsExecutingDialogue();
+            !mainCanvas.dialogueSystem.IsExecutingDialogue() &&
+            canPlayerDoAnything;
     }
 
     private void Update()

@@ -34,23 +34,46 @@ public class NPC : Interactible
 
     public override void Interact(Player player)
     {
+        StartCoroutine(Execute());
+    }
+
+    IEnumerator Execute()
+    {
         if (currentQuestPart == null)
         {
-            Dialogue selectedDialogue = defaultDialogues[Random.Range(0, defaultDialogues.Length - 1)];
-            GameManager.gm.mainCanvas.dialogueSystem.ExecuteDialogueFromNPC(this, selectedDialogue);
+            if (defaultDialogues.Length > 0)
+            {
+                Dialogue selectedDialogue = defaultDialogues[Random.Range(0, defaultDialogues.Length)];
+                yield return StartCoroutine(GameManager.gm.mainCanvas.dialogueSystem.ExecuteDialogue(selectedDialogue));
+            }
+            else
+            {
+                throw new UnityException("The npc " + name + " has no default dialogues.");
+            }
         }
         else
         {
             if (CanQuestBeValidated())
             {
-                GameManager.gm.mainCanvas.dialogueSystem.ExecuteDialogueFromNPC(this, currentQuestPart.dialogue);
+                yield return StartCoroutine(GameManager.gm.mainCanvas.dialogueSystem.ExecuteDialogue(currentQuestPart.dialogue));
+
+                if (currentQuestPart.validator != null)
+                {
+                    currentQuestPart.validator.ValidatePart();
+                    GameManager.gm.questManager.RemoveNPCToPending(currentQuestPart.validator.GetValidatorType(), this);
+                }
+
+                currentQuestPart = null;
+                UpdateQuestStatus();
+
+                quest.ExecuteQuest(index + 1);
             }
             else
             {
                 if (currentQuestPart.defaultDialogues.Length > 0)
                 {
-                    Dialogue selectedDialogue = currentQuestPart.defaultDialogues[Random.Range(0, currentQuestPart.defaultDialogues.Length - 1)];
-                    GameManager.gm.mainCanvas.dialogueSystem.ExecuteDialogueFromNPC(this, selectedDialogue);
+                    Dialogue selectedDialogue = currentQuestPart.defaultDialogues[Random.Range(0, currentQuestPart.defaultDialogues.Length)];
+                    yield return StartCoroutine(GameManager.gm.mainCanvas.dialogueSystem.ExecuteDialogue(selectedDialogue));
                 }
             }
         }
@@ -88,6 +111,7 @@ public class NPC : Interactible
 
     public void UpdateQuestStatus()
     {
+        print("UpdateQuestStatus()   " + index);
         if (currentQuestPart == null)
         {
             questIcons.SetBubble(Quest.QuestType.DialogueBubble);
@@ -96,6 +120,9 @@ public class NPC : Interactible
 
         if (CanQuestBeValidated())
         {
+
+            print("CanQuestBeValidated()   " + index);
+
             if (index == 0)
                 questIcons.SetBubble(Quest.QuestType.NewQuest);
             else
@@ -114,23 +141,4 @@ public class NPC : Interactible
             currentQuestPart.validator.CanPartBeValidated();
     }
 
-    public void EndDialogue()
-    {
-        if (currentQuestPart != null)
-        {
-            if (CanQuestBeValidated())
-            {
-                if (currentQuestPart.validator != null)
-                {
-                    currentQuestPart.validator.ValidatePart();
-                    GameManager.gm.questManager.RemoveNPCToPending(currentQuestPart.validator.GetValidatorType(), this);
-                }
-
-                currentQuestPart = null;
-                UpdateQuestStatus();
-
-                quest.ExecuteQuest(index + 1);
-            }
-        }
-    }
 }

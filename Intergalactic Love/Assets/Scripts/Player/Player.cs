@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     public PlayerInventory playerInventory;
     public PlayerMovement playerMovement;
 
+    public Camera mainCam;
+
     public void Initialize()
     {
         playerInventory = GetComponent<PlayerInventory>();

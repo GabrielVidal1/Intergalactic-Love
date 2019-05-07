@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class Interactible : MonoBehaviour
+public abstract class Interactible : MonoBehaviour
 {
     public static Interactible targetedItem;
 
-    public virtual void Interact(Player player)
+    private void Start()
     {
-
+        GetComponent<Collider>().isTrigger = true;
     }
+
+    public abstract void Interact(Player player);
 
     private void OnTriggerEnter(Collider other)
     {

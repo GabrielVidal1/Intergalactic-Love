@@ -12,12 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7067fd353e1f5c144919dfebf0d2981b, type: 3}
   m_Name: Quest Step 3
   m_EditorClassIdentifier: 
-  protagonist1:
-    name: Billy
-    portrait: {fileID: 2800000, guid: 49a0be0ac3cd262438c8c97d505f3738, type: 3}
-  protagonist2:
-    name: Pumkim Demon
-    portrait: {fileID: 2800000, guid: fe845fac773ad4446af4af3d9b340da4, type: 3}
+  protagonist1: player
+  protagonist2: Pumkin Demon
   lines:
   - protagonistPos: 1
     position: 1

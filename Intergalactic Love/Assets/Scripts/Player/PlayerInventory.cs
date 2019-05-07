@@ -56,14 +56,4 @@ public class PlayerInventory : MonoBehaviour
         return true;
     }
 
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (Interactible.targetedItem != null)
-            {
-                Interactible.targetedItem.Interact(player);
-            }
-        }
-    }
 }

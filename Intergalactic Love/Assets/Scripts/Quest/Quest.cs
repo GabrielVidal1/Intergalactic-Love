@@ -15,8 +15,7 @@ public class Quest : MonoBehaviour
     }
 
     public QuestPart[] parts;
-
-    public QuestReward[] rewards;
+    public QuestEvent[] endEvents;
 
 
     [System.Serializable]
@@ -36,8 +35,6 @@ public class Quest : MonoBehaviour
             public NPC npc;
             public Dialogue[] newDefaultDialogues;
         }
-
-        
     }
 
     public enum QuestType
@@ -56,19 +53,23 @@ public class Quest : MonoBehaviour
         Interact
     }
 
+    public void StartQuest()
+    { ExecuteQuest(0); }
+
     public void ExecuteQuest(int index)
     {
+        print("Aaweaweawe");
+
         if (index >= parts.Length)
         {
-            foreach (QuestReward reward in rewards)
-            {
-                reward.RewardPlayer();
-            }
+            StartCoroutine(ExecuteEndEvents());
             return;
         }
 
         if (!parts[index].npc.IsInitialized())
             parts[index].npc.Initialize();
+
+        print("parts[index].npc.SetQuestPart");
 
         parts[index].npc.SetQuestPart(this, index);
 
@@ -77,9 +78,23 @@ public class Quest : MonoBehaviour
             dc.npc.defaultDialogues = dc.newDefaultDialogues;
         }
 
+        StartCoroutine(ExecuteEvents(index));
+    }
+
+    IEnumerator ExecuteEvents(int index)
+    {
         foreach (QuestEvent e in parts[index].events)
         {
-            e.Invoke();
+            yield return StartCoroutine(e.Invoke());
         }
     }
+
+    IEnumerator ExecuteEndEvents()
+    {
+        foreach (QuestEvent e in endEvents)
+        {
+            yield return StartCoroutine(e.Invoke());
+        }
+    }
+
 }

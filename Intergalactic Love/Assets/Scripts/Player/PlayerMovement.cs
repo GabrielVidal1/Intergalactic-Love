@@ -47,24 +47,21 @@ public class PlayerMovement : MonoBehaviour
                 #region Movement
                 if (Input.GetKey(KeyCode.W))
                 {
-                    localDir += Vector3.forward * speed;
+                    localDir += Vector3.forward;
                 }
                 else if (Input.GetKey(KeyCode.S))
                 {
-                    localDir -= Vector3.forward * speed;
+                    localDir -= Vector3.forward;
                 }
 
                 if (Input.GetKey(KeyCode.A))
                 {
-                    localDir += Vector3.left * speed;
+                    localDir += Vector3.left;
                 }
                 else if (Input.GetKey(KeyCode.D))
                 {
-                    localDir -= Vector3.left * speed;
+                    localDir -= Vector3.left;
                 }
-
-                //localDir.Normalize();
-
 
                 if (canJump && Input.GetKeyDown(KeyCode.Space))
                 {
@@ -115,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
             if (mainAttractor != null)
                 up = mainAttractor.Attract(transform);
 
-            rb.velocity = transform.TransformDirection(localDir) + -up * (gravity - jumpForce);
+            rb.velocity = transform.TransformDirection(localDir).normalized * speed + -up * (gravity - jumpForce);
         }
     }
 
