@@ -7,6 +7,8 @@ public abstract class QuestEvent : MonoBehaviour
     public Transform cameraInterestPoint;
 
     public bool shouldAnimate = false;
+
+    public Transform intermediatePos;
     public float waitAtEventDuration = 1.5f;
 
     [Range(1, 100)]
@@ -33,7 +35,23 @@ public abstract class QuestEvent : MonoBehaviour
 
         for (float i = 0f; i < 1f; i += 1f / framePerTravel)
         {
-            mainCam.transform.position = Vector3.Lerp(initialPosition, cameraInterestPoint.position, i);
+            if (intermediatePos != null)
+            {
+                if (i < 0.5f)
+                {
+                    mainCam.transform.position = Vector3.Lerp(initialPosition, intermediatePos.position, 2f * i);
+                }
+                else
+                {
+                    mainCam.transform.position = Vector3.Lerp(intermediatePos.position, cameraInterestPoint.position, 2f * (i - 0.5f));
+                }
+            }
+            else
+            {
+                mainCam.transform.position = Vector3.Lerp(initialPosition, cameraInterestPoint.position, i);
+            }
+
+
             mainCam.transform.rotation = Quaternion.Lerp(initialRotation, cameraInterestPoint.rotation, i);
             yield return 0;
         }
@@ -50,10 +68,25 @@ public abstract class QuestEvent : MonoBehaviour
 
         yield return new WaitForSeconds(waitAtEventDuration/2);
 
-        for (float i = 0f; i < 1f; i += 1f / framePerTravel)
+        for (float i = 1f; i >= 0f; i -= 1f / framePerTravel)
         {
-            mainCam.transform.position = Vector3.Lerp(initialPosition, cameraInterestPoint.position, 1 - i);
-            mainCam.transform.rotation = Quaternion.Lerp(initialRotation, cameraInterestPoint.rotation, 1 - i);
+            if (intermediatePos != null)
+            {
+                if (i < 0.5f)
+                {
+                    mainCam.transform.position = Vector3.Lerp(initialPosition, intermediatePos.position, 2f * i);
+                }
+                else
+                {
+                    mainCam.transform.position = Vector3.Lerp(intermediatePos.position, cameraInterestPoint.position, 2f * (i- 0.5f));
+                }
+            }
+            else
+            {
+                mainCam.transform.position = Vector3.Lerp(initialPosition, cameraInterestPoint.position, i);
+            }
+
+            mainCam.transform.rotation = Quaternion.Lerp(initialRotation, cameraInterestPoint.rotation, i);
             yield return 0;
         }
 

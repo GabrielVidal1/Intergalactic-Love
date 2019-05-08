@@ -33,6 +33,8 @@ public class SoundManager : MonoBehaviour
 
     public AudioClip defaultFootstep;
 
+    public AudioClip newRecipe;
+
 
     public void PlaySound(AudioClip audioClip)
     {

@@ -10,6 +10,10 @@ public class MainCanvas : MonoBehaviour
 
     public ConfirmationMessageUI confirmationMessage;
 
+    public ItemPopupParent itemPopupParent;
+
+    public NewRecipePopup newRecipePopup;
+
     public GameObject interactTooltip;
 
     public CanvasGroup blackFondue;
@@ -31,6 +35,8 @@ public class MainCanvas : MonoBehaviour
         dialogueSystem.Initialize();
 
         confirmationMessage.Initiliaze();
+
+        itemPopupParent.Initialize();
     }
 
     public void Update()

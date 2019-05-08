@@ -82,6 +82,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7c70a2e9091ace24fa65de795c28329e, type: 2}
   - {fileID: 11400000, guid: d2aba4e7058d75043bbae9963ad68394, type: 2}
   - {fileID: 11400000, guid: 5a08842e0db92e84abceaca155de6da2, type: 2}
+  - {fileID: 11400000, guid: c89d1553d2ed6eb4ab413db488f9dd0a, type: 2}
   parts:
   - {fileID: 1719568674746801530, guid: 588129ebd42b0e04bb82fb427f2583a7, type: 3}
   - {fileID: 6937197600998521838, guid: 932f159a9f4163f488a78ad69cb5940b, type: 3}
@@ -103,6 +104,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ddac0bf72c8fdb74bac4524e322d7293, type: 2}
   - {fileID: 11400000, guid: 4e86c03909460114fb90de790811b68a, type: 2}
   - {fileID: 11400000, guid: 94d81ea3a79a5a740a2b8ef16f509fff, type: 2}
+  - {fileID: 11400000, guid: bb2d5d81584c8244db131b8b162841f3, type: 2}
   hasDiscoveredRecipe: 
 --- !u!114 &8383183507330647387
 MonoBehaviour:
@@ -132,6 +134,8 @@ MonoBehaviour:
   clickOnRecipe: {fileID: 0}
   playerJump: {fileID: 8300000, guid: cbd7bcc91c3636045ae0c5311bf00d7a, type: 3}
   newQuestSound: {fileID: 8300000, guid: daf07f507f250a741a945195c826afbd, type: 3}
+  defaultFootstep: {fileID: 8300000, guid: 61278dac07de1614fb3c8ef33db0076d, type: 3}
+  newRecipe: {fileID: 0}
 --- !u!114 &6809974147648471892
 MonoBehaviour:
   m_ObjectHideFlags: 0

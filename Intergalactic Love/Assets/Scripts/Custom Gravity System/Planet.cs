@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Planet : Attractor
 {
+    [SerializeField] private Vector3 center;
+    [SerializeField] private bool isCenterTransformPosition;
     public Vector3 Center
     {
-        get { return transform.position; }
+        get
+        {
+            return transform.position + (isCenterTransformPosition ? Vector3.zero : center);
+        }
     }
 
     protected override Vector3 GetUp(Transform target)

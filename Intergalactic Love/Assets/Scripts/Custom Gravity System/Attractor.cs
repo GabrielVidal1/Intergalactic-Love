@@ -17,5 +17,10 @@ public abstract class Attractor : MonoBehaviour
 
         return up;
     }
+
+    private void Start()
+    {
+        tag = "Attractor";
+    }
 }
 

@@ -28,6 +28,11 @@ public class PlayerInventory : MonoBehaviour
         GameManager.gm.questManager.UpdateQuestNPC(Quest.ValidatorType.GatherItems);
         GameManager.gm.questManager.UpdateQuestNPC(Quest.ValidatorType.HasItems);
         GameManager.gm.questManager.UpdateQuestNPC(Quest.ValidatorType.ConsumeItems);
+
+        for (int i = 0; i < amount; i++)
+        {
+            GameManager.gm.mainCanvas.itemPopupParent.AddItem(item);
+        }
     }
 
     public bool RemoveItemFromInventory(ItemData item, int amount)
@@ -48,9 +53,13 @@ public class PlayerInventory : MonoBehaviour
         if (collectible is DroppedItem)
         {
             DroppedItem droppedItem = (DroppedItem)collectible;
-
             AddItemToInventory(droppedItem.associatedItem, 1);
+        }
 
+        if (collectible is Blueprint)
+        {
+            Blueprint blueprint = (Blueprint)collectible;
+            GameManager.gm.recipeManager.DiscoverRecipe(blueprint.associatedRecipe.index);
         }
 
         return true;

@@ -9,6 +9,11 @@ public class RecipeManager : MonoBehaviour
 
     public void DiscoverRecipe(int index)
     {
+        if (!hasDiscoveredRecipe[index])
+        {
+            GameManager.gm.mainCanvas.newRecipePopup.Trigger(recipes[index]);
+        }
+
         hasDiscoveredRecipe[index] = true;
     }
 
