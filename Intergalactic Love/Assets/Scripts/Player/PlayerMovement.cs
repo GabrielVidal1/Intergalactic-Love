@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float camDistance = 6f;
 
+    [SerializeField] private AudioSource footstepsSource;
+
     //[SerializeField] private Transform camRot;
 
     private Rigidbody rb;
@@ -29,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     private Camera mainCam;
 
     private LayerMask mask;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -37,6 +40,11 @@ public class PlayerMovement : MonoBehaviour
         mainCam = GameManager.gm.player.mainCam;
 
         mask = ~LayerMask.GetMask("UI");
+
+
+        footstepsSource.loop = true;
+        footstepsSource.clip = GameManager.gm.soundManager.defaultFootstep;
+        footstepsSource.Play();
     }
 
     private bool isDisabled;
@@ -50,24 +58,31 @@ public class PlayerMovement : MonoBehaviour
 
             if (GameManager.gm.CanPlayerMove())
             {
+                bool moved = false;
                 #region Movement
                 if (Input.GetKey(KeyCode.W))
                 {
                     localDir += Vector3.forward;
+                    moved = true;
                 }
                 else if (Input.GetKey(KeyCode.S))
                 {
                     localDir -= Vector3.forward;
+                    moved = true;
                 }
 
                 if (Input.GetKey(KeyCode.A))
                 {
                     localDir += Vector3.left;
+                    moved = true;
                 }
                 else if (Input.GetKey(KeyCode.D))
                 {
                     localDir -= Vector3.left;
+                    moved = true;
                 }
+
+                footstepsSource.volume = moved ? 1f : 0f;
 
                 if (canJump && Input.GetKeyDown(KeyCode.Space))
                 {
@@ -126,6 +141,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+                footstepsSource.volume = 0f;
             }
 
             jumpForce *= 0.9f;
@@ -134,6 +150,10 @@ public class PlayerMovement : MonoBehaviour
                 up = mainAttractor.Attract(transform);
 
             rb.velocity = transform.TransformDirection(localDir).normalized * speed + -up * (gravity - jumpForce);
+        }
+        else
+        {
+            footstepsSource.volume = 0f;
         }
     }
 
@@ -144,6 +164,13 @@ public class PlayerMovement : MonoBehaviour
         if (collision.collider.CompareTag("Attractor"))
         {
             mainAttractor = collision.collider.GetComponent<Attractor>();
+
+            if (mainAttractor.footstepSounds != null)
+                footstepsSource.clip = mainAttractor.footstepSounds;
+            else
+                footstepsSource.clip = GameManager.gm.soundManager.defaultFootstep;
+            footstepsSource.Play();
+
         }
     }
 

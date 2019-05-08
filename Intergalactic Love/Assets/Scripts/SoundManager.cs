@@ -31,6 +31,8 @@ public class SoundManager : MonoBehaviour
 
     public AudioClip newQuestSound;
 
+    public AudioClip defaultFootstep;
+
 
     public void PlaySound(AudioClip audioClip)
     {
@@ -43,7 +45,7 @@ public class SoundManager : MonoBehaviour
         s.outputAudioMixerGroup = mixerGroup;
 
         s.Play();
-        g.transform.SetParent(GameManager.gm.player.mainCam.transform);
+        g.transform.SetParent(GameManager.gm.player.transform);
         g.transform.localPosition = Vector3.zero;
 
         Destroy(g, audioClip.length);

@@ -4,10 +4,9 @@ using UnityEngine;
 
 public abstract class Attractor : MonoBehaviour
 {
-    protected virtual Vector3 GetUp(Transform target)
-    {
-        throw new UnityException("not good");
-    }
+    public AudioClip footstepSounds;
+
+    protected abstract Vector3 GetUp(Transform target);
 
     public Vector3 Attract(Transform target)
     {

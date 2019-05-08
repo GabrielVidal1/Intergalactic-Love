@@ -130,7 +130,7 @@ MonoBehaviour:
   failedCraft: {fileID: 0}
   cantClickHere: {fileID: 0}
   clickOnRecipe: {fileID: 0}
-  playerJump: {fileID: 8300000, guid: 1fc76c8874c467844ba8d92960cff407, type: 3}
+  playerJump: {fileID: 8300000, guid: cbd7bcc91c3636045ae0c5311bf00d7a, type: 3}
   newQuestSound: {fileID: 8300000, guid: daf07f507f250a741a945195c826afbd, type: 3}
 --- !u!114 &6809974147648471892
 MonoBehaviour:
