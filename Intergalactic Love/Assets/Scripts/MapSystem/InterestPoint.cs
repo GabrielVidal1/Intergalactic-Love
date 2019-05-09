@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class InterestPoint : MonoBehaviour
 {
-    public Itinerary.Event Event;
+    public Itinerary.MapPoint.Event Event;
 }

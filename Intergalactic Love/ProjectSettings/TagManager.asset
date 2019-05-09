@@ -10,6 +10,8 @@ TagManager:
   - RotationGizmo
   - RaycastPlane
   - SpaceshipWreck
+  - Asteroid
+  - InterestPoint
   layers:
   - Default
   - TransparentFX

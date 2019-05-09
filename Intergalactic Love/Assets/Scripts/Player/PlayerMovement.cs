@@ -32,7 +32,9 @@ public class PlayerMovement : MonoBehaviour
 
     private LayerMask mask;
 
-    void Start()
+    private bool initialized = false;
+
+    void Initialize()
     {
         rb = GetComponent<Rigidbody>();
         up = Vector3.up;
@@ -45,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
         footstepsSource.loop = true;
         footstepsSource.clip = GameManager.gm.soundManager.defaultFootstep;
         footstepsSource.Play();
+
+        initialized = true;
     }
 
     private bool isDisabled;
@@ -53,6 +57,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isDisabled)
         {
+
+            if (!initialized)
+                Initialize();
 
             Vector3 localDir = Vector3.zero;
 
@@ -117,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
 
                 Ray ray = new Ray(camPivotTransform.position - mainCam.transform.forward, -mainCam.transform.forward);
 
-                Debug.DrawRay(camPivotTransform.position - mainCam.transform.forward, -mainCam.transform.forward * camDistance, Color.red, 1f);
+                //Debug.DrawRay(camPivotTransform.position - mainCam.transform.forward, -mainCam.transform.forward * camDistance, Color.red, 1f);
                 RaycastHit hit;
 
                 if (Physics.Raycast(ray, out hit, camDistance, mask))
@@ -176,6 +183,11 @@ public class PlayerMovement : MonoBehaviour
 
     public void DisablePlayer()
     {
+        if (camPivotTransform == null)
+        {
+            Debug.Break();
+            return;
+        }
         camPivotTransform.gameObject.SetActive(false);
         isDisabled = true;
     }

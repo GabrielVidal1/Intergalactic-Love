@@ -111,40 +111,51 @@ public class ItineraryTracer : MonoBehaviour
         Vector3[] positions = new Vector3[trail.positionCount];
         trail.GetPositions(positions);
 
-        result.events = new List<Itinerary.Event>();
+        result.points = new List<Itinerary.MapPoint>();
 
         foreach (Vector3 pos in positions)
         {
-            Collider[] cols = Physics.OverlapSphere(pos, 0.03f);
+            Collider[] cols = Physics.OverlapBox(pos, new Vector3(0.01f, 1, 0.01f));
 
-            Itinerary.Event e = Itinerary.Event.Nothing;
+            Itinerary.MapPoint p = new Itinerary.MapPoint();
+
+            p.position = pos;
+
+            p.mapEvent = Itinerary.MapPoint.Event.Nothing;
 
             foreach (Collider col in cols)
             {
                 if (col.CompareTag("InterestPoint"))
                 {
-                    e = col.GetComponent<InterestPoint>().Event;
+                    p.mapEvent = col.GetComponent<InterestPoint>().Event;
                     break;
                 }
             }
-            result.events.Add(e);
+            result.points.Add(p);
         }
 
         return result;
     }
 }
 
-
+[System.Serializable]
 public class Itinerary
 {
-    public enum Event
+    [System.Serializable]
+    public class MapPoint
     {
-        Nothing,
-        Asteroids,
-        Special,
+        public Vector3 position;
+        public Event mapEvent;
+        
+        public enum Event
+        {
+            Nothing,
+            Asteroids,
+            Planet2,
+            Planet3,
+            Planet4,
+        }
     }
 
-    public List<Event> events;
-
-    public Action specialEvent;
+    public List<MapPoint> points;
 }

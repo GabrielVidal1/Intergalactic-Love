@@ -84,7 +84,7 @@ Material:
     - _Parallax: 0.02
     - _RimIntensity: 0.322
     - _RimSize: 3
-    - _RimSmoothness: 0.074
+    - _RimSmoothness: 0.06
     - _ShadowIntensity: 0.47
     - _Shininess: 0.275
     - _SmoothnessTextureChannel: 0

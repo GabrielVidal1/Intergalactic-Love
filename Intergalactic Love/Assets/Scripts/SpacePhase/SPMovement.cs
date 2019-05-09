@@ -45,7 +45,12 @@ public class SPMovement : MonoBehaviour
 
         targetPosition = transform.position + (movement * speed + travelSpeed * Vector3.forward ) * Time.deltaTime;
 
-        transform.position = Vector3.Lerp(transform.position, targetPosition, smoothSpeedCoef);
+        Vector3 pos = Vector3.Lerp(transform.position, targetPosition, smoothSpeedCoef);
+
+        pos.y = Mathf.Clamp(pos.y, -10, 10);
+
+        transform.position = pos;
+
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotSmoothCoef);
     }
 }

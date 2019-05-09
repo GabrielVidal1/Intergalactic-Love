@@ -9,7 +9,7 @@ public class ItemManager : MonoBehaviour
 
     public Dictionary<ItemData, SpaceshipPart> itemToPart;
 
-    private void Start()
+    public void Initialize()
     {
         itemToPart = new Dictionary<ItemData, SpaceshipPart>();
 

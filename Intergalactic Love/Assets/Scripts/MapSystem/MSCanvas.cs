@@ -30,6 +30,8 @@ public class MSCanvas : MonoBehaviour
 
     public void OnClickGo()
     {
+        GameManager.gm.currentItinerary = ms.itineraryTracer.GetItinerary();
+
         StartCoroutine(blackFondu(true, MapSystem.SceneName.SpacePhase));
     }
 

@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
         else if (gm != this)
             Destroy(gameObject);
 
+        DontDestroyOnLoad(this);
+
+        InitAll();
     }
     #endregion
 
@@ -26,6 +29,8 @@ public class GameManager : MonoBehaviour
     public NPCManager NPCManager;
     public SoundManager soundManager;
 
+    public SpacePhaseManager spacePhaseManager;
+
     public Player player;
 
     public DroppedItem droppedItemPrefab;
@@ -34,12 +39,16 @@ public class GameManager : MonoBehaviour
 
     public bool canPlayerDoAnything;
 
-    private void Start()
+    public Itinerary currentItinerary;
+
+    private void InitAll()
     {
+        print("GameManager called InitAll()");
         //ALWAYS PRESENT
         recipeManager = GetComponent<RecipeManager>();
         recipeManager.Initialize();
         itemManager = GetComponent<ItemManager>();
+        itemManager.Initialize();
         questManager = GetComponent<QuestManager>();
         NPCManager = GetComponent<NPCManager>();
         soundManager = GetComponent<SoundManager>();
@@ -61,6 +70,8 @@ public class GameManager : MonoBehaviour
 
     public bool CanPlayerMove()
     {
+        if (mainCanvas == null) return false;
+
         return 
             !mainCanvas.IsInventoryOpened() &&
             !mainCanvas.IsCraftingDisplayed() &&

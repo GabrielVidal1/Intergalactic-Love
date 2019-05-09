@@ -9,7 +9,7 @@ public class MapSystem : MonoBehaviour
 
     public Transform playerPreview;
 
-    private ItineraryTracer itineraryTracer;
+    public ItineraryTracer itineraryTracer;
 
     public MSCanvas canvas;
 
@@ -25,6 +25,8 @@ public class MapSystem : MonoBehaviour
         canvas.Initialize(this);
 
         canvas.SetFuel(0);
+
+        GameManager.gm.player.DisablePlayer();
     }
 
     public void SetFuelbar(float distance)
