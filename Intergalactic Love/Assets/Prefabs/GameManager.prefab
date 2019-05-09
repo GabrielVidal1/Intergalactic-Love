@@ -54,11 +54,14 @@ MonoBehaviour:
   mainCanvasSE: {fileID: 0}
   NPCManager: {fileID: 0}
   soundManager: {fileID: 0}
+  spacePhaseManager: {fileID: 0}
   player: {fileID: 0}
   droppedItemPrefab: {fileID: 8891760448634575040, guid: 0d7bc1c175f4f2a4781203d346ac9a80,
     type: 3}
   questManager: {fileID: 6809974147648471892}
   canPlayerDoAnything: 0
+  currentItinerary:
+    points: []
 --- !u!114 &8440754603049065652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +139,8 @@ MonoBehaviour:
   newQuestSound: {fileID: 8300000, guid: daf07f507f250a741a945195c826afbd, type: 3}
   defaultFootstep: {fileID: 8300000, guid: 61278dac07de1614fb3c8ef33db0076d, type: 3}
   newRecipe: {fileID: 0}
+  tipOff: {fileID: 8300000, guid: 22a415559e2a81648b4deb1d5c3ea627, type: 3}
+  tipOn: {fileID: 8300000, guid: 93fef0f459b65d645bb51a4eaec22cb4, type: 3}
 --- !u!114 &6809974147648471892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,3 +183,6 @@ MonoBehaviour:
   - portrait: {fileID: 2800000, guid: f8dabab3195f90145927dd16fe76282e, type: 3}
     name: Circuit Soldier
     voice: {fileID: 0}
+  - portrait: {fileID: 2800000, guid: d90465fd26ce5764fa3b5adcf429f138, type: 3}
+    name: Mailbox
+    voice: {fileID: 8300000, guid: 829637d8493c8754dbf9d51b73c895e2, type: 3}

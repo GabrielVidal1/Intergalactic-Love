@@ -16,6 +16,8 @@ public class MainCanvas : MonoBehaviour
 
     public GameObject interactTooltip;
 
+    public UITips uiTips;
+
     public CanvasGroup blackFondue;
 
     private bool isInventoryDisplayed = false;
@@ -35,6 +37,8 @@ public class MainCanvas : MonoBehaviour
         dialogueSystem.Initialize();
 
         confirmationMessage.Initiliaze();
+
+        uiTips.Initialize();
 
         itemPopupParent.Initialize();
     }

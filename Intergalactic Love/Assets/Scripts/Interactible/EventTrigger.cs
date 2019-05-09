@@ -9,6 +9,11 @@ public class EventTrigger : Interactible
 
     private bool hasBeenTriggered = false;
 
+    private void Start()
+    {
+        GetComponent<Collider>().isTrigger = true;
+    }
+
     public override void Interact(Player player)
     {
         hasBeenTriggered = true;

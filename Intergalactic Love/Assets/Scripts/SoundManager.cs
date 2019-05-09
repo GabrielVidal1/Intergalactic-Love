@@ -35,6 +35,9 @@ public class SoundManager : MonoBehaviour
 
     public AudioClip newRecipe;
 
+    public AudioClip tipOff;
+    public AudioClip tipOn;
+
 
     public void PlaySound(AudioClip audioClip)
     {
