@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class RecipeManager : MonoBehaviour
 {
+    public CraftingStationIcons craftingStationIconsPrefab;
+
+    public Material craftingStationIconIsUsed;
+    public Material craftingStationIconCanUse;
+    public Material craftingStationIconCantUse;
+
+    [Header("Recipes")]
     public Recipe[] recipes;
     public bool[] hasDiscoveredRecipe;
 

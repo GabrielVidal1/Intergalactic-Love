@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7067fd353e1f5c144919dfebf0d2981b, type: 3}
+  m_Name: Introduction
+  m_EditorClassIdentifier: 
+  protagonist1: player
+  protagonist2: Old Robot
+  lines:
+  - protagonistPos: 0
+    position: 0
+    line: Hey can you help me building a spaceship?
+    style: 0
+  - protagonistPos: 0
+    position: 0
+    line: I need to save my crush!
+    style: 0
+  - protagonistPos: 1
+    position: 1
+    line: Boy o Boi you want me to build a spaceship for you?
+    style: 0
+  - protagonistPos: 1
+    position: 1
+    line: I'm sorry but I can't do that...
+    style: 0
+  - protagonistPos: 1
+    position: 1
+    line: But I can give you blueprints for it.
+    style: 0
+  - protagonistPos: 0
+    position: 0
+    line: Thanks! I would appreciate that.
+    style: 0
+  - protagonistPos: 0
+    position: 0
+    line: Thanks! I would appreciate that.
+    style: 0

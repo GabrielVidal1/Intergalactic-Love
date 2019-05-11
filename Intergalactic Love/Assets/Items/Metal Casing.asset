@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4af783f4bea79df4db4e5962610f9c19, type: 3}
+  m_Name: Metal Casing
+  m_EditorClassIdentifier: 
+  itemName: Metal Casing
+  mass: 0
+  texture: {fileID: 2800000, guid: c892710edb798304dac876016aa8f90e, type: 3}
+  index: 0

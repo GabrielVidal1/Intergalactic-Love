@@ -18,6 +18,8 @@ public class MainCanvas : MonoBehaviour
 
     public UITips uiTips;
 
+    public CraftingStationUITip craftingStationUITip;
+
     public CanvasGroup blackFondue;
 
     private bool isInventoryDisplayed = false;
@@ -39,6 +41,8 @@ public class MainCanvas : MonoBehaviour
         confirmationMessage.Initiliaze();
 
         uiTips.Initialize();
+
+        craftingStationUITip.Initialize();
 
         itemPopupParent.Initialize();
     }
