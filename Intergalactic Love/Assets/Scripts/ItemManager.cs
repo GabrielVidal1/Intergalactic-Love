@@ -16,7 +16,7 @@ public class ItemManager : MonoBehaviour
         foreach (SpaceshipPart part in parts)
         {
             itemToPart[part.itemData] = part;
-            items.Add(part.itemData);
+            //items.Add(part.itemData);
         }
 
         for (int i = 0; i < items.Count; i++)
