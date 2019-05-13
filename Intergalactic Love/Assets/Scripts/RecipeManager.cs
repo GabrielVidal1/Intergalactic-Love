@@ -14,11 +14,11 @@ public class RecipeManager : MonoBehaviour
     public Recipe[] recipes;
     public bool[] hasDiscoveredRecipe;
 
-    public void DiscoverRecipe(int index)
+    public IEnumerator DiscoverRecipe(int index)
     {
         if (!hasDiscoveredRecipe[index])
         {
-            GameManager.gm.mainCanvas.newRecipePopup.Trigger(recipes[index]);
+            yield return StartCoroutine(GameManager.gm.mainCanvas.newRecipePopup.Trigger(recipes[index]));
         }
 
         hasDiscoveredRecipe[index] = true;

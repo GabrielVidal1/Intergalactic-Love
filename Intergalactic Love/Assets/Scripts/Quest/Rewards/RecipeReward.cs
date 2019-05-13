@@ -8,7 +8,6 @@ public class RecipeReward : QuestEvent
 
     protected override IEnumerator Execute()
     {
-        GameManager.gm.recipeManager.DiscoverRecipe(unlockedRecipe.index);
-        yield break;
+        yield return StartCoroutine(GameManager.gm.recipeManager.DiscoverRecipe(unlockedRecipe.index));
     }
 }

@@ -19,18 +19,14 @@ public class NewRecipePopup : MonoBehaviour
         group.alpha = 0f;
     }
 
-    public void Trigger(Recipe recipe)
+
+    public IEnumerator Trigger(Recipe recipe)
     {
         recipeName.text = recipe.result.itemName;
         recipeTexture.texture = recipe.result.texture;
 
         GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.newRecipe);
 
-        StartCoroutine(Disappear());
-    }
-
-    IEnumerator Disappear()
-    {
         group.alpha = 1f;
 
         while(delay > 0f)
