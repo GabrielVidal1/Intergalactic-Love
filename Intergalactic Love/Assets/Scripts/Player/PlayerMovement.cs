@@ -34,12 +34,15 @@ public class PlayerMovement : MonoBehaviour
 
     private bool initialized = false;
 
+    private Animator animator;
+
     void Initialize()
     {
         rb = GetComponent<Rigidbody>();
         up = Vector3.up;
         isDisabled = false;
         mainCam = GameManager.gm.player.mainCam;
+        animator = GetComponent<Animator>();
 
         mask = ~LayerMask.GetMask("UI");
 
@@ -97,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
 
                     jumpForce = jumpHeight;
                     canJump = false;
+                    animator.SetBool("IsJumping", true);
                 }
 
                 #endregion
@@ -157,6 +161,8 @@ public class PlayerMovement : MonoBehaviour
                 up = mainAttractor.Attract(transform);
 
             rb.velocity = transform.TransformDirection(localDir).normalized * speed + -up * (gravity - jumpForce);
+
+            animator.SetFloat("WRBlend", (rb.velocity.magnitude-10) / 8);
         }
         else
         {
@@ -167,6 +173,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         canJump = true;
+        animator.SetBool("IsJumping", false);
 
         if (collision.collider.CompareTag("Attractor"))
         {
