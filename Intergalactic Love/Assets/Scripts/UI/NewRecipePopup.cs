@@ -9,7 +9,7 @@ public class NewRecipePopup : MonoBehaviour
     [SerializeField] private TextMeshProUGUI recipeName;
     [SerializeField] private RawImage recipeTexture;
 
-    [SerializeField] private float delay;
+    [SerializeField] private float delay = 1.5f;
 
     private CanvasGroup group;
 
@@ -22,6 +22,8 @@ public class NewRecipePopup : MonoBehaviour
 
     public IEnumerator Trigger(Recipe recipe)
     {
+        //Debug.Log("Triggered " + recipe.result.itemName);
+
         recipeName.text = recipe.result.itemName;
         recipeTexture.texture = recipe.result.texture;
 
@@ -29,15 +31,17 @@ public class NewRecipePopup : MonoBehaviour
 
         group.alpha = 1f;
 
-        while(delay > 0f)
+        float currentDelay = delay;
+
+        while (currentDelay > 0f)
         {
-            if (delay < 1f)
+            if (currentDelay < 1f)
             {
-                group.alpha = delay;
+                group.alpha = currentDelay;
             }
 
-            delay -= Time.deltaTime;
-            yield return new WaitForSeconds(Time.deltaTime);
+            currentDelay -= Time.deltaTime;
+            yield return 0;
         }
 
         group.alpha = 0f;

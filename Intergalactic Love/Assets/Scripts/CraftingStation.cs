@@ -76,6 +76,12 @@ public class CraftingStation : Interactible
         {
             GameManager.gm.player.playerInventory.AddItemToInventory(item.item, item.amount);
         }
+
+        foreach (ItemQuantity item in input)
+        {
+            GameManager.gm.player.playerInventory.RemoveItemFromInventory(item.item, item.amount);
+        }
+
         isUsed = false;
         craftingStationIcons.SetState(State.None);
 

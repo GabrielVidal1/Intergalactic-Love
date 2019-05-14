@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7067fd353e1f5c144919dfebf0d2981b, type: 3}
   m_Name: You should gather items 1
   m_EditorClassIdentifier: 
-  protagonist1: 
-  protagonist2: Old Robot
+  protagonist1: Old Robot
+  protagonist2: 
   lines:
   - protagonistPos: 0
     position: 0

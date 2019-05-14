@@ -42,6 +42,8 @@ public class ItemPopup : MonoBehaviour
         amountText.text = amount.ToString();
 
         destroyInTime = delay;
+
+        group.alpha = 1f;
     }
 
     IEnumerator Disappear()

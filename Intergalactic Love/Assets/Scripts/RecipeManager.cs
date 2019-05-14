@@ -24,16 +24,19 @@ public class RecipeManager : MonoBehaviour
         hasDiscoveredRecipe[index] = true;
     }
 
-    public void Initialize()
+    public void ResetKnownRecipe()
     {
-        //Debug.Log(recipes.Length);
-
         hasDiscoveredRecipe = new bool[recipes.Length];
         for (int i = 0; i < recipes.Length; i++)
         {
             hasDiscoveredRecipe[i] = false;
             recipes[i].index = i;
         }
+    }
+
+    public void Initialize()
+    {
+        ResetKnownRecipe();
     }
 
     public void DiscoverRandomRecipe()
@@ -51,6 +54,7 @@ public class RecipeManager : MonoBehaviour
         SaveLoad.SaveGame();
     }
 
+    /*
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -66,7 +70,7 @@ public class RecipeManager : MonoBehaviour
             }
         }
     }
-
+    */
 
     public Recipe FindRecipeFromIngredients(List<ItemData> ingredients)
     {

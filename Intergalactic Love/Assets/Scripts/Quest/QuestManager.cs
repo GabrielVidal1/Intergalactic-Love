@@ -11,10 +11,12 @@ public class QuestManager : MonoBehaviour
 
     public QuestIcons questIconPrefab;
 
-    public Dictionary<Quest.ValidatorType, List<NPC>> pendingQuestNPCs;
+    private Dictionary<Quest.ValidatorType, List<NPC>> pendingQuestNPCs;
+    public List<ItemCollectionEvent> pendingEvents;
 
-    private void Start()
+    private void Awake()
     {
+        pendingEvents = new List<ItemCollectionEvent>();
         pendingQuestNPCs = new Dictionary<Quest.ValidatorType, List<NPC>>();
     }
 
@@ -26,6 +28,11 @@ public class QuestManager : MonoBehaviour
             {
                 npc.UpdateQuestStatus();
             }
+        }
+
+        foreach (ItemCollectionEvent e in pendingEvents)
+        {
+            e.UpdateStatus();
         }
     }
 

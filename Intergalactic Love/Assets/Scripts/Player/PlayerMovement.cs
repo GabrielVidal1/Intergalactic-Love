@@ -124,20 +124,14 @@ public class PlayerMovement : MonoBehaviour
                     camRotXAngle = Mathf.Clamp(camRotXAngle, -50, 30);
                     camPivotTransform.localRotation = Quaternion.Euler(camRotXAngle, 0, 0);
                     //print(transform.up);
-                }
 
-                Ray ray = new Ray(camPivotTransform.position - mainCam.transform.forward, -mainCam.transform.forward);
+                    Ray ray = new Ray(camPivotTransform.position - mainCam.transform.forward, -mainCam.transform.forward);
+                    RaycastHit hit;
 
-                //Debug.DrawRay(camPivotTransform.position - mainCam.transform.forward, -mainCam.transform.forward * camDistance, Color.red, 1f);
-                RaycastHit hit;
-
-                if (Physics.Raycast(ray, out hit, camDistance, mask))
-                {
-                    mainCam.transform.position = hit.point - mainCam.transform.forward * 0.1f;
-                }
-                else
-                {
-                    mainCam.transform.localPosition = new Vector3(0, 0, -camDistance);
+                    if (Physics.Raycast(ray, out hit, camDistance, mask))
+                        mainCam.transform.position = hit.point - mainCam.transform.forward * 0.1f;
+                    else
+                        mainCam.transform.localPosition = new Vector3(0, 0, -camDistance);
                 }
 
                 if (Input.GetMouseButtonUp(1))

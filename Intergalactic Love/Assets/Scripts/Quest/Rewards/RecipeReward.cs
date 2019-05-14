@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class RecipeReward : QuestEvent
 {
-    [SerializeField] private Recipe unlockedRecipe;
+    [SerializeField] private Recipe[] unlockedRecipes;
 
     protected override IEnumerator Execute()
     {
-        yield return StartCoroutine(GameManager.gm.recipeManager.DiscoverRecipe(unlockedRecipe.index));
+        foreach (Recipe recipe in unlockedRecipes)
+        {
+            yield return StartCoroutine(GameManager.gm.recipeManager.DiscoverRecipe(recipe.index));
+        }
     }
 }
