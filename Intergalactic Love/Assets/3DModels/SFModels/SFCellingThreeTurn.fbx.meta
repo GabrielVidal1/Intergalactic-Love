@@ -1,16 +1,14 @@
 fileFormatVersion: 2
-guid: d6d10225ad9643546ad68ae53616424c
+guid: 3690252fb09e9e24f96ce5731e8d2850
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: No Name
+    2100000: Material
     2300000: //RootNode
     3300000: //RootNode
-    4300000: SFCelling
-    4300002: SFCelling2
-    2186277476908879412: ImportLogs
+    4300000: SFCellingThreeTurn
   externalObjects: {}
   materials:
     importMaterials: 0
@@ -46,10 +44,10 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
-    importVisibility: 1
+    importVisibility: 0
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1

@@ -1,16 +1,14 @@
 fileFormatVersion: 2
-guid: d6d10225ad9643546ad68ae53616424c
+guid: 86eb3889b03344649980779157e8aba1
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: No Name
+    2100000: Material
     2300000: //RootNode
     3300000: //RootNode
-    4300000: SFCelling
-    4300002: SFCelling2
-    2186277476908879412: ImportLogs
+    4300000: SFCellingTurn
   externalObjects: {}
   materials:
     importMaterials: 0
