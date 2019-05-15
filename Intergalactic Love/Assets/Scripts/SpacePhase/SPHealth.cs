@@ -44,8 +44,14 @@ public class SPHealth : MonoBehaviour
         {
             if (GameManager.gm.spacePhaseManager != null)
                 GameManager.gm.spacePhaseManager.Die();
+
+            GetComponent<SPMovement>().moving = false;
+
             return;
         }
+
+        GameObject explosion = Instantiate(GameManager.gm.spacePhaseManager.explosionPrefab, transform.position, Quaternion.identity);
+        explosion.transform.localScale *= 0.5f;
 
         animator.SetTrigger("TakeDamage");
 

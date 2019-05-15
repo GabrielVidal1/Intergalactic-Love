@@ -18,13 +18,12 @@ public class SPMovement : MonoBehaviour
     private Quaternion targetRotation;
     private Vector3 targetPosition;
 
-    void Start()
-    {
-        
-    }
+    public bool moving = false;
 
     private void Update()
     {
+        if (!moving) return;
+
         Vector3 movement = Vector3.zero;
 
         if (Input.GetKey(KeyCode.W))

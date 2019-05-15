@@ -60,7 +60,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isDisabled)
         {
-
             if (!initialized)
                 Initialize();
 
@@ -186,7 +185,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (camPivotTransform == null)
         {
-            Debug.Break();
             return;
         }
         camPivotTransform.gameObject.SetActive(false);

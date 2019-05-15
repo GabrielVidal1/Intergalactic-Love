@@ -23,6 +23,14 @@ public class SpacePhaseManager : MonoBehaviour
 
     [SerializeField] private CanvasGroup fondu;
 
+
+    [SerializeField] private GameObject[] spacePhaseTips;
+    [SerializeField] private GameObject leftClickIcon;
+    [SerializeField] private GameObject leftClickIconText;
+
+    public GameObject explosionPrefab;
+
+
     void Start()
     {
         GameManager.gm.player.DisablePlayer();
@@ -41,6 +49,35 @@ public class SpacePhaseManager : MonoBehaviour
 
     IEnumerator ExecuteItinerary()
     {
+        for (float i = 0f; i < 1f; i += Time.deltaTime)
+        {
+            fondu.alpha = 1f-i;
+            yield return 0;
+        }
+        fondu.alpha = 0f;
+
+        if (GameManager.gm.shouldDisplayTips)
+        {
+            foreach (GameObject tip in spacePhaseTips)
+            {
+                tip.SetActive(true);
+                yield return new WaitForSeconds(2f);
+
+                leftClickIcon.SetActive(true);
+
+                while (Input.GetMouseButtonDown(0))
+                    yield return 0;
+                while (!Input.GetMouseButtonDown(0))
+                    yield return 0;
+
+                leftClickIcon.SetActive(false);
+                tip.SetActive(false);
+                leftClickIconText.SetActive(false);
+            }
+        }
+
+        player.GetComponent<SPMovement>().moving = true;
+
         print("ExecuteItinerary");
 
         minimap.SetUp(itinerary);
@@ -57,41 +94,37 @@ public class SpacePhaseManager : MonoBehaviour
                 switch (itinerary.points[i+3].mapEvent)
                 {
                     case Itinerary.MapPoint.Event.Planet2:
-                        AddPlanet(planet2Preview.gameObject);
-                        break;
-                    case Itinerary.MapPoint.Event.Planet3:
-                        break;
-                    case Itinerary.MapPoint.Event.Planet4:
-                        break;
-                    default:
+                        AddPlanet(planet2Preview);
                         break;
                 }
             }
 
-            switch (itinerary.points[i].mapEvent)
-            {
-                case Itinerary.MapPoint.Event.Planet2:
-                    StartCoroutine(MoveToPlanet("Planet2"));
-                    yield break;
-                case Itinerary.MapPoint.Event.Planet3:
-                    break;
-                case Itinerary.MapPoint.Event.Planet4:
-                    break;
-                default:
-                    break;
-            }
-
             yield return new WaitForSecondsRealtime(stepDuration);
+        }
+
+        switch (itinerary.points[itinerary.points.Count - 1].mapEvent)
+        {
+            case Itinerary.MapPoint.Event.Planet2:
+                StartCoroutine(MoveToPlanet("Planet2"));
+                yield break;
         }
     }
 
-    private void AddPlanet(GameObject planet)
+    private void AddPlanet(PlanetPreview planet)
     {
-        Instantiate(planet, new Vector3(0, 0, asteroidSpawner.dist), Quaternion.identity);
+        print("Add Planet " + planet.name);
+
+        Vector3 pos = player.transform.position;
+        pos.z += asteroidSpawner.dist * 3f;
+
+        PlanetPreview p = Instantiate(planet, pos, Quaternion.identity);
+        p.Init(1f);
     }
 
     private IEnumerator MoveToPlanet(string sceneName)
     {
+        print("Move to Planet " + sceneName);
+
         for (float i = 0f; i < 1f; i+= Time.deltaTime)
         {
             fondu.alpha = i;
@@ -109,7 +142,34 @@ public class SpacePhaseManager : MonoBehaviour
 
     public void Die()
     {
-
+        StartCoroutine(DieCoroutine());
     }
 
+    IEnumerator DieCoroutine()
+    {
+        healthBar.value = 0f;
+
+        for (int i = 0; i < 5; i++)
+        {
+            GameObject e = Instantiate(explosionPrefab, player.transform.position
+                 + Random.insideUnitSphere * 2f, Quaternion.identity);
+            e.transform.localScale *= 7f;
+
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        player.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(1.5f);
+
+        for (float i = 0f; i < 1f; i += Time.deltaTime)
+        {
+            fondu.alpha = i;
+            yield return 0;
+        }
+        fondu.alpha = 1f;
+
+        GameManager.gm.shouldDisplayTips = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }

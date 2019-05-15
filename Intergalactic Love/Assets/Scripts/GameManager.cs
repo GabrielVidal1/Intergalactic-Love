@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
 
     public Itinerary currentItinerary;
 
+    public bool shouldDisplayTips = true;
+
     private void InitAll()
     {
         print("GameManager called InitAll()");

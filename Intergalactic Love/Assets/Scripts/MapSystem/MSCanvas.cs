@@ -11,11 +11,66 @@ public class MSCanvas : MonoBehaviour
 
     [SerializeField] private CanvasGroup blackFonduGroup;
 
+    [SerializeField] private GameObject[] tips;
+    [SerializeField] private GameObject finalTip;
+
+    [SerializeField] private GameObject leftClickIcon;
+    [SerializeField] private GameObject leftClickIconText;
+
+    public GameObject playerTarget;
+    public GameObject planet2Target;
+
     private MapSystem ms;
 
     public void Initialize(MapSystem ms)
     {
         this.ms = ms;
+    }
+
+    public IEnumerator ShowTips()
+    {
+        playerTarget.SetActive(false);
+        planet2Target.SetActive(false);
+
+        foreach (GameObject tip in tips)
+        {
+            tip.SetActive(true);
+            yield return new WaitForSeconds(2f);
+
+            leftClickIcon.SetActive(true);
+
+            while (Input.GetMouseButtonDown(0))
+                yield return 0;
+            while (!Input.GetMouseButtonDown(0))
+                yield return 0;
+
+            leftClickIcon.SetActive(false);
+            tip.SetActive(false);
+            leftClickIconText.SetActive(false);
+        }
+
+        yield return StartCoroutine(ShowDumbassTip());
+    }
+
+    public IEnumerator ShowDumbassTip()
+    {
+        finalTip.SetActive(true);
+        playerTarget.SetActive(true);
+        planet2Target.SetActive(true);
+
+        yield return new WaitForSeconds(2f);
+
+        leftClickIcon.SetActive(true);
+
+        while (Input.GetMouseButtonDown(0))
+            yield return 0;
+        while (!Input.GetMouseButtonDown(0))
+            yield return 0;
+
+        leftClickIcon.SetActive(false);
+        finalTip.SetActive(false);
+        leftClickIconText.SetActive(false);
+        planet2Target.SetActive(false);
     }
 
     public void SetFuel(float value)
@@ -30,7 +85,7 @@ public class MSCanvas : MonoBehaviour
 
     public void OnClickGo()
     {
-        GameManager.gm.currentItinerary = ms.itineraryTracer.GetItinerary();
+        GameManager.gm.currentItinerary = ms.itineraryTracer.GetItinerary(Itinerary.MapPoint.Event.Planet2);
 
         StartCoroutine(blackFondu(true, MapSystem.SceneName.SpacePhase));
     }

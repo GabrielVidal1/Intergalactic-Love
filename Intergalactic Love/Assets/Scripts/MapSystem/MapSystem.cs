@@ -17,16 +17,27 @@ public class MapSystem : MonoBehaviour
     public float GetMaxDistance()
     { return maxDistance; }
 
+    public bool canDoAnything;
+
     private void Start()
     {
+        StartCoroutine(StartCoroutine());
+    }
+
+    IEnumerator StartCoroutine()
+    {
+        canDoAnything = false;
+
         itineraryTracer = GetComponent<ItineraryTracer>();
         itineraryTracer.Initialize(this);
 
         canvas.Initialize(this);
-
         canvas.SetFuel(0);
-
         GameManager.gm.player.DisablePlayer();
+
+        yield return StartCoroutine(canvas.ShowTips());
+
+        canDoAnything = true;
     }
 
     public void SetFuelbar(float distance)

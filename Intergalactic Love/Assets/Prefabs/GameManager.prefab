@@ -49,9 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd967515577bdf840b6dff68a719fde6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemManager: {fileID: 8440754603049065652}
+  itemManager: {fileID: 0}
   mainCanvas: {fileID: 0}
-  recipeManager: {fileID: 8440754603049065641}
+  recipeManager: {fileID: 0}
   mainCanvasSE: {fileID: 0}
   NPCManager: {fileID: 0}
   soundManager: {fileID: 0}
@@ -59,10 +59,23 @@ MonoBehaviour:
   player: {fileID: 0}
   droppedItemPrefab: {fileID: 8891760448634575040, guid: 0d7bc1c175f4f2a4781203d346ac9a80,
     type: 3}
-  questManager: {fileID: 6809974147648471892}
-  canPlayerDoAnything: 0
+  questManager: {fileID: 0}
+  canPlayerDoAnything: 1
   currentItinerary:
-    points: []
+    points:
+    - position: {x: 0.11899772, y: -0.0191621, z: 0.115002245}
+      mapEvent: 0
+    - position: {x: 0.12651145, y: -0.01223525, z: 0.16654125}
+      mapEvent: 0
+    - position: {x: 0.15218627, y: -0.01223525, z: 0.21544683}
+      mapEvent: 1
+    - position: {x: 0.17696202, y: -0.01223525, z: 0.2595737}
+      mapEvent: 1
+    - position: {x: 0.21024203, y: -0.01223525, z: 0.29707408}
+      mapEvent: 0
+    - position: {x: 0.25476032, y: -0.01223525, z: 0.3285693}
+      mapEvent: 2
+  shouldDisplayTips: 1
 --- !u!114 &8440754603049065652
 MonoBehaviour:
   m_ObjectHideFlags: 0

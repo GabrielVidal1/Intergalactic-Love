@@ -25,14 +25,31 @@ public class ItineraryTracer : MonoBehaviour
 
         everything = ~0;
         plane = LayerMask.GetMask("UI");
+
+        ms.canvas.playerTarget.SetActive(true);
+        ms.canvas.planet2Target.SetActive(false);
     }
 
     private float distance;
 
     private Vector3 lastHit;
 
+    private void ResetItinerary()
+    {
+        hasItinerary = false;
+        ms.canvas.SetGoButtonInteractible(false);
+        distance = 0f;
+
+
+        ms.playerPreview.localPosition = Vector3.zero;
+
+        trail.Clear();
+    }
+
     private void Update()
     {
+        if (!ms.canDoAnything) return;
+
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
@@ -41,16 +58,10 @@ public class ItineraryTracer : MonoBehaviour
                 if (hit.collider.CompareTag("Player"))
                 {
                     player = hit.collider;
-                    isTracing = true;
-                    hasItinerary = false;
-                    ms.canvas.SetGoButtonInteractible(false);
-                    distance = 0f;
-
                     lastHit = hit.point;
 
-                    ms.playerPreview.localPosition = Vector3.zero;
-
-                    trail.Clear();
+                    isTracing = true;
+                    ResetItinerary();
                 }
             }
 
@@ -79,6 +90,10 @@ public class ItineraryTracer : MonoBehaviour
 
                 ms.playerPreview.transform.position = point;
                 ms.SetFuelbar(distance);
+
+                ms.canvas.playerTarget.SetActive(false);
+                ms.canvas.planet2Target.SetActive(true);
+
                 lastHit = point;
             }
 
@@ -94,9 +109,24 @@ public class ItineraryTracer : MonoBehaviour
     private void Stop()
     {
         isTracing = false;
-        hasItinerary = true;
-        ms.canvas.SetGoButtonInteractible(true);
+        hasItinerary = IsItineraryDestination(Itinerary.MapPoint.Event.Planet2);
+        ms.canvas.SetGoButtonInteractible(hasItinerary);
+
+        if (!hasItinerary)
+        {
+            ResetItinerary();
+            StartCoroutine(ShowDumbassTip());
+        }
     }
+
+    IEnumerator ShowDumbassTip()
+    {
+        ms.canDoAnything = false;
+        yield return StartCoroutine(ms.canvas.ShowDumbassTip());
+        ms.canDoAnything = true;
+    }
+
+
 
     private bool RayCast(LayerMask mask, out RaycastHit hit)
     {
@@ -104,7 +134,7 @@ public class ItineraryTracer : MonoBehaviour
         return Physics.Raycast(ray, out hit, 1000, mask);
     }
 
-    public Itinerary GetItinerary()
+    public Itinerary GetItinerary(Itinerary.MapPoint.Event destination)
     {
         Itinerary result = new Itinerary();
 
@@ -131,10 +161,20 @@ public class ItineraryTracer : MonoBehaviour
                     break;
                 }
             }
+
             result.points.Add(p);
+
+            if (p.mapEvent == destination)
+                break;
         }
 
         return result;
+    }
+
+    public bool IsItineraryDestination(Itinerary.MapPoint.Event mapEvent)
+    {
+        GameManager.gm.currentItinerary = GetItinerary(mapEvent);
+        return GameManager.gm.currentItinerary.points[GameManager.gm.currentItinerary.points.Count - 1].mapEvent == mapEvent;
     }
 }
 
@@ -152,8 +192,6 @@ public class Itinerary
             Nothing,
             Asteroids,
             Planet2,
-            Planet3,
-            Planet4,
         }
     }
 
