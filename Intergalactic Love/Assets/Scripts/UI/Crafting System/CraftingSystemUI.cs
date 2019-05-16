@@ -70,6 +70,9 @@ public class CraftingSystemUI : MonoBehaviour
                 StartCoroutine(PrintNoRecipeAlert());
 
                 Debug.Log("NO RECIPE");
+
+                recipeList.UpdateRecipeList();
+
                 return false;
             }
         }
@@ -106,6 +109,8 @@ public class CraftingSystemUI : MonoBehaviour
         //reset ingredients and recipe
         ingredientInCrafting = new List<ItemData>();
         presetRecipe = null;
+
+        recipeList.UpdateRecipeList();
 
         return true;
     }

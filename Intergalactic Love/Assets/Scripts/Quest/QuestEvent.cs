@@ -26,8 +26,8 @@ public abstract class QuestEvent : MonoBehaviour
             yield break;
         }
 
+        GameManager.gm.mainCanvas.CloseOpenedUI();
         GameManager.gm.canPlayerDoAnything = false;
-
         Camera mainCam = GameManager.gm.player.mainCam;
 
         Vector3 initialPosition = mainCam.transform.position;
