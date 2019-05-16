@@ -210,7 +210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4823861712933477357}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.88, y: 0, z: -0}
+  m_LocalPosition: {x: 0.95, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4823861712933767119}
@@ -389,5 +389,5 @@ MonoBehaviour:
   intermediatePos: {fileID: 0}
   waitAtEventDuration: 1.5
   framePerTravel: 40
-  sound: {fileID: 0}
+  sound: {fileID: 8300000, guid: f11b3a6cbe9ab824cba2561300953fb9, type: 3}
   triggerName: OpenDoor

@@ -9,15 +9,22 @@ public class EventTrigger : Interactible
 
     private bool hasBeenTriggered = false;
 
+    private AudioSource audio;
+
     private void Start()
     {
         GetComponent<Collider>().isTrigger = true;
+        audio = GetComponent<AudioSource>();
     }
 
     public override void Interact(Player player)
     {
+        if(audio != null)
+            audio.Play();
+
         hasBeenTriggered = true;
         StartCoroutine(ExecuteEvents());
+        base.SetObjectAsTarget(false);
     }
 
     protected override void SetObjectAsTarget(bool enable)

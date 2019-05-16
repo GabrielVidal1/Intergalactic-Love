@@ -5,19 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class KillZone : MonoBehaviour
 {
+    
+    public Transform respawnPoint;
+    private Transform playerTransform;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            playerTransform = other.GetComponent<Transform>();
             StartCoroutine(BlackFondue());
         }
     }
 
     IEnumerator BlackFondue()
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-
         for (float i = 0f; i < 1f; i += 0.1f)
         {
             GameManager.gm.mainCanvas.blackFondue.alpha = i;
@@ -25,7 +27,9 @@ public class KillZone : MonoBehaviour
         }
         GameManager.gm.mainCanvas.blackFondue.alpha = 1f;
 
+        playerTransform.position = respawnPoint.position;
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameManager.gm.mainCanvas.blackFondue.alpha = 0.0f;
+
     }
 }

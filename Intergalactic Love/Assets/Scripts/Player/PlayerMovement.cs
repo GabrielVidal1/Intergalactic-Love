@@ -156,6 +156,10 @@ public class PlayerMovement : MonoBehaviour
             if (mainAttractor != null)
                 up = mainAttractor.Attract(transform);
             
+            if(Input.GetKey(KeyCode.LeftControl))
+            {
+                animator.SetBool("IsCrouching", !animator.GetBool("IsCrouching"));
+            }
 
             float horizontalMovement = Input.GetAxisRaw("Horizontal");
             float verticalMovement = Input.GetAxisRaw("Vertical");
@@ -187,6 +191,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = transform.TransformDirection(localDir).normalized * speed + -up * (gravity - jumpForce);
 
             animator.SetFloat("WRBlend", (rb.velocity.magnitude-10) / 8);
+            animator.SetFloat("IWCBlend", (rb.velocity.magnitude - 10) / 8);
         }
         else
         {

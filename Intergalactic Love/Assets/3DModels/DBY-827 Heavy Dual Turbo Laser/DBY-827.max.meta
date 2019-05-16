@@ -3,6 +3,25 @@ guid: b4e6489092c56ff45a47b2f41ce07fbf
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
+    100000: //RootNode
+    100002: DBY-827_BASE
+    100004: DBY-827_SOCKET
+    100006: DBY-827_WEAPON
+    400000: //RootNode
+    400002: DBY-827_BASE
+    400004: DBY-827_SOCKET
+    400006: DBY-827_WEAPON
+    2100000: 08 - Default
+    2300000: DBY-827_BASE
+    2300002: DBY-827_SOCKET
+    2300004: DBY-827_WEAPON
+    3300000: DBY-827_BASE
+    3300002: DBY-827_SOCKET
+    3300004: DBY-827_WEAPON
+    4300000: DBY-827_BASE
+    4300002: DBY-827_WEAPON
+    4300004: DBY-827_SOCKET
+    9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
@@ -57,7 +76,7 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
     previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
