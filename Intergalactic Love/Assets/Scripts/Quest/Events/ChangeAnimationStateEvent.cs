@@ -6,6 +6,8 @@ public class ChangeAnimationStateEvent : QuestEvent
 {
     private Animator animator;
 
+    public string triggerName = "StateChange";
+
     private bool endAnim;
 
     private void Start()
@@ -16,7 +18,7 @@ public class ChangeAnimationStateEvent : QuestEvent
     protected override IEnumerator Execute()
     {
         endAnim = false;
-        animator.SetTrigger("StateChange");
+        animator.SetTrigger(triggerName);
 
         while(!endAnim)
             yield return 0;

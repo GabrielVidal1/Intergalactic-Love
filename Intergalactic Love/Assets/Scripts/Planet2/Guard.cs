@@ -19,7 +19,7 @@ public class Guard : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         index = 0;
         isChasingPlayer = false;
-
+        
         agent.destination = points[index].position;
     }
 
@@ -27,7 +27,7 @@ public class Guard : MonoBehaviour
     {
         if (!isChasingPlayer)
         {
-            if (Vector3.Distance(transform.position, points[index].position) < thresoldDistant )
+            if (Vector3.Distance(new Vector3(transform.position.x, points[index].position.y, transform.position.z), points[index].position) < thresoldDistant )
             {
                 index = (index + 1) % points.Length;
                 agent.destination = points[index].position;
