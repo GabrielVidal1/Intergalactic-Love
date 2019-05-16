@@ -21,11 +21,16 @@ public class PartList : MonoBehaviour
         {
             if (GameManager.gm.itemManager.itemToPart.ContainsKey(item.Key))
             {
-                PartListItem r = Instantiate(listPartPrefab, listPartParent);
-                r.Initialize(GameManager.gm.itemManager.itemToPart[item.Key], item.Value);
-
-                listParts[item.Key] = r;
+                AddListPart(item.Key, item.Value);
             }
         }
+    }
+
+    public void AddListPart(ItemData item, int amount)
+    {
+        PartListItem r = Instantiate(listPartPrefab, listPartParent);
+        r.Initialize(GameManager.gm.itemManager.itemToPart[item], amount);
+
+        listParts[item] = r;
     }
 }

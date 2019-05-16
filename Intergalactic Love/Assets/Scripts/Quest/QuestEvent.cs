@@ -26,8 +26,8 @@ public abstract class QuestEvent : MonoBehaviour
             yield break;
         }
 
+        GameManager.gm.mainCanvas.CloseOpenedUI();
         GameManager.gm.canPlayerDoAnything = false;
-
         Camera mainCam = GameManager.gm.player.mainCam;
 
         Vector3 initialPosition = mainCam.transform.position;
@@ -59,12 +59,14 @@ public abstract class QuestEvent : MonoBehaviour
         mainCam.transform.position = cameraInterestPoint.position;
         mainCam.transform.rotation = cameraInterestPoint.rotation;
 
+        Transform initialParent = mainCam.transform.parent;
+        mainCam.transform.SetParent(cameraInterestPoint);
+
         yield return new WaitForSeconds(waitAtEventDuration/2);
-
         GameManager.gm.soundManager.PlaySound(sound);
-
         yield return StartCoroutine(Execute());
 
+        mainCam.transform.SetParent(initialParent);
 
         yield return new WaitForSeconds(waitAtEventDuration/2);
 

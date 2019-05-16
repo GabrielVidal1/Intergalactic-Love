@@ -2615,7 +2615,7 @@ MonoBehaviour:
   output:
   - amount: 1
     item: {fileID: 11400000, guid: 7d7c90f43a47acc4e9776a9e55d41e2d, type: 2}
-  actionSound: {fileID: 0}
+  actionSound: {fileID: 8300000, guid: 8fa1154ed52cb7941a1f4bf9d44e35c6, type: 3}
   IconParent: {fileID: 1083624685099438428}
 --- !u!82 &1083624684160972237
 AudioSource:
@@ -2624,10 +2624,10 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1083624684160972278}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 8fa1154ed52cb7941a1f4bf9d44e35c6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

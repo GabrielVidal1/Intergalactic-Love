@@ -17,6 +17,9 @@ MonoBehaviour:
   lines:
   - protagonistPos: 1
     position: 1
-    line: Nice! Now that you have the cockpit, you just need reactors and you will
-      be ready to go!
+    line: Nice! Now that you have the cockpit, you're good to go!
+    style: 0
+  - protagonistPos: 1
+    position: 1
+    line: Let me give you some parts to furnish your spaceship...
     style: 0

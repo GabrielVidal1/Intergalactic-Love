@@ -13,8 +13,8 @@ public class Capsule : Attractor
 
     private void Start()
     {
-        center1 = Center - transform.up * 0.5f * transform.localScale.y;
-        center2 = Center + transform.up * 0.5f * transform.localScale.y;
+        center1 = Center - transform.up * 0.5f * transform.lossyScale.y;
+        center2 = Center + transform.up * 0.5f * transform.lossyScale.y;
         dist = Vector3.Distance(center1, center2);
     }
 

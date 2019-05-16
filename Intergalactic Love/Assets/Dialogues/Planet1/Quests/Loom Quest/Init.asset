@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7067fd353e1f5c144919dfebf0d2981b, type: 3}
+  m_Name: Init
+  m_EditorClassIdentifier: 
+  protagonist1: player
+  protagonist2: Farmer Robot
+  lines:
+  - protagonistPos: 1
+    position: 1
+    line: What do you want ma boi?
+    style: 0
+  - protagonistPos: 0
+    position: 0
+    line: Do you know how I can make some fabric?
+    style: 0
+  - protagonistPos: 1
+    position: 1
+    line: It's very simple, you need to transform the cotton into strings
+    style: 0
+  - protagonistPos: 1
+    position: 1
+    line: And then weave it into fabric!
+    style: 0
+  - protagonistPos: 0
+    position: 0
+    line: I don't know how to do any of these things...
+    style: 0
+  - protagonistPos: 1
+    position: 1
+    line: I can teach you if you bring me 10 pieces of cotton.
+    style: 0

@@ -8,9 +8,6 @@ public class PartTransformation : MonoBehaviour
 
     public RotationGizmo rotationGizmo;
 
-    
-
-
     private bool isRotating = false;
     private bool isDraggingPart = false;
     private Vector3 refDir;
@@ -29,6 +26,8 @@ public class PartTransformation : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.gm.canPlayerDoAnything) return;
+
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = GameManager.gm.mainCanvasSE.GetRayFromMousePosition();

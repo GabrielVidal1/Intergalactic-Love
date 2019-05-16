@@ -21,12 +21,6 @@ public class ItemCollectionEvent : MonoBehaviour
 
     public void UpdateStatus()
     {
-        if (!triggered)
-            triggered = true;
-        else
-            return;
-
-
         foreach (ItemAndQuantity item in requiredItems)
         {
             if (playerInventory.inventory.ContainsKey(item.item))
@@ -36,6 +30,11 @@ public class ItemCollectionEvent : MonoBehaviour
             }
             else return;
         }
+
+        if (!triggered)
+            triggered = true;
+        else
+            return;
 
         StartCoroutine(TriggerEvents());
     }

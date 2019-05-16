@@ -40,10 +40,11 @@ public class ItineraryTracer : MonoBehaviour
         ms.canvas.SetGoButtonInteractible(false);
         distance = 0f;
 
-
         ms.playerPreview.localPosition = Vector3.zero;
 
         trail.Clear();
+
+        print("ResetItinerary()");
     }
 
     private void Update()
@@ -82,6 +83,7 @@ public class ItineraryTracer : MonoBehaviour
 
                     distance = ms.GetMaxDistance();
                     Stop();
+                    return;
                 }
                 else
                 {
@@ -108,8 +110,14 @@ public class ItineraryTracer : MonoBehaviour
 
     private void Stop()
     {
+        print("Stop");
+
         isTracing = false;
+
         hasItinerary = IsItineraryDestination(Itinerary.MapPoint.Event.Planet2);
+
+        print("hasItinerary = " + hasItinerary);
+
         ms.canvas.SetGoButtonInteractible(hasItinerary);
 
         if (!hasItinerary)
