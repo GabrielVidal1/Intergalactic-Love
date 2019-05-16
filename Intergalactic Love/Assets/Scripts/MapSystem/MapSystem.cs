@@ -33,7 +33,9 @@ public class MapSystem : MonoBehaviour
 
         canvas.Initialize(this);
         canvas.SetFuel(0);
-        GameManager.gm.player.DisablePlayer();
+
+        if (GameManager.gm.player != null)
+            GameManager.gm.player.DisablePlayer();
 
         yield return StartCoroutine(canvas.ShowTips());
 

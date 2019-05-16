@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -66,8 +67,15 @@ public class GameManager : MonoBehaviour
         if (mainCanvas != null)
             mainCanvas.Initialize();
        
-
         SaveLoad.LoadGame();
+
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            print("Reset progression");
+
+            player.playerInventory.inventory = new Dictionary<ItemData, int>();
+            recipeManager.ResetKnownRecipe();
+        }
 
         canPlayerDoAnything = true;
     }

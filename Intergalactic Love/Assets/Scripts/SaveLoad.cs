@@ -17,6 +17,8 @@ public static class SaveLoad
         bf.Serialize(file, save);
 
         Debug.Log("Save at: " + Application.persistentDataPath + "/save.save");
+
+        file.Close();
     }
 
     public static void LoadGame()
@@ -78,28 +80,31 @@ public class Save
 
     public void Load()
     {
-        for (int i = 0; i < discoveredRecipes.Length &&
-            i < GameManager.gm.recipeManager.hasDiscoveredRecipe.Length; i++)
+        if (GameManager.gm.player != null)
         {
-            GameManager.gm.recipeManager.hasDiscoveredRecipe[i] =
-                discoveredRecipes[i].Equals('1');
-        }
-
-        string[] bits = playerInventory.Split('\n');
-
-        Dictionary<ItemData, int> inventory = new Dictionary<ItemData, int>();
-        foreach (string bit in bits)
-        {
-            PlayerInventory pi = JsonUtility.FromJson<PlayerInventory>(bit);
-            if (pi != null)
+            for (int i = 0; i < discoveredRecipes.Length &&
+                i < GameManager.gm.recipeManager.hasDiscoveredRecipe.Length; i++)
             {
-                ItemData item = GameManager.gm.itemManager.items[pi.index];
-
-                inventory[item] = pi.amount;
+                GameManager.gm.recipeManager.hasDiscoveredRecipe[i] =
+                    discoveredRecipes[i].Equals('1');
             }
-        }
 
-        GameManager.gm.player.playerInventory.inventory = inventory;
+            string[] bits = playerInventory.Split('\n');
+
+            Dictionary<ItemData, int> inventory = new Dictionary<ItemData, int>();
+            foreach (string bit in bits)
+            {
+                PlayerInventory pi = JsonUtility.FromJson<PlayerInventory>(bit);
+                if (pi != null)
+                {
+                    ItemData item = GameManager.gm.itemManager.items[pi.index];
+
+                    inventory[item] = pi.amount;
+                }
+            }
+
+            GameManager.gm.player.playerInventory.inventory = inventory;
+        }
     }
 }
 

@@ -6030,6 +6030,7 @@ GameObject:
   - component: {fileID: 744892251}
   - component: {fileID: 744892253}
   - component: {fileID: 744892252}
+  - component: {fileID: 744892254}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -6080,7 +6081,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -6096,6 +6097,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 744892250}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &744892254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744892250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23fa698560b688845bf08bafe6dc1b28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AdditionalVertexStreamMesh: {fileID: 0}
 --- !u!1 &760923626
 GameObject:
   m_ObjectHideFlags: 0
@@ -7095,7 +7109,7 @@ PrefabInstance:
     - target: {fileID: 3009522197317369006, guid: e1500b18fb8a0984b8a5a4d1b865278d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 26.6
+      value: -18.08
       objectReference: {fileID: 0}
     - target: {fileID: 3009522197317369006, guid: e1500b18fb8a0984b8a5a4d1b865278d,
         type: 3}
