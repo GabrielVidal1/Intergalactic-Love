@@ -152,6 +152,7 @@ MonoBehaviour:
   - {fileID: 2104863106}
   - {fileID: 1813583600}
   finalTip: {fileID: 576300745}
+  finalTipText: {fileID: 167780625}
   leftClickIcon: {fileID: 1908507917}
   leftClickIconText: {fileID: 1985281662}
   playerTarget: {fileID: 1534827571}
@@ -1732,7 +1733,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 586477307}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000029504295}
-  m_LocalPosition: {x: -0.000020831823, y: 0, z: 0}
+  m_LocalPosition: {x: -0.000020831823, y: -0.0126, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 624675782}
@@ -1977,7 +1978,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 624675778}
   m_LocalRotation: {x: -0.70710707, y: -0, z: -0, w: 0.70710653}
-  m_LocalPosition: {x: -0.00018566847, y: -0.17, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 0.94414, y: 0.94414, z: 0.94414}
   m_Children:
   - {fileID: 699605110}

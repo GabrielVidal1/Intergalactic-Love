@@ -7324,7 +7324,7 @@ MonoBehaviour:
   dist: 100
   distRadiusRatio: 0.728
   asteroidPerFrame: 4
-  maxAsteroids: 2000
+  maxAsteroids: 5000
   asteroids: []
   shouldSpawnAsteroids: 0
   lastZ: 0

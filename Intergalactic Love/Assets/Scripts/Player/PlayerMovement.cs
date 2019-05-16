@@ -165,6 +165,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (!initialized) return;
+
         canJump = true;
         animator.SetBool("IsJumping", false);
 

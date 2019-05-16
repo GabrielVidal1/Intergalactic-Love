@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
 
     private void InitAll()
     {
+        canPlayerDoAnything = true;
+
         print("GameManager called InitAll()");
         //ALWAYS PRESENT
         recipeManager = GetComponent<RecipeManager>();

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MSCanvas : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class MSCanvas : MonoBehaviour
 
     [SerializeField] private GameObject[] tips;
     [SerializeField] private GameObject finalTip;
+    [SerializeField] private TextMeshProUGUI finalTipText;
 
     [SerializeField] private GameObject leftClickIcon;
     [SerializeField] private GameObject leftClickIconText;
@@ -71,6 +73,8 @@ public class MSCanvas : MonoBehaviour
         finalTip.SetActive(false);
         leftClickIconText.SetActive(false);
         planet2Target.SetActive(false);
+
+        finalTipText.text = "You need to go to the second planet, not wander in space!";
     }
 
     public void SetFuel(float value)

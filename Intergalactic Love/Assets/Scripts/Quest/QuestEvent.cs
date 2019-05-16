@@ -59,12 +59,14 @@ public abstract class QuestEvent : MonoBehaviour
         mainCam.transform.position = cameraInterestPoint.position;
         mainCam.transform.rotation = cameraInterestPoint.rotation;
 
+        Transform initialParent = mainCam.transform.parent;
+        mainCam.transform.SetParent(cameraInterestPoint);
+
         yield return new WaitForSeconds(waitAtEventDuration/2);
-
         GameManager.gm.soundManager.PlaySound(sound);
-
         yield return StartCoroutine(Execute());
 
+        mainCam.transform.SetParent(initialParent);
 
         yield return new WaitForSeconds(waitAtEventDuration/2);
 

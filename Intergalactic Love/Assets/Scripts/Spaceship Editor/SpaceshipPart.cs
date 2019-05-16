@@ -38,6 +38,9 @@ public class SpaceshipPart : MonoBehaviour
     {
         this.parent = parent;
         transform.parent = parent.mesh.transform;
+
+        if (GameManager.gm.mainCanvasSE != null)
+            GameManager.gm.mainCanvasSE.goButton.interactable = true;
     }
 
     private SpaceshipPartMesh mesh2;
@@ -213,6 +216,11 @@ public class SpaceshipPart : MonoBehaviour
 
     public void Destroy()
     {
+        if (!GameManager.gm.mainCanvasSE.partList.listParts.ContainsKey(itemData))
+        {
+            GameManager.gm.mainCanvasSE.partList.AddListPart(itemData, 0);
+        }
+
         GameManager.gm.mainCanvasSE.partList.listParts[itemData].PreviewQuantity++;
 
         SpaceshipPart[] p = attachedParts.ToArray();

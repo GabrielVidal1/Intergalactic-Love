@@ -35,7 +35,14 @@ public class ItemSource : Interactible
 
     public override void Interact(Player player)
     {
-        SpawnItems();
+        //SpawnItems();
+        foreach (RandomItem item in items)
+        {
+            if (Random.value < item.chance)
+            {
+                GameManager.gm.player.playerInventory.AddItemToInventory(item.item, 1);
+            }
+        }
 
         SetObjectAsTarget(false);
 

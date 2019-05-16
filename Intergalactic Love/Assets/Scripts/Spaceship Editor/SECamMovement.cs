@@ -23,6 +23,8 @@ public class SECamMovement : MonoBehaviour
 
     void Update()
     {
+        if (!GameManager.gm.canPlayerDoAnything) return;
+
         if (Input.GetMouseButtonDown(1))
         {
             Cursor.lockState = CursorLockMode.Locked;
