@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float camRotSpeed = 3f;
 
     [SerializeField] private Transform camPivotTransform;
+    [SerializeField] private Transform characterTransform;
 
     [SerializeField] private float camDistance = 6f;
 
@@ -29,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
 
     private float camRotXAngle;
     private Camera mainCam;
+
+    private float angleCharacter = 0.0f;
 
     private LayerMask mask;
 
@@ -152,6 +155,34 @@ public class PlayerMovement : MonoBehaviour
 
             if (mainAttractor != null)
                 up = mainAttractor.Attract(transform);
+            
+
+            float horizontalMovement = Input.GetAxisRaw("Horizontal");
+            float verticalMovement = Input.GetAxisRaw("Vertical");
+            float characterRotAngle = 0.0f;
+
+            if(horizontalMovement == 0.0f)
+            {
+                if(verticalMovement == 0.0f)
+                {
+                    characterRotAngle = angleCharacter;
+                }
+                else
+                {
+                    characterRotAngle = verticalMovement > 0.0f ? 0.0f : 180.0f;
+                }
+            }
+            else if(verticalMovement == 0.0f)
+            {
+                characterRotAngle = horizontalMovement > 0.0f ? 90.0f : -90.0f;
+            }
+            else
+            {
+                characterRotAngle = Mathf.Atan(verticalMovement / horizontalMovement) * Mathf.Rad2Deg + (verticalMovement > 0.0f ? 0.0f : 180.0f);
+            }
+
+            angleCharacter = Mathf.LerpAngle(angleCharacter, characterRotAngle, 0.2f);
+            characterTransform.localRotation = Quaternion.AngleAxis( angleCharacter, new Vector3(0,1,0));
 
             rb.velocity = transform.TransformDirection(localDir).normalized * speed + -up * (gravity - jumpForce);
 
