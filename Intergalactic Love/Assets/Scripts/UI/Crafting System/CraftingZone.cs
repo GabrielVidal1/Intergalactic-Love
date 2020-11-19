@@ -6,7 +6,7 @@ using TMPro;
 
 public class CraftingZone : MonoBehaviour
 {
-    private CraftingSystemUI craftingSystemUI;
+    private CraftingSystemUI craftingSystem;
 
     [SerializeField] private CraftingZoneSlot[] craftingZoneSlots;
     [SerializeField] private Button craftButton;
@@ -17,11 +17,28 @@ public class CraftingZone : MonoBehaviour
     [SerializeField] private Texture unknownObject;
     [SerializeField] private Texture emptySlot;
 
+    [SerializeField] private CanvasGroup noRecipeAlert;
 
-    public void Initialize(CraftingSystemUI craftingSystemUI)
+    private PlayerInventory playerInventory;
+    private Recipe presetRecipe;
+
+    public List<ItemData> ingredientInCrafting = new List<ItemData>();
+
+    public void Initialize(CraftingSystemUI craftingSystemUi)
     {
-        this.craftingSystemUI = craftingSystemUI;
+        playerInventory = GameManager.gm.player.playerInventory;
+        if (playerInventory.inventory == null)
+            playerInventory.inventory = new Dictionary<ItemData, int>();
+        
+        noRecipeAlert.alpha = 0f;
+        craftingSystem = craftingSystemUi;
+    }
+    
+    public void Open()
+    {
         craftButton.interactable = false;
+        presetRecipe = null;
+        ingredientInCrafting.Clear();
 
         resultRawImage.texture = emptySlot;
         resultAmountText.text = "";
@@ -31,43 +48,90 @@ public class CraftingZone : MonoBehaviour
             item.Initialize(this);
         }
     }
-
+    
     public void OnClickCraft()
     {
-        bool consumeItems = craftingSystemUI.Craft();
+        GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.clickOnCraft);
 
-        if (consumeItems)
+        if (presetRecipe == null)
         {
-            foreach (CraftingZoneSlot slot in craftingZoneSlots)
+            presetRecipe = GameManager.gm.recipeManager.FindRecipeFromIngredients(ingredientInCrafting);
+
+            // If a recipe exists with this unknown combination of ingredients 
+            if (presetRecipe == null)
             {
+                GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.failedCraft);
+
+                // Consume ingredients
+                foreach (ItemData ingredients in ingredientInCrafting)
+                    playerInventory.RemoveItemFromInventory(ingredients, 1);
+
+                // Reload the inventory item list
+                craftingSystem.inventoryList.Open();
+
+                // Reset ingredients and recipe
+                ingredientInCrafting.Clear();
+                presetRecipe = null;
+
+                // Reload the recipe list
+                craftingSystem.recipeList.UpdateRecipeList();
+
+                StartCoroutine(PrintNoRecipeAlert());
+            }
+        }
+        else
+        {
+            GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.successfulCraft);
+
+            // Consume ingredients
+            foreach (ItemData ingredient in presetRecipe.ingredients)
+                playerInventory.RemoveItemFromInventory(ingredient, 1);
+
+            // Add result to player inventory
+            playerInventory.AddItemToInventory(presetRecipe.result, presetRecipe.amount);
+
+            // Reload the inventory item list
+            craftingSystem.inventoryList.Open();
+
+            // Reset ingredients and recipe
+            ingredientInCrafting.Clear();
+            presetRecipe = null;
+
+            // Reload the recipe list
+            craftingSystem.recipeList.UpdateRecipeList();
+
+            // Refill the slots
+            /*
+            foreach (CraftingZoneSlot slot in craftingZoneSlots)
                 slot.ReplaceItem();
-            }
-        } else
+            */
+
+        }
+        
+        craftButton.interactable = false;
+        foreach (CraftingZoneSlot slot in craftingZoneSlots)
         {
-            foreach (CraftingZoneSlot slot in craftingZoneSlots)
-            {
-                slot.ResetIlitem();
-                slot.ResetItem();
-            }
+            slot.ResetIlitem();
+            slot.ResetItem();
         }
     }
 
     public void UpdateCraftingSlot(ItemData newItem, ItemData oldItem)
     {
         if (oldItem != null)
-            craftingSystemUI.ingredientInCrafting.Remove(oldItem);
+            ingredientInCrafting.Remove(oldItem);
         if (newItem != null)
-            craftingSystemUI.ingredientInCrafting.Add(newItem);
+            ingredientInCrafting.Add(newItem);
 
-        if (craftingSystemUI.ingredientInCrafting.Count == 3)
+        if (ingredientInCrafting.Count == 3)
         {
             craftButton.interactable = true;
 
-            Recipe recipe = GameManager.gm.recipeManager.FindRecipeFromIngredients(craftingSystemUI.ingredientInCrafting);
+            Recipe recipe = GameManager.gm.recipeManager.FindRecipeFromIngredients(ingredientInCrafting);
 
             if (recipe)
             {
-                craftingSystemUI.PresetRecipe(recipe);
+                presetRecipe = recipe;
 
                 resultRawImage.texture = recipe.result.texture;
                 resultAmountText.text = recipe.amount == 1 ? "" : recipe.amount.ToString();
@@ -88,22 +152,41 @@ public class CraftingZone : MonoBehaviour
         }
     }
 
+    // The player can craft the recipe here
     public void SetRecipe(Recipe recipe)
     {
+        // Reset the quantity of for ingredients in inventory item list
         foreach (ItemData ingredient in recipe.ingredients)
+            craftingSystem.inventoryList.listItems[ingredient].PreviewQuantity = GameManager.gm.player.playerInventory.inventory[ingredient];
+
+        // Place the ingredients on the crafting slots
+        for (int i = 0; i < 3; i++)
         {
-            craftingSystemUI.inventoryList.listItems[ingredient].ResetPreviewQuantity();
+            InventoryListItem inventoryListItem = craftingSystem.inventoryList.listItems[recipe.ingredients[i]];
+            craftingZoneSlots[i].ReplaceItem(inventoryListItem);
         }
 
-        for (int i = 0; i < craftingZoneSlots.Length; i++)
-        {
-            InventoryListItem ilim = craftingSystemUI.inventoryList.listItems[recipe.ingredients[i]];
-            craftingZoneSlots[i].ReplaceItem(ilim);
-        }
-
+        // Display the result of the recipe
         resultRawImage.texture = recipe.result.texture;
         resultAmountText.text = recipe.amount == 1 ? "" : recipe.amount.ToString();
 
-        craftingSystemUI.PresetRecipe(recipe);
+        presetRecipe = recipe;
+
+        // enable the craft button
+        craftButton.interactable = true;
     }
+    
+    IEnumerator PrintNoRecipeAlert()
+    {
+        noRecipeAlert.alpha = 1f;
+        yield return new WaitForSecondsRealtime(1f);
+
+        for (float i = 1f; i >= 0f; i-=0.02f)
+        {
+            noRecipeAlert.alpha = i;
+            yield return 0;
+        }
+        noRecipeAlert.alpha = 0f;
+    }
+
 }

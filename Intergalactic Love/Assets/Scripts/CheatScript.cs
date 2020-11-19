@@ -24,18 +24,13 @@ public class CheatScript : MonoBehaviour
 
             foreach (ItemData item in itemsToGive)
             {
-                GameManager.gm.player.playerInventory.AddItemToInventory(item, 10);
+                GameManager.gm.player.playerInventory.AddItemToInventory(item, 20);
             }
 
-            StartCoroutine(DiscoverRecipes());
-        }
-    }
-
-    IEnumerator DiscoverRecipes()
-    {
-        foreach (Recipe r in recipeToDiscover)
-        {
-            yield return StartCoroutine(GameManager.gm.recipeManager.DiscoverRecipe(r.index));
+            foreach (Recipe r in recipeToDiscover)
+            {
+                StartCoroutine(GameManager.gm.recipeManager.DiscoverRecipe(r.index));
+            }
         }
     }
 }

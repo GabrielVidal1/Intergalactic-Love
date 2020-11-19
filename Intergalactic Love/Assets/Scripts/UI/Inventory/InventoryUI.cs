@@ -6,9 +6,9 @@ public class InventoryUI : MonoBehaviour
 {
     public InventoryList inventoryList;
 
-    public void Initialize()
+    public void Open()
     {
-        inventoryList.Initialize();
+        inventoryList.Open();
     }
 
 }

@@ -23,10 +23,10 @@ public class CraftingZoneSlot : MonoBehaviour, IDropHandler
         ResetItem();
     }
 
-    public void SetIngredient(ItemData item)
+    public void SetIngredient(ItemData i)
     {
-        craftingZone.UpdateCraftingSlot(item, this.item);
-        this.item = item;
+        craftingZone.UpdateCraftingSlot(i, item);
+        item = i;
         ingredientTexture.texture = item.texture;
         removeButton.SetActive(true);
 

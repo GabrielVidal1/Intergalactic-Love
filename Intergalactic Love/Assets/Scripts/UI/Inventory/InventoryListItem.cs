@@ -29,16 +29,8 @@ public class InventoryListItem : MonoBehaviour
         }
     }
 
-    public void ResetPreviewQuantity()
-    {
-        PreviewQuantity = GameManager.gm.player.playerInventory.inventory[itemData];
-    }
-
     public void Initialize(ItemData itemData, int quantity)
     {
-        //Debug.Log(itemData.name + " = " + quantity.ToString());
-
-
         this.itemData = itemData;
         itemIcon.texture = itemData.texture;
         itemName.text = itemData.itemName;
@@ -53,7 +45,7 @@ public class InventoryListItem : MonoBehaviour
         return itemData;
     }
 
-    public void SetDisable(bool disable)
+    private void SetDisable(bool disable)
     {
         disabledOcclusion.SetActive(disable);
     }

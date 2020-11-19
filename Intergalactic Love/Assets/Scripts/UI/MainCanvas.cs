@@ -66,7 +66,7 @@ public class MainCanvas : MonoBehaviour
 
                 if (isInventoryDisplayed)
                 {
-                    inventoryUI.Initialize();
+                    inventoryUI.Open();
                     GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.openInventory);
                 }
                 else
@@ -79,7 +79,7 @@ public class MainCanvas : MonoBehaviour
                 isCraftingDisplayed = !isCraftingDisplayed;
                 craftingSystem.gameObject.SetActive(isCraftingDisplayed);
 
-                inventoryUI.Initialize();
+                inventoryUI.Open();
 
                 if (isCraftingDisplayed)
                 {
@@ -95,11 +95,11 @@ public class MainCanvas : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            CloseOpenedUI();
+            CloseOpenedUi();
         }
     }
 
-    public void CloseOpenedUI()
+    public void CloseOpenedUi()
     {
         if (isCraftingDisplayed)
         {
