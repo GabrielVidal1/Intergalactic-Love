@@ -7,28 +7,23 @@ public class InventoryList : MonoBehaviour
     public InventoryListItem inventoryListItemPrefab;
     public Transform listItemParent;
 
-    public Dictionary<ItemData, InventoryListItem> listItems;
+    public Dictionary<ItemData, InventoryListItem> listItems = new Dictionary<ItemData, InventoryListItem>();
 
-    public void Initialize()
+    public void Open()
     {
         for (int i = 0; i < listItemParent.childCount; i++)
             Destroy(listItemParent.GetChild(i).gameObject);
 
-        listItems = new Dictionary<ItemData, InventoryListItem>();
+        listItems.Clear();
 
         foreach (KeyValuePair<ItemData, int> item in GameManager.gm.player.playerInventory.inventory)
-        {
-            InventoryListItem r = Instantiate(inventoryListItemPrefab, listItemParent);
-            r.Initialize(item.Key, item.Value);
-
-            listItems[item.Key] = r;
-        }
+            AddItem(item.Key, item.Value);
     }
 
-    public void AddNewItem(ItemData item)
+    private void AddItem(ItemData item, int amount)
     {
         InventoryListItem r = Instantiate(inventoryListItemPrefab, listItemParent);
-        r.Initialize(item, GameManager.gm.player.playerInventory.inventory[item]);
+        r.Initialize(item, amount);
         listItems[item] = r;
     }
 

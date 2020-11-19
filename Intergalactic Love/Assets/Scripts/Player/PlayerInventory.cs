@@ -50,18 +50,33 @@ public class PlayerInventory : MonoBehaviour
 
     public bool Collect(Collectible collectible)
     {
-        if (collectible is DroppedItem)
+        switch (collectible)
         {
-            DroppedItem droppedItem = (DroppedItem)collectible;
-            AddItemToInventory(droppedItem.associatedItem, 1);
+            case DroppedItem droppedItem:
+                AddItemToInventory(droppedItem.associatedItem, 1);
+                break;
+            case Blueprint blueprint:
+                GameManager.gm.recipeManager.DiscoverRecipe(blueprint.associatedRecipe.index);
+                break;
         }
 
-        if (collectible is Blueprint)
-        {
-            Blueprint blueprint = (Blueprint)collectible;
-            GameManager.gm.recipeManager.DiscoverRecipe(blueprint.associatedRecipe.index);
-        }
+        return true;
+    }
+    
+    public bool CanCraftItem(Recipe recipe)
+    {
+        Dictionary<ItemData, int> ingredients = new Dictionary<ItemData, int>();
 
+        foreach (ItemData ing in recipe.ingredients)
+            ingredients[ing] = ingredients.ContainsKey(ing) ? ingredients[ing] + 1 : 1;
+
+        foreach (KeyValuePair<ItemData, int> val in ingredients)
+        {
+            if (!inventory.ContainsKey(val.Key))
+                return false;
+            if (inventory[val.Key] < val.Value)
+                return false;
+        }
         return true;
     }
 

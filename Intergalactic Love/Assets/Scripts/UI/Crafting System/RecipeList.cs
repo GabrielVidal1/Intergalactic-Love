@@ -8,41 +8,44 @@ public class RecipeList : MonoBehaviour
     [SerializeField] private Transform recipeListParent;
 
     private CraftingSystemUI craftingSystem;
+    
+    private readonly List<RecipeListItem> recipeListItems = new List<RecipeListItem>();
+    private RecipeManager recipeManager;
 
-    public void Initialize(CraftingSystemUI craftingSystem)
+    public void Initialize(CraftingSystemUI craftingSystemUi)
     {
-        RecipeListItem.recipeList = this;
-
-        this.craftingSystem = craftingSystem;
-
-        RecipeManager recipeManager = GameManager.gm.recipeManager;
-
-        for (int i = 0; i < recipeListParent.childCount; i++)
-            Destroy(recipeListParent.GetChild(i).gameObject);
+        RecipeListItem.RecipeList = this;
+        craftingSystem = craftingSystemUi;
+        recipeManager = GameManager.gm.recipeManager;
+    }
+    
+    public void Open()
+    {
+        foreach (RecipeListItem recipeListItem in recipeListItems)
+            Destroy(recipeListItem.gameObject);
+        recipeListItems.Clear();
 
         for (int i = 0; i < recipeManager.hasDiscoveredRecipe.Length; i++)
         {
             if (recipeManager.hasDiscoveredRecipe[i])
             {
                 RecipeListItem recipeListItem = Instantiate(recipeListItemPrefab, recipeListParent);
-                recipeListItem.Initialize(recipeManager.recipes[i], craftingSystem);
+                recipeListItem.Initialize(recipeManager.recipes[i]);
+                recipeListItems.Add(recipeListItem);
             }
         }
     }
 
     public void UpdateRecipeList()
     {
-        for (int i = 0; i < recipeListParent.childCount; i++)
-        {
-            RecipeListItem recipeListItem = recipeListParent.GetChild(i).GetComponent<RecipeListItem>();
+        foreach (RecipeListItem recipeListItem in recipeListItems)
             recipeListItem.UpdateStatus();
-        }
     }
 
+    // Player can craft it
     public void OnClickRecipe(Recipe recipe)
     {
         GameManager.gm.soundManager.PlaySound(GameManager.gm.soundManager.clickOnRecipe);
-
-        craftingSystem.OnClickRecipe(recipe);
+        craftingSystem.craftingZone.SetRecipe(recipe);
     }
 }

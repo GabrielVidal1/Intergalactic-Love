@@ -26,7 +26,7 @@ public abstract class QuestEvent : MonoBehaviour
             yield break;
         }
 
-        GameManager.gm.mainCanvas.CloseOpenedUI();
+        GameManager.gm.mainCanvas.CloseOpenedUi();
         GameManager.gm.canPlayerDoAnything = false;
         Camera mainCam = GameManager.gm.player.mainCam;
 
