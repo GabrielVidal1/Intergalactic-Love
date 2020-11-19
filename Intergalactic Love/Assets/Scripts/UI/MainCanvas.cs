@@ -55,6 +55,7 @@ public class MainCanvas : MonoBehaviour
             {
                 if (Interactible.targetedItem != null)
                 {
+                    ShowInteractTooltip(false);
                     Interactible.targetedItem.Interact(GameManager.gm.player);
                 }
             }
